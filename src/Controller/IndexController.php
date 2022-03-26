@@ -9,7 +9,7 @@ use DateTime;
 
 class IndexController extends AbstractController
 {
-  #[Route(path: "/")]
+  #[Route(path: "/index")]
   public function index(UserRepository $userRepository)
   {
     $user = new User();
@@ -21,7 +21,7 @@ class IndexController extends AbstractController
       ->setEmail("bob@bob.com")
       ->setBirthDate(new DateTime('1981-02-16'));
 
-    $userRepository->save($user);
+    //$userRepository->save($user);
   }
 
   #[Route(path: "/contact", name: "contact", httpMethod: "POST")]

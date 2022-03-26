@@ -6,13 +6,13 @@ class Route extends AbstractRoute
 {
   private array $getParams = [];
   private string $controller;
-  private string $method;
+  private array $method;
 
   public function __construct(
     string $path,
     string $controller,
     string $method,
-    array $httpMethod = ["GET"],
+    array $httpMethod = array("GET"),
     string $name = "default",
   ) {
     parent::__construct($path, $httpMethod, $name);
@@ -54,7 +54,7 @@ class Route extends AbstractRoute
     return $this;
   }
 
-  public function getMethod(): string
+  public function getMethod(): array
   {
     return $this->method;
   }

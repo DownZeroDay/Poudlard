@@ -24,7 +24,7 @@ class IndexController extends AbstractController
     $userRepository->save($user);
   }
 
-  #[Route(path: "/contact", name: "contact", httpMethod: "POST")]
+  #[Route(path: "/contact", name: "contact", httpMethod: ["POST"])]
   public function contact()
   {
     echo $this->twig->render('index/contact.html.twig');

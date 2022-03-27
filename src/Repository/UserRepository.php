@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManager;
+use phpDocumentor\Reflection\Types\Boolean;
 
 final class UserRepository extends AbstractRepository
 {
@@ -11,7 +13,7 @@ final class UserRepository extends AbstractRepository
   public function save(User $user): bool
   {
     $stmt = $this->pdo->prepare("INSERT INTO users (`name`, firstName, username, `password`, email, birthDate) VALUES (:name, :firstName, :username, :password, :email, :birthDate)");
-
+    
     return $stmt->execute([
       'name' => $user->getName(),
       'firstName' => $user->getFirstName(),
@@ -21,4 +23,11 @@ final class UserRepository extends AbstractRepository
       'birthDate' => $user->getBirthDate()->format('Y-m-d')
     ]);
   }
+
+  public function userExist()
+  {
+   return $check = $this->pdo->prepare('SELECT username, password FROM users WHERE username = ? ');
+    //return $check->execute(array($user->getEmail()));
+  }
+
 }

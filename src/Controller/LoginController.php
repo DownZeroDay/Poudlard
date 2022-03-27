@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\User;
+use App\Repository\UserRepository;
+use App\Routing\Attribute\Route;
+
+class LoginController extends AbstractController
+{
+  #[Route(path: "/" , httpMethod: ["GET", "POST"])]
+  public function index(UserRepository $userRepository)
+  {
+    echo $this->twig->render('security/login.html.twig');
+   
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+  
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+   
+      if( !empty($username) && !empty($password)){
+       
+        //COntrole email et passeword
+        $check = $userRepository->userExist();
+        $check->execute(array($username));
+        $row = $check->rowCount();
+        $data = $check->fetch();
+
+        if($row > 0 && password_verify($password, $data['password'])){
+          
+          $_SESSION['user'] = $username;
+          header('Location:/contact');
+        }
+        else{
+            echo "<script> alert('identifiant incorrect') </script>";
+        }
+      }        
+      
+    }
+    
+  }
+  
+} 

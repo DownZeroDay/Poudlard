@@ -38,7 +38,7 @@ class RegisterController extends AbstractController
            $userRepository->save($user);
 
             //var_dump($_SESSION);
-            echo("Je sui la");
+            echo("Je suis la");
 
           //header('Location:/home');
         }

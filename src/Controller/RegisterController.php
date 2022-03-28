@@ -20,8 +20,11 @@ class RegisterController extends AbstractController
         $email = $_POST['email'];
         $birthDate = new dateTime($_POST['birthDate']);
         $password = $_POST['password'];
+        $role = intval($_POST['role']);
 
-        if(!empty($username) && !empty($name) && !empty($firtsname) && !empty($email) && !empty($birthDate) && !empty($password)){
+        echo $role;
+
+        if(!empty($username) && !empty($name) && !empty($firtsname) && !empty($email) && !empty($birthDate) && !empty($password) && !empty($role)){
           $user = new User();
           // verification de l'adresse email
           $check = $userRepository->userExist();
@@ -35,7 +38,8 @@ class RegisterController extends AbstractController
            ->setUsername($username)
            ->setPassword($password)
            ->setEmail($email)
-           ->setBirthDate($birthDate);
+           ->setBirthDate($birthDate)
+           ->setIdDroit($role);
             
            $userRepository->save($user);
           

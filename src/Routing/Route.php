@@ -6,7 +6,7 @@ class Route extends AbstractRoute
 {
   private array $getParams = [];
   private string $controller;
-  private array $method;
+  private string $method;
 
   public function __construct(
     string $path,
@@ -54,7 +54,7 @@ class Route extends AbstractRoute
     return $this;
   }
 
-  public function getMethod(): array
+  public function getMethod(): string
   {
     return $this->method;
   }

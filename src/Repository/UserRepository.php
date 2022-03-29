@@ -12,9 +12,6 @@ final class UserRepository extends AbstractRepository
 
   public function save(User $user): bool
   {
-
-    echo $user->getIdDroit();
-
     $stmt = $this->pdo->prepare("INSERT INTO users (`name`, firstName, username, `password`, email, birthDate, idDroit) VALUES (:name, :firstName, :username, :password, :email, :birthDate, :idDroit)");
     
     return $stmt->execute([
@@ -27,6 +24,24 @@ final class UserRepository extends AbstractRepository
       'idDroit' => $user->getIdDroit()
     ]);
   }
+
+  public function getUserbyId($id)
+  {
+    $stmp = $this->pdo->prepare("SELECT * FROM users WHERE id= :id");
+    $stmp->execute(['id'=>$id]);
+    $table = $stmp->fetch();
+    $user = new User();
+    $user->setName($table['name'])
+    ->setFirstName($table['firstname'])
+    ->setUsername($table['username'])
+    ->setPassword($table['password'])
+    ->setEmail($table['email'])
+    ->setBirthDate($table['birthDate'])
+    ->setIdDroit($table['idDroit']);
+
+    return $user;
+  }
+
 
   public function userExist()
   {

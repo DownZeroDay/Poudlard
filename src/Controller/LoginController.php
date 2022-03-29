@@ -8,15 +8,26 @@ use App\Routing\Attribute\Route;
 
 class LoginController extends AbstractController
 {
+
+
   #[Route(path: "/" , httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
     echo $this->twig->render('security/login.html.twig');
-   
+    
+
+    
+
+    if (key_exists('logout_btn', $_POST) && key_exists('user', $_SESSION)) {
+      $_SESSION = [];
+    }
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
   
-      $username = $_POST['username'];
-      $password = $_POST['password'];
+      if (key_exists('username', $_POST) && key_exists('password', $_POST)) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+      }
    
       if( !empty($username) && !empty($password)){
        
@@ -34,9 +45,9 @@ class LoginController extends AbstractController
         else{
             echo "<script> alert('identifiant incorrect') </script>";
         }
-      }        
+      }       
       
-    }
+    } 
     
   }
   

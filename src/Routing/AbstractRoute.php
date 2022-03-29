@@ -10,7 +10,7 @@ abstract class AbstractRoute
 
   public function __construct(
     string $path,
-    array $httpMethod = ["GET"],
+    array $httpMethod = array("GET"),
     string $name = "default"
   ) {
     $this->path = $path;

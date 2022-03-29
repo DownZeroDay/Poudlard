@@ -13,6 +13,7 @@ class User
   private string $password;
   private string $email;
   private DateTime $birthDate;
+  private int $idDroit;
 
   public function getId(): int
   {
@@ -87,6 +88,26 @@ class User
   public function setBirthDate(DateTime $birthDate): self
   {
     $this->birthDate = $birthDate;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of roleId
+   */ 
+  public function getIdDroit()
+  {
+    return $this->idDroit;
+  }
+
+  /**
+   * Set the value of roleId
+   *
+   * @return  self
+   */ 
+  public function setIdDroit(int $Idrole)
+  {
+    $this->idDroit = $Idrole;
 
     return $this;
   }

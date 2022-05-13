@@ -14,6 +14,8 @@ use App\Config\PdoConnection;
 use App\Config\TwigEnvironment;
 use App\DependencyInjection\Container;
 use App\Repository\UserRepository;
+use App\Repository\CategorieRepository;
+use App\Repository\EvenementRepository;
 use App\Routing\ArgumentResolver;
 use App\Routing\RouteNotFoundException;
 use App\Routing\Router;
@@ -21,6 +23,7 @@ use App\Session\Session;
 use App\Session\SessionInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use Twig\Environment;
+
 
 // Env vars - Possibilité d'utiliser le pattern Adapter
 // Pour pouvoir varier les dépendances qu'on utilise
@@ -31,6 +34,8 @@ $dotenv->loadEnv(__DIR__ . '/../.env');
 $pdoConnection = new PdoConnection();
 $pdoConnection->init(); // Connexion à la BDD
 $userRepository = new UserRepository($pdoConnection->getPdoConnection());
+$categorieRepository = new CategorieRepository($pdoConnection->getPdoConnection());
+$evenementRepository = new EvenementRepository($pdoConnection->getPdoConnection());
 
 // Twig - Vue
 $twigEnvironment = new TwigEnvironment();
@@ -41,6 +46,8 @@ $container = new Container();
 $container->set(Environment::class, $twig);
 $container->set(SessionInterface::class, new Session());
 $container->set(UserRepository::class, $userRepository);
+$container->set(CategorieRepository::class, $categorieRepository);
+$container->set(EvenementRepository::class, $evenementRepository);
 
 // Routage
 $router = new Router($container, new ArgumentResolver());

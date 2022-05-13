@@ -26,8 +26,6 @@ final class UserRepository extends AbstractRepository
 
   public function userExist()
   {
-   return $check = $this->pdo->prepare('SELECT username, password FROM users WHERE username = ? ');
-    //return $check->execute(array($user->getEmail()));
+    return $this->pdo->prepare('SELECT username, password FROM ' . self::TABLE .' WHERE username = ? ');
   }
-
 }

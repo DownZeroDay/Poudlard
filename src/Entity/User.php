@@ -13,10 +13,16 @@ class User
   private string $password;
   private string $email;
   private DateTime $birthDate;
+  private string $ville;
 
   public function getId(): int
   {
     return $this->id;
+  }
+
+  public function getVille(): string
+  {
+    return $this->ville;
   }
 
   public function getName(): string

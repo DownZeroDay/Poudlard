@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/style.css" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/index"> image ici</a>
+                 {# <a href="#"> <img src="../sourceImg/detoxcuresmoothie.jpg" alt="logo"> </a>  #}
+                 <ul>
+                    <li> <a href="/index"> Accueil</a></li>
+                    <li> <a href="#"> Produit</a></li>
+                    <li> <a href="#"> Déconnexion</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+
+        </header>
+    <section id="content"> 
+        
+            <form method="POST" action="/">
+                <button class="btn btn-primary" type="submit" name="logout_btn"> Déconnexion </button>
+            </form>
+     
+    {% block content %}{% endblock %}
+    </section>
+
+</body>
+</html>

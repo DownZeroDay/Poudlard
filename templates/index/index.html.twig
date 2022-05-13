@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+{% block title %}home{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Bienvenue sur la page {{ session.username }}</h1>
+    
+
+    <a href="/categorie"> Créer une categorie </a> <br>
+
+    <a href="/evenement"> Créer un évenement </a>
+
+    <img src="docs/capture.png" width="50px" height="25px">
+
+    {# <section class="lk">
+    
+        {% for resultat in resultats %}
+            <li>{{ resultat.titre }}</li>
+            <li>{{ resultat.description }}</li>
+
+            <p>
+                L'image est là
+                <img src="{{resultat.image}}" alt"image"/>
+            </p>
+           
+        {% endfor %}
+
+    </section> #}
+{% endblock %}

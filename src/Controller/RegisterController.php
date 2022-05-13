@@ -12,7 +12,7 @@ class RegisterController extends AbstractController
   #[Route(path: "/register", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
+     if(isset($_POST['submit'])){
       
         $username = $_POST['username'];
         $name = $_POST['name'];
@@ -31,24 +31,21 @@ class RegisterController extends AbstractController
           if( $row == 0){
 
             $user->setName($name)
-           ->setFirstName($firtsname)
-           ->setUsername($username)
-           ->setPassword($password)
-           ->setEmail($email)
-           ->setBirthDate($birthDate);
+              ->setFirstName($firtsname)
+              ->setUsername($username)
+              ->setPassword($password)
+              ->setEmail($email)
+              ->setBirthDate($birthDate);
             
-           $userRepository->save($user);
+            $userRepository->save($user);
           
-          header('Location:/');
+            header('Location:/');
           }
           else{
-           
             echo "<script> alert('Ce compte existe déjà') </script>";
           }
         }
     }
-    
     echo $this->twig->render('security/register.html.twig');
   }
-
 }

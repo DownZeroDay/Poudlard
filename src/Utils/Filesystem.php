@@ -7,7 +7,7 @@ class Filesystem
   public static function getFilesList(string $dir, bool $withDotDirs = false): array
   {
     $files = scandir($dir);
-
+        
     return $withDotDirs ? $files : array_slice($files, 2);
   }
 

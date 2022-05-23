@@ -4,15 +4,18 @@ namespace App\Entity;
 
 use DateTime;
 
-class User
+class User extends Model
 {
-  private int $id;
-  private string $name;
-  private string $firstName;
-  private string $username;
-  private string $password;
-  private string $email;
-  private DateTime $birthDate;
+  protected int $id;
+  protected int $droit;
+  protected string $nom;
+  protected string $prenom;
+  protected string $dateNaissance;
+  protected string $email;
+  protected string $password;
+
+  const TABLE_NAME = 'utilisateurs';
+  const PRIMARY_FIELD_NAME = 'id';
 
   public function getId(): int
   {

@@ -1,12 +1,12 @@
-<? 
-namespace App\Authorization;
+<?php
+namespace App\AccessControl;
 
 use App\Repository\DroitRepository;
 use App\Repository\UserRepository;
 use App\Session\Session;
 use App\Entity\Droit;
 
-class Authorization
+class AccessControl
 {
     private array $idUser;
     private Session $session;

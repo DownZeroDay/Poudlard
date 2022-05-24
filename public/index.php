@@ -10,11 +10,12 @@ if (
   return false;
 }
 
+use App\AccessControl\AccessControl;
 use App\Config\PdoConnection;
 use App\Config\TwigEnvironment;
 use App\DependencyInjection\Container;
-use App\Repository\UserRepository;
 use App\Repository\DroitRepository;
+use App\Repository\UserRepository;
 use App\Routing\ArgumentResolver;
 use App\Routing\RouteNotFoundException;
 use App\Routing\Router;
@@ -22,8 +23,6 @@ use App\Session\Session;
 use App\Session\SessionInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use Twig\Environment;
-use App\Authorization\Authorization;
-
 // Env vars - Possibilité d'utiliser le pattern Adapter
 // Pour pouvoir varier les dépendances qu'on utilise
 $dotenv = new Dotenv();
@@ -43,7 +42,7 @@ $twig = $twigEnvironment->init();
 $session = new Session();
 
 //Authorization setup
-$authorization = new Authorization($session,$userRepository,$droitRepository);
+$authorization = new AccessControl($session,$userRepository,$droitRepository);
 
 // Service Container
 $container = new Container();

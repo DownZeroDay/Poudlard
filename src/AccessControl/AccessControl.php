@@ -33,7 +33,7 @@ class AccessControl
 
     public function isAuthorize($idRight){
         if($idRight == 0) return true;
-       return (!empty($idRight)) && ($idRight == $this->getDroitUser()); 
+        return (!empty($idRight)) && ($idRight == $this->getDroitUser()); 
     }
 
     private function getDroitUser(){

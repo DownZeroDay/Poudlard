@@ -36,7 +36,10 @@ class IndexController extends AbstractController
       $params['Droit'] = $this->authorize->getLabelUser();
     }
     $this->views = [['user/Profile.html.twig',1] ,['user/BDEProfile.html.twig',2] , ['user/AdminProfile.html.twig',3]];
+    
     $this->viewPage();
+    
+    
   }
 
   #[Route(path: "/contact", name: "contact")]

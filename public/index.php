@@ -11,6 +11,7 @@ if (
 }
 
 use App\AccessControl\AccessControl;
+use App\AccessControl\AccessDeniedException;
 use App\Config\PdoConnection;
 use App\Config\TwigEnvironment;
 use App\DependencyInjection\Container;

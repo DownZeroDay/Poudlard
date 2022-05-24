@@ -13,15 +13,13 @@ class DroitRepository extends AbstractRepository
     {
 
 
-        $stmp = $this->db->prepare("SELECT * FROM droit WHERE id= :id");
+        $stmp = $this->pdo->prepare("SELECT * FROM droit WHERE id= :id");
 
-        $stmp->execute(['id' => $idDroit]);
+        $stmp->execute([':id' => $idDroit]);
         $table = $stmp->fetch();
         $droit = new Droit();
         $droit->setId($table["id"])
         ->setLabel($table["libelle"]);
-
-        var_dump($droit);
 
         return $droit;
     }

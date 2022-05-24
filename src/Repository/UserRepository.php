@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use phpDocumentor\Reflection\Types\Boolean;
+use DateTime;
 
 final class UserRepository extends AbstractRepository
 {
@@ -20,7 +21,7 @@ final class UserRepository extends AbstractRepository
       'username' => $user->getUsername(),
       'password' => password_hash($user->getPassword(), PASSWORD_BCRYPT),
       'email' => $user->getEmail(),
-      'birthDate' => $user->getBirthDate()->format('Y-m-d'),
+      'birthDate' => $user->getBirthDate(),
       'idDroit' => $user->getIdDroit()
     ]);
   }
@@ -45,7 +46,7 @@ final class UserRepository extends AbstractRepository
 
   public function userExist()
   {
-   return $check = $this->pdo->prepare('SELECT username, password FROM users WHERE username = ? ');
+   return $check = $this->pdo->prepare('SELECT id, username, password FROM users WHERE username = ? ');
     //return $check->execute(array($user->getEmail()));
   }
 

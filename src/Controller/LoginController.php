@@ -37,9 +37,9 @@ class LoginController extends AbstractController
         $row = $check->rowCount();
         $data = $check->fetch();
 
-        if($row > 0 && password_verify($password, $data['password'])){
-          
+        if($row > 0 && password_verify($password, $data['password'])){       
           $_SESSION['user'] = $username;
+          $_SESSION['id'] =  $data['id'] ?? null;
           header('Location:/contact');
         }
         else{

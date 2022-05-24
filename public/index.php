@@ -49,7 +49,7 @@ $container = new Container();
 $container->set(Environment::class, $twig);
 $container->set(SessionInterface::class, $session);
 $container->set(UserRepository::class, $userRepository);
-$container->set(Authorization::class,$authorization);
+$container->set(AccessControl::class,$authorization);
 
 // Routage
 $router = new Router($container, new ArgumentResolver());

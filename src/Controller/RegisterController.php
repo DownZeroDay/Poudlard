@@ -18,7 +18,7 @@ class RegisterController extends AbstractController
         $name = $_POST['name'];
         $firtsname = $_POST['firstname'];
         $email = $_POST['email'];
-        $birthDate = new dateTime($_POST['birthDate']);
+        $birthDate = $_POST['birthDate'];
         $password = $_POST['password'];
         $role = intval($_POST['role']);
 

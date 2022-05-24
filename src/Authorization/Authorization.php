@@ -29,10 +29,9 @@ class Authorization
     }
 
 
-    public function authorize(){
-       
+    public function isAuthorize($idRight){
+       return (!empty($idRight)) && ($idRight == $this->getDroitUser()); 
     }
-
 
     private function getDroitUser(){
         //get User
@@ -40,16 +39,8 @@ class Authorization
         if(!empty($this->idUser))
         {
             return $this->userRepository->getUserbyId($this->idUser)->getIdDroit();
-
         } 
     }
-
-
-
-
-
-
-
 
 }
 ?>

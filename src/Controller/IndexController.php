@@ -22,10 +22,13 @@ class IndexController extends AbstractController
   #[Route(path: "/contact", name: "contact")]
     public function contact()
     {    
+        $params = [];
         if(!empty($_SESSION) ){
-          echo $this->twig->addGlobal('session', $_SESSION);
+          $params = $_SESSION;
         }
-          echo $this->twig->render('index/contact.html.twig');        
+        $page = $this->showView('index/contact.html.twig',0,$params);
+        if($page) echo $page;
+          //echo $this->twig->render('index/contact.html.twig');        
     }
 
 }

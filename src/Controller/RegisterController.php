@@ -9,7 +9,7 @@ use DateTime;
 
 class RegisterController extends AbstractController
 {
-  #[Route(path: "/register", httpMethod: "GET")]
+  #[Route(path: "/register", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -18,32 +18,40 @@ class RegisterController extends AbstractController
         $name = $_POST['name'];
         $firtsname = $_POST['firstname'];
         $email = $_POST['email'];
-        $birthDate = new dateTime($_POST['birthDate']);
+        $birthDate = $_POST['birthDate'];
         $password = $_POST['password'];
+        $role = intval($_POST['role']);
 
-        if(!empty($username) && !empty($name) && !empty($firtsname) && !empty($email) && !empty($birthDate) && !empty($password)){
-           
-          // cripter le mot de passe
-          $hashpass = password_hash($password, PASSWORD_BCRYPT); 
-     
+        echo $role;
+
+        if(!empty($username) && !empty($name) && !empty($firtsname) && !empty($email) && !empty($birthDate) && !empty($password) && !empty($role)){
           $user = new User();
+          // verification de l'adresse email
+          $check = $userRepository->userExist();
+          $check->execute(array($username));
+          $row = $check->rowCount();
 
-          $user->setName($name)
+          if( $row == 0){
+
+            $user->setName($name)
            ->setFirstName($firtsname)
            ->setUsername($username)
-           ->setPassword($hashpass)
+           ->setPassword($password)
            ->setEmail($email)
-           ->setBirthDate($birthDate);
+           ->setBirthDate($birthDate)
+           ->setIdDroit($role);
             
            $userRepository->save($user);
-
-            //var_dump($_SESSION);
-            echo("Je suis la");
-
-          //header('Location:/home');
+          
+          header('Location:/');
+          }
+          else{
+           
+            echo "<script> alert('Ce compte existe déjà') </script>";
+          }
         }
     }
-   
+    
     echo $this->twig->render('security/register.html.twig');
   }
 

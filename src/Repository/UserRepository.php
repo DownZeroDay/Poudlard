@@ -1,11 +1,7 @@
 <?php
-
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManager;
-use phpDocumentor\Reflection\Types\Boolean;
-use DateTime;
 
 final class UserRepository extends AbstractRepository
 {
@@ -30,17 +26,11 @@ final class UserRepository extends AbstractRepository
     ]);
   }
 
-  public function userExist()
-  {
-    $user = new User(1);
-    return new User(1);
-   //return $check = $this->pdo->prepare('SELECT email, password FROM utilisateurs WHERE email = ? ');
-    //return $check->execute(array($user->getEmail()));
+  public function userExist($id)
+  { 
+    if(empty($id) && $id != 0) return false;
+    $user = new User($id);
+    return !empty($user->id) ?  true : false;
+    
   }
-
-  // public function get($id){
-  //   $stmt = $this->pdo->prepare("select * from utilisateurs where id = " . $id);
-  //   return $stmt->execute();
-  // }
-
 }

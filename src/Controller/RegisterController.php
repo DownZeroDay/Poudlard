@@ -13,36 +13,26 @@ class RegisterController extends AbstractController
   public function index(UserRepository $userRepository)
   {
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-      
-        $username = $_POST['username'];
-        $name = $_POST['name'];
-        $firtsname = $_POST['firstname'];
-        $email = $_POST['email'];
-        $birthDate = $_POST['birthDate'];
-        $password = $_POST['password'];
-        $role = intval($_POST['role']);
 
-        echo $role;
 
-        if(!empty($username) && !empty($name) && !empty($firtsname) && !empty($email) && !empty($birthDate) && !empty($password) && !empty($role)){
+        $res = [];
+        $res["nom"] = $_POST['name'];
+        $res["prenom"] = $_POST['firstname'];
+        $res["email"] = $_POST['email'];
+        $res["dateNaissance"] = $_POST['birthDate'];
+        $res["password"] = $_POST['password'];
+        $res["droit"] = intval($_POST['role']);
+
+
+        if(!empty($res["nom"]) && !empty($res["prenom"]) && !empty($res["email"]) && !empty($res["dateNaissance"]) && !empty($res["password"]) && !empty($res["droit"])){
           $user = new User();
           // verification de l'adresse email
-          $check = $userRepository->userExist();
-          $check->execute(array($username));
-          $row = $check->rowCount();
+          $check = $userRepository->userExist($user->getIdByMail($res["email"]));
+          if(!$check){
 
-          if( $row == 0){
-
-            $user->setName($name)
-           ->setFirstName($firtsname)
-           ->setUsername($username)
-           ->setPassword($password)
-           ->setEmail($email)
-           ->setBirthDate($birthDate)
-           ->setIdDroit($role);
+            $user->initialiser($res);
+            $user->enregistrer();
             
-           $userRepository->save($user);
-          
           header('Location:/');
           }
           else{

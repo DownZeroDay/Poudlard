@@ -7,6 +7,7 @@ class Model {
 
     protected $from_db = FALSE;
     protected $fields_to_update = array();
+    protected $pdoConnect = 0;
 
     const TABLE_NAME = 'undefined';
     const PRIMARY_FIELD_NAME = 'undefined';
@@ -16,10 +17,10 @@ class Model {
      * 
      */
     public function __construct($primary_field = NULL) {
-        $pdoConnect = new PdoConnection();
+        $this->pdoConnect = new PdoConnection();
         if(!empty($primary_field)) {
-            $query = "SELECT * FROM " . static::TABLE_NAME . " WHERE " . static::PRIMARY_FIELD_NAME . " = " . $pdoConnect->quote($primary_field);					
-            $resultat = $pdoConnect->query_one($query);
+            $query = "SELECT * FROM " . static::TABLE_NAME . " WHERE " . static::PRIMARY_FIELD_NAME . " = " . $this->pdoConnect->quote($primary_field);					
+            $resultat = $this->pdoConnect->query_one($query);
             if ($resultat) {
                 $this->initialiser($resultat);
                 $this->{static::PRIMARY_FIELD_NAME} = $resultat[static::PRIMARY_FIELD_NAME];
@@ -57,20 +58,21 @@ class Model {
         }
     }
 
-    public function makeEnregistrer($attributs) {
-        $pdoConnect = new PdoConnection();
+    public function enregistrer() {
+        $this->pdoConnect = new PdoConnection();
+        $attributs = get_object_vars($this);
         if (!empty($this->{static::PRIMARY_FIELD_NAME}) || $this->{static::PRIMARY_FIELD_NAME} === 0) {          
                 $champsNonEnregistres = !empty($this->fields_to_update) ? array_diff_key($attributs, $this->fields_to_update) : array();
-                $contenuRequete = $pdoConnect->makeRequestVal($attributs, $champsNonEnregistres);
+                $contenuRequete = $this->pdoConnect->makeRequestVal($attributs, $champsNonEnregistres);
                                     
                 if ($this->from_db) {
-                    $requete =' UPDATE '. static::TABLE_NAME . ' SET ' . $contenuRequete['columns_values'] . ' WHERE ' . static::PRIMARY_FIELD_NAME . '=' . $pdoConnect->quote($this->{static::PRIMARY_FIELD_NAME}) . ';';
+                    $requete =' UPDATE '. static::TABLE_NAME . ' SET ' . $contenuRequete['columns_values'] . ' WHERE ' . static::PRIMARY_FIELD_NAME . '=' . $this->pdoConnect->quote($this->{static::PRIMARY_FIELD_NAME}) . ';';
                 } else {
                     $requete = ' INSERT INTO '. static::TABLE_NAME . ' ('.$contenuRequete['columns'].') VALUES ('.$contenuRequete['values'].');';
                     $this->from_db = TRUE;	
                 }
                 $this->fields_to_update = array();
-                return $pdoConnect->query_noresult($requete);
+                return $this->pdoConnect->query_noresult($requete);
             }
     }
 }

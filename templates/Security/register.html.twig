@@ -21,11 +21,6 @@
                         <form method="POST" >
 
                             <div class="form-floating mb-4">
-                                <label for="username">Pseudo</label>
-                                <input type="text" name="username" class="form-control my-input" id="username" required>
-                            </div>
-
-                            <div class="form-floating mb-4">
                                 <label for="name">Nom</label>
                                 <input type="text" name="name" class="form-control my-input" id="name" required>
                             </div>
@@ -50,6 +45,14 @@
                                 <input type="password" name="password"  class="form-control my-input" id="name" required>
                             </div>    
                             
+                            <div class="form-floating mb-4">
+                                <label for="titels">Roles: </label><br>
+                                <label for="student">Étudiant: </label>
+                                <input type="radio" name="role"  class="form-control my-input" value="1" id="role" required>
+                                <label for="bde">BDE: </label>
+                                <input type="radio" name="role"  class="form-control my-input" value="2" id="role" required>
+                            </div>  
+
                             <div class="text-center" >
                                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">S'inscrire
                                 </button>

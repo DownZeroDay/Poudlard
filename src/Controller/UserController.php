@@ -28,4 +28,7 @@ class UserController extends AbstractController
     $user = $userRepository->find($id);
     var_dump($user);
   }
+
+
+  
 }

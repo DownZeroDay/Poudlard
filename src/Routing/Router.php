@@ -30,7 +30,7 @@ class Router
    *
    * @param string $name
    * @param string $url
-   * @param string $httpMethod
+   * @param array $httpMethod
    * @param string $controller Controller class
    * @param string $method
    * @return self
@@ -82,7 +82,7 @@ class Router
   public function getRoute(string $uri, string $httpMethod): ?Route
   {
     foreach ($this->routes as $route) {
-      if ($this->argumentResolver->match($uri, $route) && $route->getHttpMethod() === $httpMethod) {
+      if ($this->argumentResolver->match($uri, $route) && in_array($httpMethod, $route->getHttpMethod())) {
         $params = $this->argumentResolver->getGetParams($uri, $route);
 
         $route->setGetParams($params);

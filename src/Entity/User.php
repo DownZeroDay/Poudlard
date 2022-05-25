@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use DateTime;
+
 
 class User extends Model
 {
@@ -82,14 +82,34 @@ class User extends Model
     return $this;
   }
 
-  public function getBirthDate(): DateTime
+  public function getBirthDate(): string
   {
     return $this->birthDate;
   }
 
-  public function setBirthDate(DateTime $birthDate): self
+  public function setBirthDate(string $birthDate): self
   {
     $this->birthDate = $birthDate;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of roleId
+   */ 
+  public function getIdDroit()
+  {
+    return $this->idDroit;
+  }
+
+  /**
+   * Set the value of roleId
+   *
+   * @return  self
+   */ 
+  public function setIdDroit(int $Idrole)
+  {
+    $this->idDroit = $Idrole;
 
     return $this;
   }

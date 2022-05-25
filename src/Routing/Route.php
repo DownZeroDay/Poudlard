@@ -12,7 +12,7 @@ class Route extends AbstractRoute
     string $path,
     string $controller,
     string $method,
-    string $httpMethod = "GET",
+    array $httpMethod = array("GET"),
     string $name = "default",
   ) {
     parent::__construct($path, $httpMethod, $name);

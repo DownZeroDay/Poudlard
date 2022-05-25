@@ -3,6 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManager;
+use phpDocumentor\Reflection\Types\Boolean;
+use DateTime;
 
 final class UserRepository extends AbstractRepository
 {
@@ -22,7 +25,8 @@ final class UserRepository extends AbstractRepository
       'username' => $user->getUsername(),
       'password' => password_hash($user->getPassword(), PASSWORD_BCRYPT),
       'email' => $user->getEmail(),
-      'birthDate' => $user->getBirthDate()->format('Y-m-d')
+      'birthDate' => $user->getBirthDate(),
+      'idDroit' => $user->getIdDroit()
     ]);
   }
 

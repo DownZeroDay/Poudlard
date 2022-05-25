@@ -6,11 +6,11 @@ abstract class AbstractRoute
 {
   protected string $name;
   protected string $path;
-  protected string $httpMethod;
+  protected array $httpMethod;
 
   public function __construct(
     string $path,
-    string $httpMethod = "GET",
+    array $httpMethod = array("GET"),
     string $name = "default"
   ) {
     $this->path = $path;
@@ -42,12 +42,12 @@ abstract class AbstractRoute
     return $this;
   }
 
-  public function getHttpMethod(): string
+  public function getHttpMethod(): array
   {
     return $this->httpMethod;
   }
 
-  public function setHttpMethod(string $httpMethod): self
+  public function setHttpMethod(array $httpMethod): self
   {
     $this->httpMethod = $httpMethod;
 

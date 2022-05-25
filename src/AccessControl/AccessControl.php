@@ -55,5 +55,29 @@ class AccessControl
     {
         return $this->labelUser ?? '';
     }
+
+    /**
+     * Get the value of admin
+     */ 
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * Get the value of bde
+     */ 
+    public function getBde()
+    {
+        return $this->bde;
+    }
+
+    /**
+     * Get the value of student
+     */ 
+    public function getStudent()
+    {
+        return $this->student;
+    }
 }
 ?>

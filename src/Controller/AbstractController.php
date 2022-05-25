@@ -43,11 +43,11 @@ abstract class AbstractController
     $this->params = [];
   }
 
-  private function chooseView()
+  private function chooseView($bypass)
   {
     if (!empty($this->views)) {
       foreach ($this->views as $view) {
-        if ($this->authorize->isAuthorize($view[1])) {
+        if ($this->authorize->isAuthorize($view[1]) || $bypass) {
           $this->renderView($view[0], $this->params, $view[1]);
           exit();
         }
@@ -58,7 +58,8 @@ abstract class AbstractController
 
   protected function viewPage(){
     try{
-      $this->chooseView();
+      $bypass = (count($this->views) ==  1 && $this->authorize->isAuthorize($this->authorize->getAdmin()->getId()));
+      $this->chooseView($bypass);
     }catch(AccessDeniedException $e){
       http_response_code(403);
       echo $this->twig->render('403.html.twig');

@@ -43,7 +43,9 @@ class AccessControl
     private function getDroitUser()
     {
         //get User
+        
         $this->idUser = $this->session->get('id', '');
+
 
         if (!empty($this->idUser)) {
             $user = new User($this->idUser);

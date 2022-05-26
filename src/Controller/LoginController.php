@@ -26,6 +26,7 @@ class LoginController extends AbstractController
         $user = new User();
         $userId = $user->getIdByMail($email);
         $check = $userRepository->userExist($userId);
+        var_dump($check);
         if($check) {
           $user = new user($userId);
           $user = $user->get();

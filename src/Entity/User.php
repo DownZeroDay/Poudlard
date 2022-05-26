@@ -6,7 +6,7 @@ use App\Config\PdoConnection;
 
 class User extends Model
 {
-  protected int $id = 0;
+  protected $id = 0;
   protected int $droit = 0;
   protected string $nom = "";
   protected string $prenom = "";

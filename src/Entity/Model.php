@@ -61,7 +61,7 @@ class Model
         }
     }
 
-    public function enregistrer() : bool
+    public function enregistrer(): bool
     {
         $this->pdoConnect = new PdoConnection();
         $attributs = get_object_vars($this);

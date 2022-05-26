@@ -35,7 +35,7 @@ class IndexController extends AbstractController
     if(!empty($this->authorize->getLabelUser())){ 
       $params['Droit'] = $this->authorize->getLabelUser();
     }
-    $this->views = [['user/Profile.html.twig',1] ,['user/BDEProfile.html.twig',2] , ['user/AdminProfile.html.twig',3]];
+    $this->views = [['user/Profile.html.twig',2] ,['user/BDEProfile.html.twig',1] , ['user/AdminProfile.html.twig',3]];
     
     $this->viewPage();
     
@@ -51,7 +51,7 @@ class IndexController extends AbstractController
           $this->params = $_SESSION;
         }
         $this->params['page_name'] = 'contact';
-        $this->views = [['index/contact.html.twig',2]];
+        $this->views = [['index/contact.html.twig',1]];
         $this->viewPage();
         //echo $this->twig->render('index/contact.html.twig');        
     }

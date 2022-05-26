@@ -29,8 +29,8 @@ class AccessControl
         $this->droitRepository = $droitRepository;
 
         $this->admin = $droitRepository->getDroitById(3);
-        $this->bde = $droitRepository->getDroitById(2);
-        $this->student = $droitRepository->getDroitById(1);
+        $this->bde = $droitRepository->getDroitById(1);
+        $this->student = $droitRepository->getDroitById(2);
     }
 
 

@@ -6,14 +6,25 @@ use DateTime;
 
 class User
 {
-  private int $id;
-  private string $name;
-  private string $firstName;
-  private string $username;
-  private string $password;
-  private string $email;
-  private DateTime $birthDate;
-  private int $idDroit;
+  protected int $id = 0;
+  protected int $droit = 0;
+  protected string $nom = '';
+  protected string $prenom = '';
+  protected string $dateNaissance = '';
+  protected string $email = '';
+  protected string $password = '';
+
+  const TABLE_NAME = 'utilisateurs';
+  const PRIMARY_FIELD_NAME = 'id';
+
+  /**
+   * Retourne l'id de l'utilisateur correspondant à l'email
+   */
+  public function getIdByMail(string $email) : int
+  {
+    $query = "SELECT id FROM " . static::TABLE_NAME . " WHERE email=" . $this->pdoConnect->quote($email);
+    return ($this->pdoConnect->query_one($query)!== false) ? ['id'] : 0;
+  }
 
   public function getId(): int
   {
@@ -94,7 +105,7 @@ class User
 
   /**
    * Get the value of roleId
-   */ 
+   */
   public function getIdDroit()
   {
     return $this->idDroit;
@@ -104,7 +115,7 @@ class User
    * Set the value of roleId
    *
    * @return  self
-   */ 
+   */
   public function setIdDroit(int $Idrole)
   {
     $this->idDroit = $Idrole;

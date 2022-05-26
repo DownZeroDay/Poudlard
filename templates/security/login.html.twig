@@ -1,40 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        
-    <title>Connexion</title>
+        <title>Connexion</title>
     </head>
     <body>
-    
-        
         <div class="container py-5 h-100 mb-5">
             <div class="row d-flex justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card shadow-2-strong" >
                         <div class="card-body p-5 text-center">
-
                             <h3 class="mb-5">Sign in</h3>
-
-                            <form method="POST" >
-
+                            <form method="POST">
                                 <div class="form-outline mb-4">
-                                    <input type="text"  class="form-control form-control-lg" name="username" required />
-                                    <label class="form-label">username</label>
-                                   
+                                    <input type="email"  class="form-control form-control-lg" required />
+                                    <label class="form-label">Email</label>
                                 </div>
-
                                 <div class="form-outline mb-4">
-                                    <input type="password"  class="form-control form-control-lg" name ="password" required/>
-                                    <label class="form-label" >Password</label>
+                                    <input type="password"  class="form-control form-control-lg" />
+                                    <label class="form-label">Password</label>
                                 </div>
-
                                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">Login</button>
-
                                 <hr class="my-4">
                                 <div class="text-center">
                                 Pas encore inscrit? <a href="/register">ici</a>
@@ -45,7 +34,5 @@
                 </div>
             </div>
         </div>
-        
-            
     </body>
 </html>

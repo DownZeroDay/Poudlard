@@ -17,13 +17,14 @@ class User extends Model
   const TABLE_NAME = 'utilisateurs';
   const PRIMARY_FIELD_NAME = 'id';
 
-  public function getIdByMail($email)
+  /**
+   * Retourne l'id de l'utilisateur correspondant à l'email
+   */
+  public function getIdByMail(string $email) : int
   {
-        $query = "SELECT id FROM " . static::TABLE_NAME . " WHERE email=". $this->pdoConnect->quote($email);
-        return $this->pdoConnect->query_one($query);
-        
+    $query = "SELECT id FROM " . static::TABLE_NAME . " WHERE email=" . $this->pdoConnect->quote($email);
+    return (($result = $this->pdoConnect->query_one($query))!== false) ? $result['id'] : 0;
   }
-
   public function getId(): int
   {
     return $this->id;

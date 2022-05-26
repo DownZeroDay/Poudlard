@@ -1,5 +1,5 @@
 <?php
-
+/* A modifier avec access control */
 namespace App\Controller;
 
 use App\Routing\Attribute\Route;

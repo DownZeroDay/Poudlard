@@ -6,7 +6,7 @@ use App\Config\PdoConnection;
 
 class User extends Model
 {
-  protected int $id = 0;
+  protected $id = 0;
   protected int $droit = 0;
   protected string $nom = '';
   protected string $prenom = '';
@@ -23,7 +23,7 @@ class User extends Model
   public function getIdByMail(string $email) : int
   {
     $query = "SELECT id FROM " . static::TABLE_NAME . " WHERE email=" . $this->pdoConnect->quote($email);
-    return ($this->pdoConnect->query_one($query)!== false) ? ['id'] : 0;
+    return (($result = $this->pdoConnect->query_one($query)) !== false) ? $result['id'] : 0;
   }
 
   public function getId(): int

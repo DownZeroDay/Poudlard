@@ -18,8 +18,8 @@ class LoginController extends AbstractController
       $_SESSION = [];
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (key_exists('username', $_POST) && key_exists('password', $_POST)) {
-        $email = $_POST['username'];
+      if (key_exists('email', $_POST) && key_exists('password', $_POST)) {
+        $email = $_POST['email'];
         $password = $_POST['password'];
       }
       if (!empty($email) && !empty($password)) {

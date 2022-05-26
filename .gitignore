@@ -1,6 +1,8 @@
 /vendor/
 /.vscode/
 .env.local
+composer.lock
 /var/
 /.phpunit.cache/
 /coverage/
+

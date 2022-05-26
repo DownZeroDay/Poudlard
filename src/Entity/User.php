@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use DateTime;
+use App\Config\PdoConnection;
 
-class User
+class User extends Model
 {
   protected int $id = 0;
   protected int $droit = 0;
@@ -91,12 +91,12 @@ class User
     return $this;
   }
 
-  public function getBirthDate(): DateTime
+  public function getBirthDate(): string
   {
     return $this->birthDate;
   }
 
-  public function setBirthDate(DateTime $birthDate): self
+  public function setBirthDate(string $birthDate): self
   {
     $this->birthDate = $birthDate;
 

@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManager;
-use phpDocumentor\Reflection\Types\Boolean;
 
 final class UserRepository extends AbstractRepository
 {
@@ -15,5 +12,4 @@ final class UserRepository extends AbstractRepository
     $user = $user->get();
     return !empty($user['id']) ?  true : false;
   }
-
 }

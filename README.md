@@ -23,20 +23,20 @@ Si un objet est récupéré les valeurs sont hydraté à notre objet et nous pou
 de notre objet car à l'instanciation les valeurs ont les mêmes attributs que la class donc si les attributs sont private ou protected ils ne seront pas accessibles en dehors de la classe.
 
 Ce fichier Model a aussi 2 autres méthodes :
- - initialiser : permet d'hydrater un objet à partir d'un tableau associatif envoyé en paramètre.
- - enregistrer : met à jour ou créé une nouvelle entrée dans la base de données à partir de l'objet cible et retourne une query_noresult.
+ - Initialiser : permet d'hydrater un objet à partir d'un tableau associatif envoyé en paramètre.
+ - Enregistrer : met à jour ou créé une nouvelle entrée dans la base de données à partir de l'objet cible et retourne une query_noresult.
 
 #### Exemples : 
 
-enregistrement ou mise à jour d'un utilisateur : 
-    - instanciation : $user = new User(), nous avons donc un objet vierge comme nous n'avons renseignés aucune valeur, les valeurs seront donc les valeurs par défaut des différents attributs de l'objet.
-    - ajout des valeurs : $newData = array('nom' => 'Doe', 'prenom' => 'John') et ensuite $user->initialiser($newData), nous avons donc un objet User qui aura un nom et un prénom.
-    - enregistrement en base de donnée : $user->enregistrer(), retourne true ou false si l'enregistrement s'est effectué ou non.
+Enregistrement ou mise à jour d'un utilisateur : 
+ - Instanciation : $user = new User(), nous avons donc un objet vierge comme nous n'avons renseignés aucune valeur, les valeurs seront donc les valeurs par défaut des différents attributs de l'objet.
+ - Ajout des valeurs : $newData = array('nom' => 'Doe', 'prenom' => 'John') et ensuite $user->initialiser($newData), nous avons donc un objet User qui aura un nom et un prénom.
+ - Enregistrement en base de donnée : $user->enregistrer(), retourne true ou false si l'enregistrement s'est effectué ou non.
 Dans le cas d'une mise à jour il aurait fallu faire exactement la même chose tout en ajoutant l'id de l'utilisateur cible au moment de créer notre utilisateur.
 
 Pour récupérer des données nous ferons quelque chose d'assez similaire : 
- - instanciation : $userOBJ = new User(1), nous aurons donc un objet User qui aura toutes les valeurs de l'utilisateur ayant comme clé primaire 1.
- - récupération pour affichage : $user = $userOBJ->get(), nous aurons donc un tableau associatif rassemblant toutes les données de l'utilisateur
+ - Instanciation : $userOBJ = new User(1), nous aurons donc un objet User qui aura toutes les valeurs de l'utilisateur ayant comme clé primaire 1.
+ - Récupération pour affichage : $user = $userOBJ->get(), nous aurons donc un tableau associatif rassemblant toutes les données de l'utilisateur
 Si on veut manipuler des objet on a juste à ajouter "(object)" devant le $userOBJ->get(), nous aurons donc un objet utilisateur qui sera manipulable.
 
 On peut retrouver des situations réelles dans les controller LoginController et RegisterController.

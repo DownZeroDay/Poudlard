@@ -26,7 +26,7 @@ Ce fichier Model a aussi 2 autres méthodes :
  - initialiser : permet d'hydrater un objet à partir d'un tableau associatif envoyé en paramètre.
  - enregistrer : met à jour ou créé une nouvelle entrée dans la base de données à partir de l'objet cible et retourne une query_noresult.
 
-#### exemples : 
+#### Exemples : 
 
 enregistrement ou mise à jour d'un utilisateur : 
     - instanciation : $user = new User(), nous avons donc un objet vierge comme nous n'avons renseignés aucune valeur, les valeurs seront donc les valeurs par défaut des différents attributs de l'objet.

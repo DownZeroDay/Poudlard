@@ -64,8 +64,6 @@ class LoginController extends AbstractController
         $link = "https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=".$chl;
         $m = $otp->now();
 
-        echo($m);
-
         if(!empty($_POST['code'])){
           if($otp->verify(htmlspecialchars($_POST['code']))){
             header('Location:/contact');

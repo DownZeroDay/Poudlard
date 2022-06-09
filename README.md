@@ -42,3 +42,20 @@ Si on veut manipuler des objet on a juste à ajouter "(object)" devant le $userO
 On peut retrouver des situations réelles dans les controller LoginController et RegisterController.
 
 ##Alex Robbrecht
+## Lansana KEITA
+### Inscription 
+Dans cette partie du devoir on a opté pour une authentification classique qui nous permet de nous inscrire et ensuite pouvoir se connecter à l'aide des identifiants (email et password)
+
+Pour ce faire, à l'inscription on s'assure que tous les champs du formulaire sont bien renseignés avant de soumettre le formulaire pour le contrôle.
+
+Après la soumission du formulaire, on s'assure que l'adresse email saisie n'est pas déjà dans la table, dans le cas contraire on affiche un message pour informer l'utilisateur.
+
+Pour finaliser l'inscription, on utilise un algorithme pour hacher le mot de passe.
+### Connexion 
+Pour pouvoir se connecter, l’utilisateur renseigne son adresse email et le mot de passe, si l’un des champs n’est pas correct, on affiche un message d’erreur jusqu’à ce qu’il renseigne les bonnes informations.
+
+Après validation du formulaire de login, il est ensuite redirigé vers une nouvelle page qui contient un QR_code mis en place avec le système google authenticator qui permet de récupérer un code de validation supplémentaire qui change au bout de quelques secondes s’il n’est pas utilisé. 
+Après la validation du code, il est redirigé vers la page contact. 
+
+### Amélioration :
+google authenticator étant un système de connexion supplémentaire, on peut enregistrer le code en base de données si l’utilisateur vient de s’inscrire. 

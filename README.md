@@ -59,3 +59,40 @@ Après la validation du code, il est redirigé vers la page contact.
 
 ### Amélioration :
 google authenticator étant un système de connexion supplémentaire, on peut enregistrer le code en base de données si l’utilisateur vient de s’inscrire. 
+
+### Alex Robbrecht
+
+### Controle de l'accès au vues 
+
+## Obtenir les types de droits 
+
+-On utilise la fonction getDroitById dans DroitRepository pour récupérer les droit dans la base de données selon l'id.
+
+## Vérifier les utilisateurs
+
+Pour vérifié si l'utilisateur à le droit d'acceder on utilise la fonction  isAuthoriza dans le fichier AccessControl.
+Cette fonction renvoie un booléen selon si l'id droit de la page est le même que celui de l'utilisateur.
+Sauf si la page est globale alors l'id droit de la page passé dans la fonction est 0.
+Pour vérifier un utiliseur la fonction isAuthorize appel getDroitUser dans le même dossier qui s'occupe de récupérer l'id droit de l'utilisateur qu'on stock dans la session.
+
+## Gérer les vues 
+
+Pour gérer les vues j'ai modifié la class abstractController pour automatiser l'affichage des vues.
+J'ai rajouté une array de paramètre et une array views qui est composé de deux éléments:
+    -Le lien de la page
+    -l'id Droit de celui qui peut acceder à cette page 
+
+Ensuite j'ai ajouter une fonction ViewPage utilisable par n'importe quel controleur héritant de la class.
+Elle permet de detecter si on à pas accès d'utilisé l'AccessDeniedException, renvoyer une 403 et rediriger vers la page 403.
+Cette fonction vérifie aussi si on est admin et qu'on peut bypass n'importe quel page si on veut en affiché une.
+
+Ensuite on passe par la fonction chooseView qui parcours l'array views et trouve la page qu'on a le droit d'accéder.
+Enfin on envoie dans renderView le lien de la page et l'idDroit de celle-ci avec les paramètre pour afficher la page et mettre en place les données en voyé.
+
+#### Exemples:
+    ->Dans le indexController on utilise cette automatisation sur la page profile qui utilise la fonction resetViewsAndParams pour dès l'entrer dans la fonction reset les arrays de views et de params.
+    Ensuite on met en place les paramètre à partir des infos de session dans params.
+    Avec cela dans l'array views on crée 3 élément composé d'un lien vers la vue avec le droit qui va avec et après on appel la fonction viewPage.
+
+    -> Pour le deuxième exemple on a la qu'une seul page la page contact qui est visible que par le BDE ou l'admin car il peut byPass. 
+    Cette fois ci dans l'array viesws on crée un élément qui contient le lien vers la page contact et son id Doit (1) et puis on appel viewPage. 

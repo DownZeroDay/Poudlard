@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Config\PdoConnection;
+use phpDocumentor\Reflection\Types\Array_;
 
 class User extends Model
 {
@@ -13,6 +14,7 @@ class User extends Model
   protected string $dateNaissance= "";
   protected string $email = "";
   protected string $password = "";
+  protected string $token = "";
 
   const TABLE_NAME = 'utilisateurs';
   const PRIMARY_FIELD_NAME = 'id';
@@ -32,24 +34,24 @@ class User extends Model
 
   public function getName(): string
   {
-    return $this->name;
+    return $this->nom;
   }
 
   public function setName(string $name): self
   {
-    $this->name = $name;
+    $this->nom = $name;
 
     return $this;
   }
 
   public function getFirstName(): string
   {
-    return $this->firstName;
+    return $this->prenom;
   }
 
   public function setFirstName(string $firstName): self
   {
-    $this->firstName = $firstName;
+    $this->prenom = $firstName;
 
     return $this;
   }
@@ -92,12 +94,12 @@ class User extends Model
 
   public function getBirthDate(): string
   {
-    return $this->birthDate;
+    return $this->dateNaissance;
   }
 
   public function setBirthDate(string $birthDate): self
   {
-    $this->birthDate = $birthDate;
+    $this->dateNaissance = $birthDate;
 
     return $this;
   }
@@ -120,5 +122,34 @@ class User extends Model
     $this->idDroit = $Idrole;
 
     return $this;
+  }
+
+  /**
+   * Get the value of token
+   */ 
+  public function getToken()
+  {
+    return $this->token;
+  }
+
+  /**
+   * Set the value of token
+   *
+   * @return  self
+   */ 
+  public function setToken($token)
+  {
+    $this->token = $token;
+
+    return $this;
+  }
+
+  public function getUserData(){
+      return array(
+          "nom" => $this->getName(),
+          "prenom" => $this->getBirthDate(),
+          "email" => $this->getEmail(),
+          "date de naissance" => $this->getBirthDate()
+      );
   }
 }

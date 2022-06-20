@@ -26,7 +26,14 @@ class IndexController extends AbstractController
 
   #[Route(path: "/home")]
   public function home(){
+    $this->resetViewsAndParams();
 
+    if(!empty($_SESSION))
+    {
+      $this->params = $_SESSION;
+    }
+    $this->views = [['index/home.html.twig',0]];
+    $this->viewPage();
   }
 
   #[Route(path: "/profile" , name: "profile")]
@@ -37,11 +44,8 @@ class IndexController extends AbstractController
     if(!empty($_SESSION)){
       $this->params = $_SESSION;
     }
-    if(!empty($this->authorize->getLabelUser())){ 
-      $params['Droit'] = $this->authorize->getLabelUser();
-    }
-    $this->views = [['user/Profile.html.twig',2] ,['user/BDEProfile.html.twig',1] , ['user/AdminProfile.html.twig',3]];
-    
+    $this->params['title'] = $this->authorize->getLabelUserWithId();
+    $this->views = [['user/Profile.html.twig',0]];
     $this->viewPage();
   }
 
@@ -71,6 +75,21 @@ class IndexController extends AbstractController
   //          'm'  => $m 
   //       ]);        
   //   }
+
+    #[Route(path:"/css")]
+    public function css()
+    {
+      require "public/css/style.css";
+      header('Content-Type: text/css');
+    }
+
+    
+    #[Route(path:"/js")]
+    public function js()
+    {
+      require "public/js/main.js";
+      header('Content-Type: application/javascript');
+    }
 
   #[Route(path: "/contact", name: "contact")]
     public function contact()

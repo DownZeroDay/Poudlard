@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Catevenement;
-
+use PDO;
 
 final class CategorieRepository extends AbstractRepository
 {
@@ -17,9 +17,18 @@ final class CategorieRepository extends AbstractRepository
       'libelle' => $cat->getLibelle()
     ]);
   }
-  // On verifie si la catégorie existe déja
+  /** Methode qui verifie si la catégorie existe déja */ 
   public function CategorieExist()
   {
     return $this->pdo->prepare('SELECT libelle FROM ' . self::TABLE .' WHERE libelle = ? ');
+  }
+
+  /**Methode qui affiche toutes les catégories */
+  public function findAll()
+  {
+    $sql = "SELECT * FROM Catevenement";
+    $resultat = $this->pdo->query($sql);
+    $resultat->execute();
+    return $resultat->fetchAll(PDO::FETCH_ASSOC);
   }
 }

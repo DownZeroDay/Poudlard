@@ -10,9 +10,7 @@ class EventController extends AbstractController
   #[Route(path: '/event/create',  httpMethod: ['GET', 'POST'], name: 'event_create_form')]
   public function create()
   {
-    echo $this->twig->render('event/create.html.twig');
-
-    
+    echo $this->twig->render('event/create.html.twig');  
   }
 
   #[Route(path: '/event/save', httpMethod: ['POST'], name: 'event_save')]

@@ -4,8 +4,8 @@ body {
     background-color:#D9D5AB;
 }
 
-.bg-login{
-    background-color:#532851;
+form, .card {
+    background-color:#532851 !important;
 }
 
 h3{
@@ -28,18 +28,27 @@ select:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-
-.input-login{
-    background-color:#532851;
-    border: 1px solid #D9D5AB;
-    color:#ffff;
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
-.input-login::placeholder {
-    color: #ffff;
+
+form input{
+    background-color:#532851 !important;
+    border: 1px solid #D9D5AB !important;
+    color:#ffff !important;
+    color-scheme: #D9D5AB;
 }
 
-.input-login:focus {
+form input::placeholder {
+    color: #ffff !important;
+}
+
+form label {
+    color: #fff !important;
+}
+
+form input:focus {
     background-color: #532851;
     color: #ffff;
 }

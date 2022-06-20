@@ -1,10 +1,10 @@
-<form action="/event/save" method="post" enctype="multipart/form-data">
+{# <form action="/event/save" method="post" enctype="multipart/form-data"> #}
 	{# <input type="text" name="name"/>
 	<input type="file" name="image"/>
 	<input type="submit" value="Enregistrer"> #}
 
 
-	<div>
+	{# <div>
             Entrer le titre de l'évenement  
             <input type="text" name="titre"> 
         </div>
@@ -52,4 +52,65 @@
             <input type="submit" value="submit">
         </div>
       
-</form>
+</form> #}
+
+{% extends "base.html.twig" %}
+{% block title %}Evenement {% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+
+        <div>
+            Entrer le titre de l'évenement  
+            <input type="text" name="titre"> 
+        </div>
+
+        <div>
+            Entrer le nombre de participant  
+            <input type="number" name="number">
+        </div>
+
+        <div>
+            Entrer le nombre Maximal de participant 
+            <input type="number" name="numberMax">
+        </div>
+
+        <div>
+            Entrer le prix 
+            <input type="text" name="prix">
+        </div>
+
+            Entrer la date de début 
+            <input type="date" name="dateDebut">
+        </div>
+
+        <div>
+            Entrer la date de fin 
+            <input type="date" name="dateFin">
+        </div>
+
+        <div>
+            Entrer l'adresse  
+            <input type="text" name="adresse">
+        </div>
+
+        <div>
+            Entrer la description de l'évenement  
+            <input type="text" name="description">
+        </div>
+        
+        <div>
+            Selectionnez le fichier  
+            <input type="file" name="image">
+        </div>
+
+        <div>
+            <input type="submit" value="submit">
+        </div>
+       
+    </form>
+{% endblock %}

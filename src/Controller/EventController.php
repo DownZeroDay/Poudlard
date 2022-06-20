@@ -2,8 +2,10 @@
 /* A modifier avec access control */
 namespace App\Controller;
 
+use App\Entity\Catevenement;
 use App\Routing\Attribute\Route;
 use App\Entity\Evenement;
+use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 class EventController extends AbstractController
 {
@@ -11,7 +13,6 @@ class EventController extends AbstractController
   public function create()
   {
     echo $this->twig->render('event/create.html.twig');
-
     
   }
 
@@ -71,5 +72,43 @@ class EventController extends AbstractController
     //   }
     // }
     echo $this->twig->render('evenement/evenement.html.twig');
+  }
+
+
+  #[Route(path: '/event/categorie',  httpMethod: ['GET', 'POST'], name: 'categorie_create_form')]
+  public function categorie(CategorieRepository $repoCat)
+  {
+
+    //$repoCat = new CategorieRepository();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $cat = [];
+      $cat["libelle"] = $_POST['libelle'];
+
+      if (!empty($cat["libelle"])){
+
+        $categorie = new Catevenement();
+
+        $check = $repoCat->CategorieExist();
+        $check->execute(array($cat["libelle"]));
+        $row = $check->rowCount();
+
+        if($row == 0){
+          $categorie->initialiser($cat);
+          $categorie->enregistrer();
+        }
+        else{
+          echo "<script> alert('Cette catégorie existe déjà') </script>";
+        }
+
+      }
+      else{
+        echo ("erreur");
+      }
+
+      
+    }
+    echo $this->twig->render('event/categorie.html.twig');
+    
   }
 }

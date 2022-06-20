@@ -17,6 +17,7 @@ use App\Config\TwigEnvironment;
 use App\DependencyInjection\Container;
 use App\Repository\DroitRepository;
 use App\Repository\UserRepository;
+use App\Repository\CategorieRepository;
 use App\Routing\ArgumentResolver;
 use App\Routing\RouteNotFoundException;
 use App\Routing\Router;
@@ -34,6 +35,7 @@ $pdoConnection = new PdoConnection();
 $pdoConnection->init(); // Connexion à la BDD
 $userRepository = new UserRepository($pdoConnection->getPdoConnection());
 $droitRepository = new DroitRepository($pdoConnection->getPdoConnection());
+$catRepository = new CategorieRepository($pdoConnection->getPdoConnection());
 
 // Twig - Vue
 $twigEnvironment = new TwigEnvironment();
@@ -50,6 +52,7 @@ $container = new Container();
 $container->set(Environment::class, $twig);
 $container->set(SessionInterface::class, $session);
 $container->set(UserRepository::class, $userRepository);
+$container->set(CategorieRepository::class, $catRepository);
 $container->set(AccessControl::class,$authorization);
 
 // Routage

@@ -1,31 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <title>Connexion</title>
-    </head>
-    <body>
-        <div class="container py-5 h-100 mb-5">
-            <div class="row d-flex justify-content-center">
+{% include 'global/header.html.twig' with {'title':'Login'} only %}
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card shadow-2-strong" >
+                        <div class="bg-login">
                         <div class="card-body p-5 text-center">
                             <h3 class="mb-5">Connectez-vous</h3>
                             <form method="POST">
                                 <div class="form-outline mb-4">
-                                    <label class="form-label">Email</label>
-                                    <input type="email"  name = "email" class="form-control form-control-lg" required />
+                                    <input type="email"  name = "email" class="input-login form-control form-control-lg" placeholder="E-mail" required />
                                 </div>
                                 <div class="form-outline mb-4">
-                                <label class="form-label">Mot de passe</label>
-                                    <input type="password" name = "password" class="form-control form-control-lg" />
+                                    <input type="password" name = "password" class="input-login form-control form-control-lg" placeholder="Mot de Passe" required/>
                                 </div>
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                                 <hr class="my-4">
-                                <div class="text-center">
+                                <div class="text-norm text-center">
                                 Pas encore inscrit? <a href="/register">ici</a>
                                 </div>
                             </form>
@@ -34,5 +24,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+{% include 'global/footer.html.twig' %}

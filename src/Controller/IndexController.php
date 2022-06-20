@@ -40,10 +40,24 @@ class IndexController extends AbstractController
   public function profile(){
   $this->resetViewsAndParams();
 
+    $user = new User($_SESSION['id']);
+    $user = $user->get();
+
+
     if(!empty($_SESSION)){
       $this->params = $_SESSION;
     }
     $this->params['title'] = $this->authorize->getLabelUserWithId();
+    $this->params['user'] = $user;
+    
+    $age = "0";
+    
+    $birth = $user['dateNaissance'];
+    $today = date('Y-m-d');
+
+    $diff = date_diff(date_create($birth),date_create($today));
+    $age = $diff->format('%y');
+    $this->params['age'] = strval($age);
     $this->views = [['user/Profile.html.twig',4]];
     $this->viewPage();
   }

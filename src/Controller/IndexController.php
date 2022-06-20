@@ -30,7 +30,7 @@ class IndexController extends AbstractController
 
     if(!empty($_SESSION))
     {
-      $this->params = $_SESSION;
+      $this->params['session'] = $_SESSION;
     }
     $this->views = [['index/home.html.twig',0]];
     $this->viewPage();

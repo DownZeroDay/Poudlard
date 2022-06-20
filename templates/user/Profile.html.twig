@@ -9,25 +9,26 @@
                             <h3 class="mb-5">Profile</h3>
                             <form method="POST">
                                 <div class="form-outline mb-4">
+                                <input type="hidden" name ="id" id ="id-Profile" value='{{params.session.id}}'>
                                    <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Nom</span>
-                                        <input type="text" class="form-control" placeholder="Nom" value='{{params.user.nom}}' aria-label="Username" aria-describedby="addon-wrapping" disabled/>
+                                        <input type="text" class="form-control" placeholder="Nom" id='nom-Profile' value='{{params.user.nom}}' aria-label="Username" aria-describedby="addon-wrapping" disabled/>
                                     </div>
                                 </div>
                                 <div class="form-outline mb-4">
                                    <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Prénom</span>
-                                        <input type="text" class="form-control" placeholder="Prénom" value='{{params.user.prenom}}' aria-label="Username" aria-describedby="addon-wrapping" disabled/>
+                                        <input type="text" class="form-control" placeholder="Prénom" id='prenom-Profile' value='{{params.user.prenom}}' aria-label="Username" aria-describedby="addon-wrapping" disabled/>
                                     </div>
                                 </div>
                                 <div class="form-outline mb-4">
                                    <div class="input-group flex-nowrap">
                                         <span class="input-group-text" id="addon-wrapping">Age</span>
-                                        <input type="text" class="form-control" value='{{params.age}} an(s)' placeholder="Age" aria-label="Age" aria-describedby="addon-wrapping" disabled/>
+                                        <input type="text" class="form-control" placeholder="Age" id='age-Profile' value='{{params.age}} an(s)'  aria-label="Age" aria-describedby="addon-wrapping" disabled/>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-lg btn-block">Modifier</button>
-                                <button class="btn btn-primary btn-lg btn-block" type="submit" hidden>Valider</button>
+                                <button class="btn btn-primary btn-lg btn-block" id='Edit-Profile'>Modifier</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" id = 'Valide-Profile' hidden>Valider</button>
                             </form>
                         </div>
                     </div>

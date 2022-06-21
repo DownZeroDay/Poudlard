@@ -1,0 +1,32 @@
+               <div class="col-3 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" >
+                        <div class="card-body p-5 text-center">
+                            <h3 class="mb-5">Profile</h3>
+                            <form id='form-Profile' method="POST">
+                                <div class="form-outline mb-4">
+                                <input type="hidden" name ="id" id ="id-Profile" value='{{params.session.id}}'>
+                                   <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Nom</span>
+                                        <input type="text" class="form-control" name = "nom" placeholder="Nom" id='nom-Profile' value='{{params.user.nom}}' aria-label="Username" aria-describedby="addon-wrapping" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-4">
+                                   <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Prénom</span>
+                                        <input type="text" class="form-control" name="prenom" placeholder="Prénom" id='prenom-Profile' value='{{params.user.prenom}}' aria-label="Username" aria-describedby="addon-wrapping" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-5">
+                                   <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">Age</span>
+                                        <input type="text" class="form-control" placeholder="Age" id='age-Profile' value='{{params.age}} an(s)'  aria-label="Age" aria-describedby="addon-wrapping" disabled/>
+                                    </div>
+                                </div>
+                                <div class="space-button">
+                                    <button class="btn btn-primary btn-lg " id='Edit-Profile'>Modifier</button>
+                                    <button class="btn btn-primary btn-lg " type="submit" id='Valide-Profile' hidden>Valider</button>
+                                </div>                               
+                            </form>
+                        </div>
+                    </div>
+                </div>

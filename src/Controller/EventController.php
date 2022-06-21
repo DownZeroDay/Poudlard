@@ -16,6 +16,7 @@ class EventController extends AbstractController
   {
     
       $object = json_decode(file_get_contents("php://input"), true);
+      var_dump($object);
       $evenement = [];
       $target = "image/".basename($object['image']['name']);
 
@@ -39,7 +40,7 @@ class EventController extends AbstractController
           && !empty($evenement["prix"]) && !empty($evenement["dateDebut"]) && !empty($evenement["dateFin"]) )
       {
 
-         if(move_uploaded_file($object['image']['tmp_name'], $target)){
+         if(move_uploaded_file($object['image']['name'], $target)){
          
 
         }

@@ -56,9 +56,20 @@ function switchInput()
 
 function sendForm(form,url,isReset,after = () => {}){
     var data = new FormData(form);
-    object = {};
+    object = new Object();
     for([key,value] of data.entries()){
-        object[key] = value;
+        if(key == 'image'){
+            var Image  = {
+                'lastModified'     : value.lastModified,
+                'lastModifiedDate' : value.lastModifiedDate,
+                'name'             : value.name,
+                'size'             : value.size,
+                'type'             : value.type
+                };  
+                object[key] = Image;
+        }else{
+            object[key] = value;     
+        }         
     }
     console.log(object);
     const options = {

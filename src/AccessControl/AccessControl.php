@@ -36,7 +36,7 @@ class AccessControl
 
     public function isAuthorize($idRight)
     {
-        if ($idRight == 0) return true;
+        if ($idRight == 0 || ($idRight == 4 && !empty($this->session->get('id','')))) return true;
         return (!empty($idRight)) && ($idRight == $this->getDroitUser());
     }
 
@@ -61,6 +61,24 @@ class AccessControl
     public function getLabelUser()
     {
         return $this->labelUser ?? '';
+    }
+/**
+     * Get the value of labelUser with id
+     */
+    public function getLabelUserWithId()
+    {
+        $id = $this->getDroitUser();
+        switch ($id) {
+            case 1:
+                return $this->bde->getLabel();
+                break;
+            case 3: 
+                return $this->admin->getLabel();
+                break;
+            default:
+                return $this->student->getLabel();
+                break;
+        }
     }
 
     /**

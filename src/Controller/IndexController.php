@@ -45,7 +45,7 @@ class IndexController extends AbstractController
 
 
     if(!empty($_SESSION)){
-      $this->params = $_SESSION;
+      $this->params['session'] = $_SESSION;
     }
     $this->params['title'] = $this->authorize->getLabelUserWithId();
     $this->params['user'] = $user;

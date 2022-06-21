@@ -23,20 +23,22 @@ class UserController extends AbstractController
     );
   }
 
-  #[Route(path: "/user/edit/{id}", name: "user_edit")]
-  public function edit(UserRepository $userRepository, int $id)
+  #[Route(path: "/user/edit", name: "edit", httpMethod: ["POST","GET"])]
+  public function edit()
   {
+    $object = json_decode(file_get_contents("php://input"), true);
+    $id = $object['id'];
     $user = new User($id);
 
-    if(!empty($_POST['nom']) && !empty($_POST['prenom'])){
-      $NewData['nom'] = $_POST['nom'];
-      $NewData['prenom'] = $_POST['prenom'];
-  
+    if(!empty($object['nom']) && !empty($object['prenom'])){
+      $NewData['nom'] = $object['nom'];
+      $NewData['prenom'] = $object['prenom'];
+   
       $user->initialiser($NewData);
       $user->enregistrer();
-      header('Location:/Profile');
+      
     }else{
-      echo "<script>Les infos envoyés sont vide!</script>";
+      echo "<script>alert(Les infos envoyés sont vide!);</script>";
     }
 
   }

@@ -32,8 +32,7 @@ class EventController extends AbstractController
       $evenement["createur"]        = $_SESSION['id'];
       $evenement["image"]           = $object['image']['name'];
       $evenements = new Evenement();
-      $evenements->initialiser($evenement);
-      $evenements->enregistrer();
+
 
       if (!empty($evenement["categorie"]) && !empty($evenement["titre"]) && !empty($evenement["description"])
           && !empty($evenement["accroche"]) && !empty($evenement["participantMax"])
@@ -41,7 +40,9 @@ class EventController extends AbstractController
       {
 
          if(move_uploaded_file($object['image']['name'], $target)){
-         
+          
+          $evenements->initialiser($evenement);
+          $evenements->enregistrer();
 
         }
         else{

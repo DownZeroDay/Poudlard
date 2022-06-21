@@ -12,8 +12,8 @@ class Evenement extends Model
   protected int $participant  = 0;
   protected int $participantMax = 0;
   protected int $prix = 0 ;
-  protected string $dateDebut;
-  protected string $dateFin;
+  protected string $dateDebut = "";
+  protected string $dateFin = "";
   protected string $adresse = "";
   protected string $description = "";
   protected string $accroche = "";

@@ -58,12 +58,14 @@ class EventController extends AbstractController
   }
 
   /** Méthode qui permet de créér une catégorie */
-  #[Route(path: '/event/categorie',  httpMethod: ['GET', 'POST'], name: 'categorie_create_form')]
+  #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
   public function categorie(CategorieRepository $repoCat)
   {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      $object = json_decode(file_get_contents("php://input"), true);
       $cat = [];
-      $cat["libelle"] = $_POST['libelle'];
+      $cat["libelle"] = $object['libelle'];
 
       if (!empty($cat["libelle"])){
 

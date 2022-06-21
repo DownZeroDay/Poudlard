@@ -4,52 +4,25 @@ namespace App\Entity;
 
 use DateTime;
 
-class Evenement
+class Evenement extends Model
 {
-  private int $id;
-  private string $titre;
-  private int $number;
-  private int $numberMax;
-  private int $prix;
-  private DateTime $dateDebut;
-  private DateTime $dateFin;
-  private string $adresse;
-  private string $description;
-  private string $image;
+  protected int $id = 0;
+  protected int $categorie = 0;
+  protected string $titre = "";
+  protected int $participant  = 0;
+  protected int $participantMax = 0;
+  protected int $prix = 0 ;
+  protected string $dateDebut = "";
+  protected string $dateFin = "";
+  protected string $adresse = "";
+  protected string $description = "";
+  protected string $accroche = "";
+  protected string $image;
+  protected int $createur = 0;
 
 
-
-    /**
-     * @return int
-     */
-    public function getNumber(): int
-    {
-        return $this->number;
-    }
-
-    /**
-     * @param int $number
-     */
-    public function setNumber(int $number): void
-    {
-        $this->number = $number;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNumberMax(): int
-    {
-        return $this->numberMax;
-    }
-
-    /**
-     * @param int $numberMax
-     */
-    public function setNumberMax(int $numberMax): void
-    {
-        $this->numberMax = $numberMax;
-    }
+    const TABLE_NAME = 'Evenement';
+    const PRIMARY_FIELD_NAME = 'id';
 
     /**
      * @return int
@@ -67,7 +40,7 @@ class Evenement
         $this->prix = $prix;
     }
 
-    public function getDateDebut(): DateTime
+    public function getDateDebut(): string
     {
         return $this->dateDebut;
     }
@@ -78,8 +51,7 @@ class Evenement
         return $this;
     }
 
-  
-    public function getDateFin(): DateTime
+    public function getDateFin(): string
     {
         return $this->dateFin;
     }
@@ -151,4 +123,104 @@ class Evenement
     }
 
 
+
+  /**
+   * Get the value of participant
+   */ 
+  public function getParticipant()
+  {
+    return $this->participant;
+  }
+
+  /**
+   * Set the value of participant
+   *
+   * @return  self
+   */ 
+  public function setParticipant($participant)
+  {
+    $this->participant = $participant;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of participantMax
+   */ 
+  public function getParticipantMax()
+  {
+    return $this->participantMax;
+  }
+
+  /**
+   * Set the value of participantMax
+   *
+   * @return  self
+   */ 
+  public function setParticipantMax($participantMax)
+  {
+    $this->participantMax = $participantMax;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of accroche
+   */ 
+  public function getAccroche()
+  {
+    return $this->accroche;
+  }
+
+  /**
+   * Set the value of accroche
+   *
+   * @return  self
+   */ 
+  public function setAccroche($accroche)
+  {
+    $this->accroche = $accroche;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of categorie
+   */ 
+  public function getCategorie()
+  {
+    return $this->categorie;
+  }
+
+  /**
+   * Set the value of categorie
+   *
+   * @return  self
+   */ 
+  public function setCategorie($categorie)
+  {
+    $this->categorie = $categorie;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of createur
+   */ 
+  public function getCreateur()
+  {
+    return $this->createur;
+  }
+
+  /**
+   * Set the value of createur
+   *
+   * @return  self
+   */ 
+  public function setCreateur($createur)
+  {
+    $this->createur = $createur;
+
+    return $this;
+  }
 }

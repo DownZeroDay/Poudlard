@@ -2,72 +2,135 @@
 /* A modifier avec access control */
 namespace App\Controller;
 
+use App\Entity\Catevenement;
 use App\Routing\Attribute\Route;
 use App\Entity\Evenement;
+use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 class EventController extends AbstractController
 {
+
+  /** Méthode qui permet de créér de un evenement */
   #[Route(path: '/event/create',  httpMethod: ['GET', 'POST'], name: 'event_create_form')]
-  public function create()
+  public function create(CategorieRepository $repoCat )
   {
-    echo $this->twig->render('event/create.html.twig');  
+    $resultats = $repoCat->findAll();
+
+    echo $this->twig->render('event/create.html.twig', [
+      'resultats' => $resultats
+  ]);
+
+    // traitement 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $evenement = [];
+      $target = "image/".basename($_FILES['image']['name']);
+
+      $evenement["categorie"]       = $_POST['categorie'];
+      $evenement["titre"]           = $_POST['titre'];
+      $evenement["description"]     = $_POST['description'];
+      $evenement["accroche"]        = $_POST['accroche'];
+      $evenement["participantMax"]  = $_POST['participantMax'];
+      $evenement["prix"]            = $_POST['prix'];
+      $evenement["dateDebut"]       = $_POST['dateDebut'];
+      $evenement["dateFin"]         = $_POST['dateFin'];
+      $evenement["adresse"]         = $_POST['adresse'];
+      $evenement["createur"]        = $_SESSION['id'];
+      $evenement["image"]           = $_FILES['image']['name'];
+      
+
+      if (!empty($evenement["categorie"]) && !empty($evenement["titre"]) && !empty($evenement["description"])
+          && !empty($evenement["accroche"]) && !empty($evenement["participantMax"])
+          && !empty($evenement["prix"]) && !empty($evenement["dateDebut"]) && !empty($evenement["dateFin"]) )
+      {
+        $evenements = new Evenement();
+        
+         if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+         
+          $evenements->initialiser($evenement);
+          $evenements->enregistrer();
+        }
+        else{
+          echo ("fichier non chargé");
+        }
+      }        
+    }
+    
   }
 
-  #[Route(path: '/event/save', httpMethod: ['POST'], name: 'event_save')]
-  public function save()
+  /** Méthode qui permet de créér une catégorie */
+  #[Route(path: '/event/categorie',  httpMethod: ['GET', 'POST'], name: 'categorie_create_form')]
+  public function categorie(CategorieRepository $repoCat)
   {
-  //   if (!isset($_FILES['image'])) {
-  //     echo "Erreur : pas d'image";
-  //     return;
-  //   }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $cat = [];
+      $cat["libelle"] = $_POST['libelle'];
 
-  //   $image = $_FILES['image'];
+      if (!empty($cat["libelle"])){
 
-  //   if (
-  //     is_uploaded_file($image['tmp_name']) &&
-  //     move_uploaded_file(
-  //       $image['tmp_name'],
-  //       __DIR__ . DIRECTORY_SEPARATOR . '../../public/events/' . basename($image['name'])
-  //     )
-  //   ) {
-  //     echo "ok";
-  //   } else {
-  //     echo "Erreur lors de l'upload";
-  //   }
+        $categorie = new Catevenement();
 
-    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $check = $repoCat->CategorieExist();
+        $check->execute(array($cat["libelle"]));
+        $row = $check->rowCount();
 
-    //   $target = "image/".basename($_FILES['image']['name']);
-
-    //   $titre = $_POST['titre'];
-    //   $number = $_POST['number'];
-    //   $numberMax = $_POST['numberMax'];
-    //   $prix = $_POST['prix'];
-    //   $dateDebut = $_POST['dateDebut'];
-    //   $adresse = $_POST['adresse'];
-    //   $description = $_POST['description'];
-    //   $image = $_FILES['image']['name'];
-
-    //   if(!empty($titre) && !empty($number) && !empty($numberMax) && !empty($prix) && !empty($dateDebut) && !empty($adresse) && !empty($description) && !empty($image)){
-    //     $evenement = new Evenement();
-    //     $evenement->setTitre($titre); 
-    //     $evenement->setNumber($number);
-    //     $evenement->setNumberMax($numberMax); 
-    //     $evenement->setPrix($prix);
-    //     $evenement->setAdresse($adresse);
-    //     $evenement->setDescription($description); 
-    //     $evenement->setImage($image); 
-          
-    //     // var_dump($evenement);
-          
-    //     // if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
-    //     //   $evenementRepository->save($evenement);
-    //     // }
-    //     // else{
-    //     //   echo ("fichier non chargé");
-    //     // }
-    //   }
-    // }
-    echo $this->twig->render('evenement/evenement.html.twig');
+        if($row == 0){
+          $categorie->initialiser($cat);
+          $categorie->enregistrer();
+        }
+        else{
+          echo "<script> alert('Cette catégorie existe déjà') </script>";
+        }
+      }
+      else{
+        echo ("erreur");
+      }
+    }
+    echo $this->twig->render('event/categorie.html.twig');
+    
   }
+
+  /** Methode qui permet de participer à un évenement */
+  #[Route(path: '/event/all',  httpMethod: ['GET'], name: 'event_all')]
+  public function event_all( EvenementRepository $repoEvent){
+
+    $evenements = $repoEvent->findAll();
+
+    echo $this->twig->render('event/event_all.html.twig', [
+      'evenements' => $evenements
+    ]);
+  }
+
+  /** Methode qui affiche un detail de l'evenement */
+  #[Route(path: '/show_event/{id}',  httpMethod: ['GET'], name: 'show_event')]
+  public function show_event(int $id){
+    
+    $evenement = new Evenement($id);
+    $evenement = $evenement->get();
+    if(!$evenement['id']){
+      echo "<script> alert('l\'évenement n\'existe pas  ') </script>";
+    }
+    echo $this->twig->render('event/show_event.html.twig', [
+      'evenement' => $evenement
+    ]);
+  }
+
+
+  /**
+   * Pour participer à un evenemnt
+   *
+   * @param EvenementRepository $repoEvent
+   * @return void
+   */
+  #[Route(path: '/participe',  httpMethod: ['GET'], name: 'participe')]
+  public function participe (EvenementRepository $repoEvent){
+    
+    $object = json_decode(file_get_contents("php://input"), true);
+    $idEvent = $object['id'];
+    $idUser = $_SESSION['id'];
+    
+    if(!empty($idUser) && !empty($idEvent)){
+      $repoEvent->participe($idUser, $idEvent);
+    }
+  }
+  
 }

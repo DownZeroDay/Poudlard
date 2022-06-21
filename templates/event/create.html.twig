@@ -1,22 +1,28 @@
-<form action="/event/save" method="post" enctype="multipart/form-data">
-	{# <input type="text" name="name"/>
-	<input type="file" name="image"/>
-	<input type="submit" value="Enregistrer"> #}
+{% extends "base.html.twig" %}
+{% block title %}Evenement {% endblock %}
+{% block head %}
+    {{ parent() }}
+    
+{% endblock %}
 
 
-	<div>
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+    <label >Categorie</label>
+    <select name="categorie">
+        {% for resultat in resultats %}
+            <option value="{{ resultat.id }}"> {{ resultat.libelle }}</option>
+        {% endfor %}
+    </select>
+
+        <div>
             Entrer le titre de l'évenement  
             <input type="text" name="titre"> 
         </div>
 
         <div>
-            Entrer le nombre de participant  
-            <input type="number" name="number">
-        </div>
-
-        <div>
             Entrer le nombre Maximal de participant 
-            <input type="number" name="numberMax">
+            <input type="number" name="participantMax">
         </div>
 
         <div>
@@ -48,8 +54,18 @@
             <input type="file" name="image">
         </div>
 
+         <div>
+           accroche 
+            <input type="text" name="accroche">
+        </div>
+
         <div>
             <input type="submit" value="submit">
         </div>
-      
-</form>
+       
+    </form>
+
+    <p> <a href="/contact"> Retour </a></p>
+
+       
+{% endblock %}

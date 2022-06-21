@@ -1,14 +1,16 @@
 const buttonEdit = document.querySelector('#Edit-Profile');
 const buttonValideEdit = document.querySelector('#Valide-Profile');
 const buttonCategorieEvent = document.querySelector('#button-categorieEvent');
+const buttonEventForm = document.querySelector('#submit-EventForm');
 
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
 const inputId = document.querySelector('#id-Profile');
-const inputLibelleEvent = document.querySelector('#input-categoriEvent')
+const inputLibelleEvent = document.querySelector('#input-categoriEvent');
 
 const formProfile = document.getElementById('form-Profile');
 const formCategorieEvent = document.getElementById('form-categoriEvent');
+const formEvent = document.getElementById('form-eventForm');
 
 /////////////////////Profile Function////////////////////////////////////////
 buttonEdit.addEventListener('click',function(event){
@@ -24,19 +26,21 @@ buttonEdit.addEventListener('click',function(event){
 
  buttonValideEdit.addEventListener('click',function(event){
     event.preventDefault();
-    sendForm(formProfile,'/user/edit',function(){
+    sendForm(formProfile,'/user/edit',false,function(){
         switchInput();
         buttonEdit.hidden = false;
         buttonValideEdit.hidden = true;
     });   
 });
 
-
 buttonCategorieEvent.addEventListener('click',function(event){
     event.preventDefault();
-    sendForm(formCategorieEvent,'/event/categorie',function(){
-        inputLibelleEvent.value = '';
-    });
+    sendForm(formCategorieEvent,'/event/categorie',true);
+})
+
+buttonEventForm.addEventListener('click',function(event){
+    event.preventDefault();
+    sendForm(formEvent,'/event/create',false);
 })
 
 
@@ -50,12 +54,13 @@ function switchInput()
 //////////Global Function///////////////
 
 
-function sendForm(form,url,after = () => {}){
+function sendForm(form,url,isReset,after = () => {}){
     var data = new FormData(form);
     object = {};
     for([key,value] of data.entries()){
         object[key] = value;
     }
+    console.log(object);
     const options = {
             method: 'POST',
             body: JSON.stringify(object),
@@ -65,6 +70,7 @@ function sendForm(form,url,after = () => {}){
 
     fetch(url,options)
     .then(function(response){
+        if(isReset) form.reset();
         after();
     })
 }

@@ -11,50 +11,42 @@ class EventController extends AbstractController
 {
 
   /** Méthode qui permet de créér de un evenement */
-  #[Route(path: '/event/create',  httpMethod: ['GET', 'POST'], name: 'event_create_form')]
-  public function create(CategorieRepository $repoCat )
+  #[Route(path: '/event/create',  httpMethod: ['POST'], name: 'create')]
+  public function create()
   {
-    $resultats = $repoCat->findAll();
-
-    echo $this->twig->render('event/create.html.twig', [
-      'resultats' => $resultats
-  ]);
-
-    // traitement 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+      $object = json_decode(file_get_contents("php://input"), true);
       $evenement = [];
-      $target = "image/".basename($_FILES['image']['name']);
+      $target = "image/".basename($object['image']['name']);
 
-      $evenement["categorie"]       = $_POST['categorie'];
-      $evenement["titre"]           = $_POST['titre'];
-      $evenement["description"]     = $_POST['description'];
-      $evenement["accroche"]        = $_POST['accroche'];
-      $evenement["participantMax"]  = $_POST['participantMax'];
-      $evenement["prix"]            = $_POST['prix'];
-      $evenement["dateDebut"]       = $_POST['dateDebut'];
-      $evenement["dateFin"]         = $_POST['dateFin'];
-      $evenement["adresse"]         = $_POST['adresse'];
+      $evenement["categorie"]       = $object['categorie'];
+      $evenement["titre"]           = $object['titre'];
+      $evenement["description"]     = $object['description'];
+      $evenement["accroche"]        = $object['accroche'];
+      $evenement["participantMax"]  = $object['participantMax'];
+      $evenement["prix"]            = $object['prix'];
+      $evenement["dateDebut"]       = $object['dateDebut'];
+      $evenement["dateFin"]         = $object['dateFin'];
+      $evenement["adresse"]         = $object['adresse'];
       $evenement["createur"]        = $_SESSION['id'];
-      $evenement["image"]           = $_FILES['image']['name'];
-      
+      $evenement["image"]           = $object['image']['name'];
+      $evenements = new Evenement();
+      $evenements->initialiser($evenement);
+      $evenements->enregistrer();
 
       if (!empty($evenement["categorie"]) && !empty($evenement["titre"]) && !empty($evenement["description"])
           && !empty($evenement["accroche"]) && !empty($evenement["participantMax"])
           && !empty($evenement["prix"]) && !empty($evenement["dateDebut"]) && !empty($evenement["dateFin"]) )
       {
-        $evenements = new Evenement();
-        
-         if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+
+         if(move_uploaded_file($object['image']['tmp_name'], $target)){
          
-          $evenements->initialiser($evenement);
-          $evenements->enregistrer();
+
         }
         else{
-          echo ("fichier non chargé");
+          return "fichier non chargé";
         }
-      }        
-    }
-    
+      }       
   }
 
   /** Méthode qui permet de créér une catégorie */

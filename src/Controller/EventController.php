@@ -35,7 +35,7 @@ class EventController extends AbstractController
           && !empty($data["prix"]) && !empty($data["dateDebut"]) && !empty($data["dateFin"]) )
       {
 
-      if(move_uploaded_file($_FILES['image']['tmp_name'], $target))
+      if($this->resizeImage($_FILES['image']['tmp_name'], $target))
         {
           $evenement->initialiser($data);
           $evenement->enregistrer();

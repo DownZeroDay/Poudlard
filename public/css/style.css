@@ -6,3 +6,7 @@
     content:"Parcourir" !important;
 }
 
+.badge{
+    margin-top: -10px;
+    margin-left: 10px;
+}

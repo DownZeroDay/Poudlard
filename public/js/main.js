@@ -40,7 +40,7 @@ buttonCategorieEvent.addEventListener('click', function (event) {
 
 buttonEventForm.addEventListener('click', function (event) {
     event.preventDefault();
-    sendFormAndFile(formEvent, '/event/create', false);
+    sendForm(formEvent, '/event/create', false);
 })
 
 function switchInput() {
@@ -50,27 +50,27 @@ function switchInput() {
 
 //////////Global Function///////////////
 
-function sendForm(form, url, isReset, after = () => { }) {
-    var data = new FormData(form);
-    object = new Object();
-    for ([key, value] of data.entries()) {
-        object[key] = value;
-    }
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(object),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-    fetch(url, options)
-        .then(function (response) {
-            if (isReset) form.reset();
-            after();
-        })
-}
+// function sendForm(form, url, isReset, after = () => { }) {
+//     var data = new FormData(form);
+//     object = new Object();
+//     for ([key, value] of data.entries()) {
+//         object[key] = value;
+//     }
+//     const options = {
+//         method: 'POST',
+//         body: JSON.stringify(object),
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     }
+//     fetch(url, options)
+//         .then(function (response) {
+//             if (isReset) form.reset();
+//             after();
+//         })
+// }
 
-function sendFormAndFile(form, url, isReset, after = () => { }) {
+function sendForm(form, url, isReset, after = () => { }) {
     var data = new FormData(form);
     const options = {
         method: 'POST',

@@ -26,13 +26,11 @@ class UserController extends AbstractController
   #[Route(path: "/user/edit", name: "edit", httpMethod: ["POST","GET"])]
   public function edit()
   {
-    $object = json_decode(file_get_contents("php://input"), true);
-    $id = $object['id'];
-    $user = new User($id);
+    $user = new User($_POST['id']);
 
-    if(!empty($object['nom']) && !empty($object['prenom'])){
-      $NewData['nom'] = $object['nom'];
-      $NewData['prenom'] = $object['prenom'];
+    if(!empty($_POST['nom']) && !empty($_POST['prenom'])){
+      $NewData['nom'] = $_POST['nom'];
+      $NewData['prenom'] = $_POST['prenom'];
    
       $user->initialiser($NewData);
       $user->enregistrer();

@@ -51,9 +51,8 @@ class EventController extends AbstractController
   {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      $object = json_decode(file_get_contents("php://input"), true);
       $cat = [];
-      $cat["libelle"] = $object['libelle'];
+      $cat["libelle"] = $_POST['libelle'];
 
       if (!empty($cat["libelle"])){
 

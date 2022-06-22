@@ -60,9 +60,9 @@
                         <tr id="tableau">
                             <td scope="row"><input type="text"   value="{{ evenement.titre }}" disabled></td> 
                             <td><input type="text"  value="{{ evenement.libelle }}" disabled>
-                                <select name="categorie" disabled>
+                                <select name="categorie" hidden>
                                     {% for categorie in categories %}
-                                        <option value="{{ categorie.id }}" {{ categorie.id == evenement.idCat ? 'selected' : ''}}> {{ categorie.libelle }}</option>
+                                        <option value="{{ categorie.id }}"> {{ categorie.libelle }}</option>
                                     {% endfor %}
                                 </select>
                             </td>
@@ -136,7 +136,7 @@
                             <td> <input type="text"  value="{{ user.nom }}" disabled></td> 
                             <td> <input type="text"  value="{{ user.email }}" disabled></td> 
                             <td> <input type="text"  value="{{ user.libelle }}" disabled></td> 
-                            <td> <input type="text"  value="{{ user.dateNaissance }}" disabled></td> 
+                            <td> <input type="text"  value="{{ user.dateNaissance|date("d/m/Y") }}" disabled></td> 
                             <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
                             <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
                             <input type="hidden"  value="/event/edit/{{ user.id }}" name="link">

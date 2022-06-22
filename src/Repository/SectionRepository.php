@@ -7,7 +7,6 @@ class SectionRepository extends AbstractRepository {
 
     const TABLE = 'section';
 
-
      /** Requete qui recupère tous les evenements */
   public function findAll()
   {
@@ -31,16 +30,6 @@ class SectionRepository extends AbstractRepository {
     $section = $section->get();
     return !empty($section['id']) ? true : false;
   }
- 
-
-
 
 }
-
-
-
-
-
-
-
 ?>

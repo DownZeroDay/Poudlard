@@ -9,14 +9,14 @@ final class CategorieRepository extends AbstractRepository
 {
   protected const TABLE = 'Catevenement';
 
-  public function save(Catevenement $cat): bool
-  {
-    $stmt = $this->pdo->prepare("INSERT INTO Catevenement (`libelle`) VALUES (:libelle)");
+  // public function save(Catevenement $cat): bool
+  // {
+  //   $stmt = $this->pdo->prepare("INSERT INTO Catevenement (`libelle`) VALUES (:libelle)");
     
-    return $stmt->execute([
-      'libelle' => $cat->getLibelle()
-    ]);
-  }
+  //   return $stmt->execute([
+  //     'libelle' => $cat->getLibelle()
+  //   ]);
+  // }
   /** Methode qui verifie si la catégorie existe déja */ 
   public function CategorieExist()
   {

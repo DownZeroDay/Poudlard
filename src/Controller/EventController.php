@@ -37,7 +37,6 @@ class EventController extends AbstractController
       $evenement["createur"]        = $_SESSION['id'];
       $evenement["image"]           = $_FILES['image']['name'];
       
-
       if (!empty($evenement["categorie"]) && !empty($evenement["titre"]) && !empty($evenement["description"])
           && !empty($evenement["accroche"]) && !empty($evenement["participantMax"])
           && !empty($evenement["prix"]) && !empty($evenement["dateDebut"]) && !empty($evenement["dateFin"]) )
@@ -54,7 +53,6 @@ class EventController extends AbstractController
         }
       }        
     }
-    
   }
 
   /** Méthode qui permet de créér une catégorie */
@@ -106,6 +104,7 @@ class EventController extends AbstractController
     
     $evenement = new Evenement($id);
     $evenement = $evenement->get();
+
     if(!$evenement['id']){
       echo "<script> alert('l\'évenement n\'existe pas  ') </script>";
     }

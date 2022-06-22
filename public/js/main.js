@@ -12,24 +12,29 @@ const formCategorieEvent = document.getElementById('form-categoriEvent');
 const formEvent = document.getElementById('form-eventForm');
 
 /////////////////////Profile Function////////////////////////////////////////
-buttonEdit.addEventListener('click', function (event) {
-    event.preventDefault();
-    if (!buttonEdit.hidden) {
-        buttonEdit.hidden = true;
-        buttonValideEdit.hidden = false;
-        switchInput();
-
-    }
-});
-
-buttonValideEdit.addEventListener('click', function (event) {
-    event.preventDefault();
-    sendForm(formProfile, '/user/edit', false, function () {
-        switchInput();
-        buttonEdit.hidden = false;
-        buttonValideEdit.hidden = true;
+if(typeof(buttonEdit) !== undefined && buttonEdit !== null) {
+    buttonEdit.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (!buttonEdit.hidden) {
+            buttonEdit.hidden = true;
+            buttonValideEdit.hidden = false;
+            switchInput();
+    
+        }
     });
-});
+
+}
+
+if(typeof(buttonValideEdit) !== undefined && buttonValideEdit !== null) {
+    buttonValideEdit.addEventListener('click', function (event) {
+        event.preventDefault();
+        sendForm(formProfile, '/user/edit', false, function () {
+            switchInput();
+            buttonEdit.hidden = false;
+            buttonValideEdit.hidden = true;
+        });
+    });
+}
 
 buttonCategorieEvent.addEventListener('click', function (event) {
     event.preventDefault();

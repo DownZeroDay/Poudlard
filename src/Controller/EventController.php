@@ -49,7 +49,6 @@ class EventController extends AbstractController
   #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
   public function categorie(CategorieRepository $repoCat)
   {
-
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
 

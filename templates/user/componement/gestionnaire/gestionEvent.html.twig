@@ -18,11 +18,11 @@
                 <form id="tableau">
                     <div class="form-group">
                         <tr id="tableau">
-                            <td scope="row"><input type="text"   value="{{ evenement.titre }}" disabled></td> 
-                            <td><input type="text"  value="{{ evenement.libelle }}" disabled>
-                                <select name="categorie" hidden>
+                            <input type="hidden" name="idEvent" value={{evenement.id}} />
+                            <td scope="row"><input type="text" name="titre"   value="{{ evenement.titre }}" disabled></td> 
+                            <td><select name="categorie" disabled>
                                     {% for categorie in categories %}
-                                        <option value="{{ categorie.id }}"> {{ categorie.libelle }}</option>
+                                        <option value="{{ categorie.id }}" {{evenement.idCat == categorie.id ? 'selected' : ''}}> {{ categorie.libelle }}</option>
                                     {% endfor %}
                                 </select>
                             </td>
@@ -30,7 +30,7 @@
                             <td> <input type="text"  value="{{ evenement.participant }}" disabled></td> 
                             <td> <input type="text"  value="{{ evenement.nom }}  {{ evenement.prenom }}" disabled></td> 
                             <td> <img src="../image/{{ evenement.image }}" class="card-img-top" alt="{{ evenement.image }}"> <input type="file" accept=".jpg, .png, .jpeg, .gif"  hidden> </td>
-                            <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <td> <button class="edit_event button_icon" > <i class="fa-solid fa-pen"></i> </button><button class="valid_editEvent button_icon" hidden> <i class="fa-solid fa-check"></i> </button>  </td>
                             <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
                         </tr>
                     </div>

@@ -1,5 +1,7 @@
 const buttonEdit = document.querySelector('#Edit-Profile');
 const buttonValideEdit = document.querySelector('#Valide-Profile');
+const buttonEditEvent = document.querySelector('.edit_event');
+const buttonValidEditEvent = document.querySelector('.valid_editEvent'); 
 
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
@@ -16,6 +18,18 @@ if(typeof(buttonEdit) !== undefined && buttonEdit !== null) {
             buttonValideEdit.hidden = false;
             switchInput();  
         }
+    });
+}
+
+if(typeof(buttonEditEvent) !== undefined && buttonEditEvent !== null){
+    buttonEditEvent.addEventListener('click',function (event) {
+        event.preventDefault();
+        for(f of this.form){
+            if(f.disabled === true) f.disabled = false;
+            console.log(f);
+        }
+        buttonEditEvent.hidden = true;
+        buttonValideEdit.hidden = false;
     });
 }
 

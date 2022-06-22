@@ -78,14 +78,21 @@ class EventController extends AbstractController
   #[Route(path: '/show_event/{id}',  httpMethod: ['GET'], name: 'show_event')]
   public function show_event(int $id){
     
+    $this->resetViewsAndParams();
     $evenement = new Evenement($id);
     $evenement = $evenement->get();
     if(!$evenement['id']){
       echo "<script> alert('l\'évenement n\'existe pas  ') </script>";
     }
-    echo $this->twig->render('event/show_event.html.twig', [
-      'evenement' => $evenement
-    ]);
+
+    if(!empty($evenement))
+    {
+      $this->params['evenement'] = $evenement;
+    }
+
+    $this->views = [['event/show_event.html.twig',0]];
+    $this->viewPage();
+
   }
 
 

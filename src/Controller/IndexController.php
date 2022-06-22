@@ -18,15 +18,17 @@ class IndexController extends AbstractController
 
   #[Route(path: "/")]
   public function home(){
-    $this->resetViewsAndParams();
+    // $this->resetViewsAndParams();
 
-    if(!empty($_SESSION))
-    {
-      $this->params['session'] = $_SESSION;
-    }
+    // if(!empty($_SESSION))
+    // {
+    //   $this->params['session'] = $_SESSION;
+    // }
 
-    $this->views = [['index/home.html.twig',0]];
-    $this->viewPage();
+    // $this->views = [['index/home.html.twig',0]];
+    // $this->viewPage();
+      header('Location:/login');
+
   }
 
   #[Route(path: "/profile" , name: "profile")]

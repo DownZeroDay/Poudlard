@@ -15,7 +15,7 @@ use OTPHP\TOTP;
 
 class IndexController extends AbstractController
 {
-  
+
   #[Route(path: "/")]
   public function home(){
     $this->resetViewsAndParams();
@@ -24,6 +24,7 @@ class IndexController extends AbstractController
     {
       $this->params['session'] = $_SESSION;
     }
+
     $this->views = [['index/home.html.twig',0]];
     $this->viewPage();
   }

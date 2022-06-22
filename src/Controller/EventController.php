@@ -49,7 +49,6 @@ class EventController extends AbstractController
   #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
   public function categorie(CategorieRepository $repoCat)
   {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
@@ -72,21 +71,7 @@ class EventController extends AbstractController
       }
       else{
         echo ("erreur");
-      }
-    }
-    echo $this->twig->render('event/categorie.html.twig');
-    
-  }
-
-  /** Methode qui permet de participer à un évenement */
-  #[Route(path: '/event/all',  httpMethod: ['GET'], name: 'event_all')]
-  public function event_all( EvenementRepository $repoEvent){
-
-    $evenements = $repoEvent->findAll();
-
-    echo $this->twig->render('event/event_all.html.twig', [
-      'evenements' => $evenements
-    ]);
+      }   
   }
 
   /** Methode qui affiche un detail de l'evenement */

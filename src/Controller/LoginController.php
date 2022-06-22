@@ -13,7 +13,7 @@ class LoginController extends AbstractController
 
   private $user; 
 
-  #[Route(path: "/", httpMethod: ["GET", "POST"])]
+  #[Route(path: "/login", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
       echo $this->twig->render('security/login.html.twig');     

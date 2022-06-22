@@ -18,11 +18,9 @@ if(typeof(buttonEdit) !== undefined && buttonEdit !== null) {
         if (!buttonEdit.hidden) {
             buttonEdit.hidden = true;
             buttonValideEdit.hidden = false;
-            switchInput();
-    
+            switchInput();  
         }
     });
-
 }
 
 if(typeof(buttonValideEdit) !== undefined && buttonValideEdit !== null) {

@@ -15,17 +15,8 @@ use OTPHP\TOTP;
 
 class IndexController extends AbstractController
 {
-  #[Route(path: "/index")]
-  public function index(UserRepository $userRepository)
-  {
-    if(session_destroy())
-    {
-      // Redirection vers la page de connexion
-        header("Location:/");
-    }
-  }
-
-  #[Route(path: "/home")]
+  
+  #[Route(path: "/")]
   public function home(){
     $this->resetViewsAndParams();
 
@@ -66,39 +57,5 @@ class IndexController extends AbstractController
     $this->views = [['user/Profile.html.twig',4]];
     $this->viewPage();
   }
-
-  #[Route(path: "/contact", name: "contact")]
-  public function contact()
-  {    
-    $this->resetViewsAndParams();
-      
-      if(!empty($_SESSION) ){
-        $this->params = $_SESSION;
-      }
-      $this->params['page_name'] = 'contact';
-      $this->views = [['index/contact.html.twig',1]];  
-      $this->viewPage();
-      //echo $this->twig->render('index/contact.html.twig');        
-  }
-
-
-  //Static Route 
-    #[Route(path:"/css" , name: "css")]
-    public function css()
-    {
-      require "public/css/style.css";
-      header('Content-Type: text/css');
-    }
-
-    
-    #[Route(path:"/js")]
-    public function js()
-    {
-      require "public/js/main.js";
-      header('Content-Type: application/javascript');
-    }
-
- 
-
 
 }

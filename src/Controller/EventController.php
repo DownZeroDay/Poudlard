@@ -13,39 +13,33 @@ class EventController extends AbstractController
   /** Méthode qui permet de créér de un evenement */
   #[Route(path: '/event/create',  httpMethod: ['POST'], name: 'create')]
   public function create()
-  {
-    
-      $object = json_decode(file_get_contents("php://input"), true);
-      var_dump($object);
-      $evenement = [];
-      $target = "image/".basename($object['image']['name']);
+  {     
+      $target = "image/".basename($_FILES['image']['name']);
+   
+      $data["categorie"]       = $_POST['categorie'];
+      $data["titre"]           = $_POST['titre'];
+      $data["description"]     = $_POST['description'];
+      $data["accroche"]        = $_POST['accroche'];
+      $data["participantMax"]  = $_POST['participantMax'];
+      $data["prix"]            = $_POST['prix'];
+      $data["dateDebut"]       = $_POST['dateDebut'];
+      $data["dateFin"]         = $_POST['dateFin'];
+      $data["adresse"]         = $_POST['adresse'];
+      $data["createur"]        = $_SESSION['id'];
+      $data["image"]           = $_FILES['image']['name'];
+      
+      $evenement = new Evenement();
 
-      $evenement["categorie"]       = $object['categorie'];
-      $evenement["titre"]           = $object['titre'];
-      $evenement["description"]     = $object['description'];
-      $evenement["accroche"]        = $object['accroche'];
-      $evenement["participantMax"]  = $object['participantMax'];
-      $evenement["prix"]            = $object['prix'];
-      $evenement["dateDebut"]       = $object['dateDebut'];
-      $evenement["dateFin"]         = $object['dateFin'];
-      $evenement["adresse"]         = $object['adresse'];
-      $evenement["createur"]        = $_SESSION['id'];
-      $evenement["image"]           = $object['image']['name'];
-      $evenements = new Evenement();
-
-
-      if (!empty($evenement["categorie"]) && !empty($evenement["titre"]) && !empty($evenement["description"])
-          && !empty($evenement["accroche"]) && !empty($evenement["participantMax"])
-          && !empty($evenement["prix"]) && !empty($evenement["dateDebut"]) && !empty($evenement["dateFin"]) )
+      if (!empty($data["categorie"]) && !empty($data["titre"]) && !empty($data["description"])
+          && !empty($data["accroche"]) && !empty($data["participantMax"])
+          && !empty($data["prix"]) && !empty($data["dateDebut"]) && !empty($data["dateFin"]) )
       {
 
-         if(move_uploaded_file($object['image']['name'], $target)){
-          
-          $evenements->initialiser($evenement);
-          $evenements->enregistrer();
-
-        }
-        else{
+      if(move_uploaded_file($_FILES['image']['tmp_name'], $target))
+        {
+          $evenement->initialiser($data);
+          $evenement->enregistrer();
+        }else{
           return "fichier non chargé";
         }
       }       

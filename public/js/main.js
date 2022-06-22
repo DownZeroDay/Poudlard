@@ -13,78 +13,74 @@ const formCategorieEvent = document.getElementById('form-categoriEvent');
 const formEvent = document.getElementById('form-eventForm');
 
 /////////////////////Profile Function////////////////////////////////////////
-buttonEdit.addEventListener('click',function(event){
+buttonEdit.addEventListener('click', function (event) {
     event.preventDefault();
-    if(!buttonEdit.hidden){
+    if (!buttonEdit.hidden) {
         buttonEdit.hidden = true;
         buttonValideEdit.hidden = false;
         switchInput();
-       
+
     }
 });
 
 
- buttonValideEdit.addEventListener('click',function(event){
+buttonValideEdit.addEventListener('click', function (event) {
     event.preventDefault();
-    sendForm(formProfile,'/user/edit',false,function(){
+    sendForm(formProfile, '/user/edit', false, function () {
         switchInput();
         buttonEdit.hidden = false;
         buttonValideEdit.hidden = true;
-    });   
+    });
 });
 
-buttonCategorieEvent.addEventListener('click',function(event){
+buttonCategorieEvent.addEventListener('click', function (event) {
     event.preventDefault();
-    sendForm(formCategorieEvent,'/event/categorie',true);
+    sendForm(formCategorieEvent, '/event/categorie', true);
 })
 
-buttonEventForm.addEventListener('click',function(event){
+buttonEventForm.addEventListener('click', function (event) {
     event.preventDefault();
-    sendForm(formEvent,'/event/create',false);
+    sendFormAndFile(formEvent, '/event/create', false);
 })
 
-
-function switchInput()
-{
+function switchInput() {
     inputNom.disabled = !inputNom.disabled;
     inputPreNom.disabled = !inputPreNom.disabled;
 }
 
-
 //////////Global Function///////////////
 
-
-function sendForm(form,url,isReset,after = () => {}){
+function sendForm(form, url, isReset, after = () => { }) {
     var data = new FormData(form);
     object = new Object();
-    for([key,value] of data.entries()){
-        if(key == 'image'){
-            var Image  = {
-                'lastModified'     : value.lastModified,
-                'lastModifiedDate' : value.lastModifiedDate,
-                'name'             : value.name,
-                'size'             : value.size,
-                'type'             : value.type
-                };  
-                object[key] = Image;
-        }else{
-            object[key] = value;     
-        }         
+    for ([key, value] of data.entries()) {
+        object[key] = value;
     }
-    console.log(object);
     const options = {
-            method: 'POST',
-            body: JSON.stringify(object),
-            headers: {'Content-Type': 'application/json'
+        method: 'POST',
+        body: JSON.stringify(object),
+        headers: {
+            'Content-Type': 'application/json'
         }
     }
-
-    fetch(url,options)
-    .then(function(response){
-        if(isReset) form.reset();
-        after();
-    })
+    fetch(url, options)
+        .then(function (response) {
+            if (isReset) form.reset();
+            after();
+        })
 }
 
+function sendFormAndFile(form, url, isReset, after = () => { }) {
+    var data = new FormData(form);
+    const options = {
+        method: 'POST',
+        body: data,
+    }
+    fetch(url, options)
+        .then(function (response) {
+            if (isReset) form.reset();
+            after();
+        })
+}
 
 

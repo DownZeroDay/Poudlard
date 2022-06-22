@@ -16,7 +16,7 @@ class LoginController extends AbstractController
   #[Route(path: "/login", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
-      echo $this->twig->render('security/login.html.twig');     
+     
 
     if (key_exists('logout_btn', $_POST) && key_exists('user', $_SESSION)) {
       $_SESSION = [];
@@ -36,13 +36,14 @@ class LoginController extends AbstractController
           if(password_verify($password, $user['password'])){
              $_SESSION['user'] = $user['nom'] . ' ' . $user['prenom'];
              $_SESSION['id'] =  $user['id'];
-             header('Location:/home');
+             header('Location:/profile');
           }
         } else {
           echo "<script> alert('identifiant incorrect') </script>";
         }
       }
     }
+    echo $this->twig->render('security/login.html.twig');     
   }
 
 

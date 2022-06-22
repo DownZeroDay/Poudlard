@@ -42,7 +42,11 @@ class EventController extends AbstractController
         }else{
           return "fichier non chargé";
         }
-      }       
+        else{
+          echo ("fichier non chargé");
+        }
+      }        
+    }
   }
 
   /** Méthode qui permet de créér une catégorie */
@@ -80,6 +84,7 @@ class EventController extends AbstractController
     $this->resetViewsAndParams();
     $evenement = new Evenement($id);
     $evenement = $evenement->get();
+
     if(!$evenement['id']){
       echo "<script> alert('l\'évenement n\'existe pas  ') </script>";
     }

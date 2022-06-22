@@ -1,1 +1,8 @@
+.space-button{
+    margin-top: 200px !important;
+}
+
+.custom-file-label::after{
+    content:"Parcourir" !important;
+}
 

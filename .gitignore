@@ -5,4 +5,7 @@ composer.lock
 /var/
 /.phpunit.cache/
 /coverage/
-
+/image/
+/.idea/
+/docs/
+phpunit.xml

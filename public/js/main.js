@@ -6,7 +6,6 @@ const buttonEventForm = document.querySelector('#submit-EventForm');
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
 const inputId = document.querySelector('#id-Profile');
-const inputLibelleEvent = document.querySelector('#input-categoriEvent');
 
 const formProfile = document.getElementById('form-Profile');
 const formCategorieEvent = document.getElementById('form-categoriEvent');
@@ -22,7 +21,6 @@ buttonEdit.addEventListener('click', function (event) {
 
     }
 });
-
 
 buttonValideEdit.addEventListener('click', function (event) {
     event.preventDefault();
@@ -49,26 +47,6 @@ function switchInput() {
 }
 
 //////////Global Function///////////////
-
-// function sendForm(form, url, isReset, after = () => { }) {
-//     var data = new FormData(form);
-//     object = new Object();
-//     for ([key, value] of data.entries()) {
-//         object[key] = value;
-//     }
-//     const options = {
-//         method: 'POST',
-//         body: JSON.stringify(object),
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     }
-//     fetch(url, options)
-//         .then(function (response) {
-//             if (isReset) form.reset();
-//             after();
-//         })
-// }
 
 function sendForm(form, url, isReset, after = () => { }) {
     var data = new FormData(form);

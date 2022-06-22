@@ -1,0 +1,34 @@
+<h3> Gestion des utilisateurs </h3> 
+
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Prenom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+
+            <form id="tableau">
+                <div class="form-group">
+                    <tr id="tableau">
+                        <td scope="row"><input type="text"  value="{{ user.prenom }}" disabled></td>  
+                        <td> <input type="text"  value="{{ user.nom }}" disabled></td> 
+                        <td> <input type="text"  value="{{ user.email }}" disabled></td> 
+                        <td> <input type="text"  value="{{ user.libelle }}" disabled></td> 
+                        <td> <input type="text"  value="{{ user.dateNaissance|date("d/m/Y") }}" disabled></td> 
+                        <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                        <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
+                        <input type="hidden"  value="/event/edit/{{ user.id }}" name="link">
+                    </tr>
+                </div>
+            </form>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+  <div class="col-md-3">
+  <h3> Gestion des Catégories</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nom de la catégorie</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categories %}
+
+                <form id="tableau">
+                    <div class="form-group">
+                        <tr id="tableau">
+                            <td scope="row"><input type="text"  value="{{ categorie.libelle }}" disabled></td>  
+                            <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
+                            <input type="hidden"  value="/event/edit/{{ categorie.id }}" name="link">
+                        </tr>
+                    </div>
+                </form>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

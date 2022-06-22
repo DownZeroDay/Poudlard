@@ -1,19 +1,27 @@
 {% include 'global/header.html.twig' with {'title': params.title} only %}
-    
-    <div class="container py-5 h-100 m-5">
-        <div class="row d-flex">
-        {% include 'user/componement/editProfil.html.twig' %}
-        {% include 'user/componement/contactForm.html.twig' %}
-        {% include 'user/componement/sectionForm.html.twig' %}
+        <div class="row d-flex m-5 ">       
+        {% include 'user/componement/form/editProfil.html.twig' %}
+        {% include 'user/componement/form/contactForm.html.twig' %}
+        {% include 'user/componement/form/sectionForm.html.twig' %}
+        {% include 'user/componement/gestionnaire/gestionCategorie.html.twig' with {"categories":params.categoryEvent} only %}
         </div>
-        <div class="row d-flex mt-2">
-        {% include 'user/componement/createCategory.html.twig' %}
-        {% include 'user/componement/eventForm.html.twig' %}
+        <div class="row d-flex m-5">
+        {% include 'user/componement/form/createCategory.html.twig' %}
+        {% include 'user/componement/form/eventForm.html.twig' %}
+        
         </div>
-    </div>
 
+        
+        <div class="row d-flex m-5">
+            {% include 'user/componement/gestionnaire/gestionEvent.html.twig' with {"evenements":params.events, "categories":params.categoryEvent} only %}  
+        </div>
+        <div class="row d-flex m-5">
+            {% include 'user/componement/gestionnaire/gestionUser.html.twig' with {"users":params.users} only %}
+        </div>
+
+        <div class="row d-flex m-5">
       <form method="POST" action="/">
           <button class="btn btn-primary" type="submit" name="logout_btn"> Deconnexion </button>
       </form>
-
+        <div>
  {% include 'global/footer.html.twig' %}

@@ -1,15 +1,11 @@
 const buttonEdit = document.querySelector('#Edit-Profile');
 const buttonValideEdit = document.querySelector('#Valide-Profile');
-const buttonCategorieEvent = document.querySelector('#button-categorieEvent');
-const buttonEventForm = document.querySelector('#submit-EventForm');
 
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
 const inputId = document.querySelector('#id-Profile');
 
 const formProfile = document.getElementById('form-Profile');
-const formCategorieEvent = document.getElementById('form-categoriEvent');
-const formEvent = document.getElementById('form-eventForm');
 
 /////////////////////Profile Function////////////////////////////////////////
 buttonEdit.addEventListener('click', function (event) {
@@ -31,22 +27,19 @@ buttonValideEdit.addEventListener('click', function (event) {
     });
 });
 
-buttonCategorieEvent.addEventListener('click', function (event) {
-    event.preventDefault();
-    sendForm(formCategorieEvent, '/event/categorie', true);
-})
-
-buttonEventForm.addEventListener('click', function (event) {
-    event.preventDefault();
-    sendForm(formEvent, '/event/create', false);
-})
-
 function switchInput() {
     inputNom.disabled = !inputNom.disabled;
     inputPreNom.disabled = !inputPreNom.disabled;
 }
 
 //////////Global Function///////////////
+
+document.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const selectedForm = this.activeElement.form;
+    const link = selectedForm['link'].value;
+    sendForm(selectedForm,link,true)
+});
 
 function sendForm(form, url, isReset, after = () => { }) {
     var data = new FormData(form);
@@ -60,5 +53,3 @@ function sendForm(form, url, isReset, after = () => { }) {
             after();
         })
 }
-
-

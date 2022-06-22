@@ -99,6 +99,15 @@ class EventController extends AbstractController
 
   }
 
+    if(!empty($evenement))
+    {
+      $this->params['evenement'] = $evenement;
+    }
+
+    $this->views = [['event/show_event.html.twig',0]];
+    $this->viewPage();
+
+  }
 
   /**
    * Pour participer à un evenemnt
@@ -116,6 +125,9 @@ class EventController extends AbstractController
     if(!empty($idUser) && !empty($idEvent)){
       $repoEvent->participe($idUser, $idEvent);
     }
-  }
-  
+  }  
+
+
+
+
 }

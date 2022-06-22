@@ -1,3 +1,6 @@
+/** Principal */
+.fa-trash-can{
+    color: red;
 .space-button{
     margin-top: 200px !important;
 }
@@ -6,7 +9,18 @@
     content:"Parcourir" !important;
 }
 
-.badge{
-    margin-top: -10px;
-    margin-left: 10px;
+a:link{ 
+ text-decoration:none; 
+} 
+
+#tableau input{
+    border: none;
 }
+.button_icon{
+    border: none;
+    background-color: rgba(0, 0, 0, 0) ;
+}
+.button_icon:focus {
+    outline: none;
+    box-shadow: none;
+  }

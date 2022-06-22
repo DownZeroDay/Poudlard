@@ -61,6 +61,7 @@ class IndexController extends AbstractController
     $this->params['title'] = 'Accueil';
     $this->views = [['index/home.html.twig',0]];
     $this->viewPage();
+
   }
 
   #[Route(path: "/profile" , name: "profile")]

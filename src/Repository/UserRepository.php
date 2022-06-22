@@ -3,6 +3,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use GuzzleHttp\Client as HTTPClient;
+use PDO;
 
 final class UserRepository extends AbstractRepository
 {
@@ -58,4 +59,29 @@ final class UserRepository extends AbstractRepository
       curl_close($curl);
       return json_decode($resp, true);
     }
+
+
+    /**
+     * Methode qui permet de récupérer tous les membres du bde
+     *
+     * @param [type] $id
+     * @return void
+     */
+  public function findBy($id)
+  {
+    $sql = "SELECT * FROM utilisateurs WHERE droit = $id" ;
+    $resultat = $this->pdo->query($sql);
+    $resultat->execute();
+    return $resultat->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+   /** Requete qui recupère tous les users*/
+   public function findAll()
+   {
+     $sql = "SELECT * FROM utilisateurs INNER JOIN droit ON droit.id = droit";
+     $resultat = $this->pdo->query($sql);
+     $resultat->execute();
+     return $resultat->fetchAll(PDO::FETCH_ASSOC);
+   }
+ 
 }

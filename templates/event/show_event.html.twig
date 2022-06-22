@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    
-    <link rel="stylesheet" href="assets/style.css" />
-    <title>Contact</title>
-  </head>
-  <body>
+{% inxlude 'global/header.html.twig' with {"title":params.evenement.titre} only %}
       <h1>Bienvenue sur la page {{params.page_name}} {{params.user}}</h1>
       
       <form method="POST" action="/">
@@ -18,18 +7,17 @@
       <p> <a href="/contact"> Retour </a></p>
 
        <div class="card" style="width: 18rem;">
-            <img src="../image/{{ evenement.image }}" class="card-img-top" alt="{{ evenement.image }}">
+            <img src="../image/{{ params.evenement.image }}" class="card-img-top" alt="{{ params.evenement.image }}">
             <div class="card-body">
-              <h5 class="card-title"> Titre : {{ evenement.titre }} </h5>
-              <h5 class="card-title"> Prix : {{ evenement.prix }} euros </h5>
-              <h5 class="card-title"> Debut :  {{ evenement.dateDebut }} </h5>
-              <h5 class="card-title"> Fin : {{ evenement.dateFin }} </h5>
-              <h5 class="card-title"> lieu : {{ evenement.adresse }} </h5>
-              <p class="card-text"> {{ evenement.description }}</p>
+              <h5 class="card-title"> Titre : {{ params.evenement.titre }} </h5>
+              <h5 class="card-title"> Prix : {{ params.evenement.prix }} euros </h5>
+              <h5 class="card-title"> Debut :  {{ params.evenement.dateDebut }} </h5>
+              <h5 class="card-title"> Fin : {{ params.evenement.dateFin }} </h5>
+              <h5 class="card-title"> lieu : {{ params.evenement.adresse }} </h5>
+              <p class="card-text"> {{ params.evenement.description }}</p>
               <a href="" class="btn btn-primary">participer </a>
             </div> 
           </div>
 
-  </body>
-</html>
+{% include 'global/footer.html.twig' %}
 

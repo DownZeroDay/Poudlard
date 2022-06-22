@@ -38,10 +38,13 @@ function switchInput() {
 //////////Global Function///////////////
 
 document.addEventListener('submit', function (event) {
-    event.preventDefault();
     const selectedForm = this.activeElement.form;
     const link = selectedForm['link'].value;
-    sendForm(selectedForm,link,true)
+    if(link !== undefined && link !== null) {
+        event.preventDefault();
+        sendForm(selectedForm,link,true)
+    }
+    
 });
 
 function sendForm(form, url, isReset, after = () => { }) {

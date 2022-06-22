@@ -12,6 +12,7 @@ class RegisterController extends AbstractController
   #[Route(path: "/register", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
+    $this->resetViewsAndParams();
     if(!empty($_POST['login']) && !empty($_POST['mdp'])){
       $data = UserRepository::getProfile($_POST['login'], $_POST['mdp']);
       if($data){
@@ -44,6 +45,7 @@ class RegisterController extends AbstractController
         echo "<script> alert('Ce compte existe déjà') </script>";
       }
     }
-    echo $this->twig->render('security/register.html.twig');
+    $this->views = [["security/register.html.twig",0]];
+    $this->viewPage();
   }
 }

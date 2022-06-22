@@ -13,7 +13,7 @@ class LoginController extends AbstractController
 
   private $user; 
 
-  #[Route(path: "/", httpMethod: ["GET", "POST"])]
+  #[Route(path: "/login", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
       echo $this->twig->render('security/login.html.twig');     
@@ -56,6 +56,7 @@ class LoginController extends AbstractController
     #[Route(path: "/auth_google",  httpMethod: ["GET", "POST"], name: "auth_google")]
     public function auth_google()
     { 
+      $this->resetViewsAndParams();
       if(!empty($_SESSION) ){
 
         $otp = TOTP::create('KFJMP3RSMRIKZHCZEH2HSNVN5SO2TXDDV5ZBT6EF3Q4BNRSJ4BL3FQYZVUVBVL4UALTQ63MONTPN564S7YLCEGEQNM4NPQV56YQRSPQ');
@@ -76,8 +77,8 @@ class LoginController extends AbstractController
       else{
         header('Location:/');        
       }
-        echo $this->twig->render('Security/auth_google.html.twig',[
-            'link' => $link
-        ]);
+
+      $this->params['link'] = $link;
+      $this->view = [['Security/auth_google.html.twig',0]];
     }
 }

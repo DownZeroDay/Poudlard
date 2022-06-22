@@ -65,4 +65,10 @@ abstract class AbstractController
       echo $this->twig->render('403.html.twig');
     }
   }
+
+  protected function resizeImage($source, $dst, $width = 800, $height = 600){
+    $image = imagecreatefromjpeg($source);
+    $img = imagescale($image, $width, $height );
+    return imagejpeg($img, $dst);
+  } 
 }

@@ -1,0 +1,43 @@
+{% include 'global/header.html.twig' with {'title': params.title} only %}
+
+<div class="row">
+    <div class="col-md-10 d-flex offset-md-1 mt-5">
+            <div class="col-8 m-5">
+                <form action = "/">
+                    <input type="text" name = "recherche">
+                    <button type = "submit"class="btn p-2">Rechercher</button>
+                </form>
+            </div>
+            <div class="col-3 m-5">
+                <a href="/nom/0"><button class="{{ params.tri != 'nom' ? 'btn p-2 ml-2' : 'btn btn-primary p-2 ml-2'}}">Nom</button></a>
+                <a href="/categorie/0"><button class="{{ params.tri != 'categorie' ? 'btn p-2 ml-2' : 'btn btn-primary p-2 ml-2'}}">Categorie</button></a>
+                <a href="/default/0"><button class="{{ params.tri != 'default' ? 'btn p-2 ml-2' : 'btn btn-primary p-2 ml-2'}}">defaut</button></a>
+            </div>
+
+    </div>
+</div>
+<div class="col-md-10 d-flex offset-md-1">
+    <div class = "row">
+        {% for evenement in params.evenements %}
+            <div class="col-sm-4">
+                <a href="/show_event/{{ evenement.id }}">  
+                    <div class="card m-5" style = "width : auto; height : 80%;"><span class="badge position-absolute top-0 start-0 translate-middle bg-info p-2 mt-n2">{{ evenement.libelle }}</span>
+                        <img src="../image/{{ evenement.image }}" class="card-img-top" alt="image de l'évènement">
+                        <div class="card-body mb-5">
+                            <h5 class="card-title text-center">{{ evenement.titre }}</h5>
+                            <p class="card-text text-center"> {{ evenement.description }}</p>
+                        </div> 
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="row">
+    <div class ="col-sm-12 d-flex mt-5 justify-content-center">
+        {% if params.page > 0 %} <a href="/{{ params.tri }}/{{ params.page - 1 }}"><button class="btn p-2 ml-2">{{ params.page - 1}}</button></a> {% endif %}
+        <a href="/{{ params.tri }}/{{ params.page}}"><button class="btn btn-primary p-2 ml-2">{{ params.page }}</button></a>
+        {% if params.page < params.maxPage %}<a href="/{{ params.tri }}/{{ params.page + 1 }}"><button class="btn p-2 ml-2">{{ params.page + 1}}</button></a> {% endif %}
+    </div>
+</div>  
+{% include 'global/footer.html.twig' %}

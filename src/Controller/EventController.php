@@ -11,42 +11,36 @@ class EventController extends AbstractController
 {
 
   /** Méthode qui permet de créér de un evenement */
-  #[Route(path: '/event/create',  httpMethod: ['GET', 'POST'], name: 'event_create_form')]
-  public function create(CategorieRepository $repoCat )
-  {
-    $resultats = $repoCat->findAll();
-
-    echo $this->twig->render('event/create.html.twig', [
-      'resultats' => $resultats
-  ]);
-
-    // traitement 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $evenement = [];
+  #[Route(path: '/event/create',  httpMethod: ['POST'], name: 'create')]
+  public function create()
+  {     
       $target = "image/".basename($_FILES['image']['name']);
-
-      $evenement["categorie"]       = $_POST['categorie'];
-      $evenement["titre"]           = $_POST['titre'];
-      $evenement["description"]     = $_POST['description'];
-      $evenement["accroche"]        = $_POST['accroche'];
-      $evenement["participantMax"]  = $_POST['participantMax'];
-      $evenement["prix"]            = $_POST['prix'];
-      $evenement["dateDebut"]       = $_POST['dateDebut'];
-      $evenement["dateFin"]         = $_POST['dateFin'];
-      $evenement["adresse"]         = $_POST['adresse'];
-      $evenement["createur"]        = $_SESSION['id'];
-      $evenement["image"]           = $_FILES['image']['name'];
+   
+      $data["categorie"]       = $_POST['categorie'];
+      $data["titre"]           = $_POST['titre'];
+      $data["description"]     = $_POST['description'];
+      $data["accroche"]        = $_POST['accroche'];
+      $data["participantMax"]  = $_POST['participantMax'];
+      $data["prix"]            = $_POST['prix'];
+      $data["dateDebut"]       = $_POST['dateDebut'];
+      $data["dateFin"]         = $_POST['dateFin'];
+      $data["adresse"]         = $_POST['adresse'];
+      $data["createur"]        = $_SESSION['id'];
+      $data["image"]           = $_FILES['image']['name'];
       
-      if (!empty($evenement["categorie"]) && !empty($evenement["titre"]) && !empty($evenement["description"])
-          && !empty($evenement["accroche"]) && !empty($evenement["participantMax"])
-          && !empty($evenement["prix"]) && !empty($evenement["dateDebut"]) && !empty($evenement["dateFin"]) )
+      $evenement = new Evenement();
+
+      if (!empty($data["categorie"]) && !empty($data["titre"]) && !empty($data["description"])
+          && !empty($data["accroche"]) && !empty($data["participantMax"])
+          && !empty($data["prix"]) && !empty($data["dateDebut"]) && !empty($data["dateFin"]) )
       {
-        $evenements = new Evenement();
-        
-         if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
-         
-          $evenements->initialiser($evenement);
-          $evenements->enregistrer();
+
+      if(move_uploaded_file($_FILES['image']['tmp_name'], $target))
+        {
+          $evenement->initialiser($data);
+          $evenement->enregistrer();
+        }else{
+          return "fichier non chargé";
         }
         else{
           echo ("fichier non chargé");
@@ -56,10 +50,9 @@ class EventController extends AbstractController
   }
 
   /** Méthode qui permet de créér une catégorie */
-  #[Route(path: '/event/categorie',  httpMethod: ['GET', 'POST'], name: 'categorie_create_form')]
+  #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
   public function categorie(CategorieRepository $repoCat)
   {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
 
@@ -81,36 +74,29 @@ class EventController extends AbstractController
       }
       else{
         echo ("erreur");
-      }
-    }
-    echo $this->twig->render('event/categorie.html.twig');
-    
-  }
-
-  /** Methode qui permet de participer à un évenement */
-  #[Route(path: '/event/all',  httpMethod: ['GET'], name: 'event_all')]
-  public function event_all( EvenementRepository $repoEvent){
-
-    $evenements = $repoEvent->findAll();
-
-    echo $this->twig->render('event/event_all.html.twig', [
-      'evenements' => $evenements
-    ]);
+      }   
   }
 
   /** Methode qui affiche un detail de l'evenement */
   #[Route(path: '/show_event/{id}',  httpMethod: ['GET'], name: 'show_event')]
   public function show_event(int $id){
     
+    $this->resetViewsAndParams();
     $evenement = new Evenement($id);
     $evenement = $evenement->get();
 
     if(!$evenement['id']){
       echo "<script> alert('l\'évenement n\'existe pas  ') </script>";
     }
-    echo $this->twig->render('event/show_event.html.twig', [
-      'evenement' => $evenement
-    ]);
+
+    if(!empty($evenement))
+    {
+      $this->params['evenement'] = $evenement;
+    }
+
+    $this->views = [['event/show_event.html.twig',0]];
+    $this->viewPage();
+
   }
 
 

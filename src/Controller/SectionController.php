@@ -16,7 +16,7 @@ class SectionController extends AbstractController
     #[Route(path: '/section/create', httpMethod: ['POST'] , name: 'create_section' )]
     public function create()
     {
-        $data["filliaire"] = $_POST['filliaire'];
+        $data["filiere"] = $_POST['filiere'];
         $data["annee"] = $_POST['annee'];
 
 
@@ -34,7 +34,7 @@ class SectionController extends AbstractController
     #[Route(path:'/section/update/{id}', httpMethod: ['POST'] , name: 'update_section')]
     public function update(SectionRepository $repoSection, int $id)
     {
-        $data["filliaire"] = $_POST['filliaire'];
+        $data["filiere"] = $_POST['filiere'];
         $data["annee"] = $_POST['annee'];
         if($repoSection->sectionExist($id))
         {

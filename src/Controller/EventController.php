@@ -42,12 +42,9 @@ class EventController extends AbstractController
         }else{
           return "fichier non chargé";
         }
-        else{
-          echo ("fichier non chargé");
-        }
       }        
     }
-  }
+  
 
   /** Méthode qui permet de créér une catégorie */
   #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
@@ -96,17 +93,6 @@ class EventController extends AbstractController
 
     $this->views = [['event/show_event.html.twig',0]];
     $this->viewPage();
-
-  }
-
-    if(!empty($evenement))
-    {
-      $this->params['evenement'] = $evenement;
-    }
-
-    $this->views = [['event/show_event.html.twig',0]];
-    $this->viewPage();
-
   }
 
   /**
@@ -126,8 +112,4 @@ class EventController extends AbstractController
       $repoEvent->participe($idUser, $idEvent);
     }
   }  
-
-
-
-
 }

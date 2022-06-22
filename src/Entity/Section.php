@@ -4,7 +4,7 @@ namespace App\Entity;
 class Section extends Model {
 
     protected $id = 0;
-    protected string $filliaire = "";
+    protected string $filiere = "";
     protected $annee = 0;
 
     const TABLE_NAME = 'section';
@@ -39,21 +39,21 @@ class Section extends Model {
     }
 
     /**
-     * Get the value of filliaire
+     * Get the value of filiere
      */ 
-    public function getFilliaire()
+    public function getFiliere()
     {
         return $this->filliaire;
     }
 
     /**
-     * Set the value of filliaire
+     * Set the value of filiere
      *
      * @return  self
      */ 
-    public function setFilliaire($filliaire)
+    public function setFiliere($filiere)
     {
-        $this->filliaire = $filliaire;
+        $this->filiere = $filiere;
 
         return $this;
     }

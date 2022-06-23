@@ -16,7 +16,7 @@
             {% include 'user/componement/gestionnaire/gestionEvent.html.twig' with {"evenements":params.events, "categories":params.categoryEvent} only %}  
         </div>
         <div class="row d-flex m-5">
-            {% include 'user/componement/gestionnaire/gestionUser.html.twig' with {"users":params.users,"roles":params.droit} only %}
+            {% include 'user/componement/gestionnaire/gestionUser.html.twig' with {"users":params.users,"roles":params.droit,"sections":params.sections} only %}
         </div>
 
         <div class="row d-flex m-5">

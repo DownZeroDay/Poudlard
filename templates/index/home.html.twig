@@ -16,10 +16,9 @@
 
     </div>
 </div>
-<div class="col-md-10 d-flex offset-md-1">
-    <div class = "row">
+<div class="col-md-10 d-flex offset-md-1 carte">
         {% for evenement in params.evenements %}
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <a href="/show_event/{{ evenement.id }}">  
                     <div class="card m-5" style = "width : auto; height : 80%;"><span class="badge position-absolute top-0 start-0 translate-middle bg-info p-2 mt-n2">{{ evenement.libelle }}</span>
                         <img src="../image/{{ evenement.image }}" class="card-img-top" alt="image de l'évènement">

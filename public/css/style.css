@@ -56,6 +56,10 @@ a:hover{
     color: #af7e41;
 }
 
+.carte a, .carte a:hover{
+    color: #D9D5AB;
+}
+
 .btn_connect{
     margin-top: -35px;
     margin-right : -5px;

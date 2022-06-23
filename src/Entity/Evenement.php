@@ -21,27 +21,27 @@ class Evenement extends Model
   protected int $createur = 0;
 
 
-    const TABLE_NAME = 'Evenement';
+    const TABLE_NAME = 'evenement';
     const PRIMARY_FIELD_NAME = 'id';
 
 
     public function getAllAccueil($offset = 0, $limit = 10){
-      $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id  WHERE dateFin > NOW() ORDER BY dateDebut DESC limit ' . $limit . ' offset ' . $offset;
+      $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id  WHERE dateDebut > NOW() ORDER BY dateDebut DESC limit ' . $limit . ' offset ' . $offset;
       return $this->pdoConnect->query_multi($sql);
     }
 
     public function getAllAccueilByName($offset = 0, $limit = 10){
-      $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id WHERE dateFin > NOW() ORDER BY titre limit ' . $limit . ' offset ' . $offset;
+      $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id WHERE dateDebut > NOW() ORDER BY titre limit ' . $limit . ' offset ' . $offset;
       return $this->pdoConnect->query_multi($sql);
     }
 
     public function getAllAccueilByCategorie($offset = 0, $limit = 10){
-      $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id WHERE dateFin > NOW() ORDER BY categorie limit ' . $limit . ' offset ' . $offset;
+      $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id WHERE dateDebut > NOW() ORDER BY categorie limit ' . $limit . ' offset ' . $offset;
       return $this->pdoConnect->query_multi($sql);
     }
 
     public function getTotal(){
-      $sql = 'SELECT COUNT(*) as total FROM ' . self::TABLE_NAME . ' WHERE dateFin > NOW()';
+      $sql = 'SELECT COUNT(*) as total FROM ' . self::TABLE_NAME . ' WHERE dateDebut > NOW()';
       return $this->pdoConnect->query_one($sql)['total'];
     }
 

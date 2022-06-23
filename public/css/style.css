@@ -64,8 +64,6 @@ a:hover{
 /************* FOOTER ***************************/
 footer{
     background-color: #532851;
-    position:sticky;
-    bottom:0px;
 }
 
 .badge{

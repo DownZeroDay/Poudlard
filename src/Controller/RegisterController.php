@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\SectionRepository;
 use App\Repository\UserRepository;
 use App\Routing\Attribute\Route;
 use DateTime;
@@ -10,7 +11,7 @@ use DateTime;
 class RegisterController extends AbstractController
 {
   #[Route(path: "/register", httpMethod: ["GET", "POST"])]
-  public function index(UserRepository $userRepository)
+  public function index(UserRepository $userRepository, SectionRepository $repoSection)
   {
     $this->resetViewsAndParams();
     if(!empty($_POST['login']) && !empty($_POST['mdp'])){
@@ -30,11 +31,14 @@ class RegisterController extends AbstractController
       $res["prenom"] = $_POST['firstname'];
       $res["email"] = $_POST['email'];
       $res["dateNaissance"] = $_POST['birthDate'];
+      // $res["idsection"] = intval($_POST['2']);
       $res["password"] = password_hash($_POST['password'], PASSWORD_BCRYPT);
       $res["droit"] = intval($_POST['role']);
+
+      var_dump($res);
     }
 
-    if (!empty($res["nom"]) && !empty($res["prenom"]) && !empty($res["email"]) && !empty($res["dateNaissance"]) && !empty($res["password"]) && !empty($res["droit"])) {
+    if (!empty($res["nom"]) && !empty($res["prenom"]) && !empty($res["email"]) && !empty($res["dateNaissance"])  && !empty($res["password"]) && !empty($res["droit"])) {
       $user = new User();
       $check = $userRepository->userExist($user->getIdByMail($res["email"]));
       if (!$check) {
@@ -45,6 +49,7 @@ class RegisterController extends AbstractController
         echo "<script> alert('Ce compte existe déjà') </script>";
       }
     }
+    $this->params['section'] = $repoSection->findAll();
     $this->views = [["security/register.html.twig",0]];
     $this->viewPage();
   }

@@ -15,7 +15,7 @@ class User extends Model
   protected string $email = "";
   protected string $password = "";
   protected string $token = "";
-  protected int $idSection = 0;
+  // protected int $idSection = 0;
 
   const TABLE_NAME = 'utilisateurs';
   const PRIMARY_FIELD_NAME = 'id';

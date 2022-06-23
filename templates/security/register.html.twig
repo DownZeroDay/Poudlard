@@ -1,4 +1,4 @@
-{% inxlude 'global/header.html.twig' with {"title":"Inscription"} only %}
+{% include 'global/header.html.twig' with {"title":"Inscription"} only %}
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-50 mx-auto">
@@ -17,22 +17,49 @@
                                 <input type="password" name="mdp" class="form-control my-input">
                             </div>
                             <br><br>
+
                             <h3>Création de compte sans MyGes</h3>
                             <div class="form-floating mb-4">
                                 <input type="text" name="name" class="form-control my-input" id="name" placeholder="Nom" required>
                             </div>
+
                             <div class="form-floating mb-4">
                                 <input type="text" name="firstname" class="form-control my-input" id="firstname" placeholder="Prénom" required>
                             </div>
+
                             <div class="form-floating mb-4">
                                 <input type="email" name="email" class="form-control my-input" placeholder="E-Mail" required>
                             </div>
+
                             <div class="form-floating mb-4">
                                 <input type="date" name="birthDate" class="form-control my-input" id="birthDate" placeholder="Date de Naissance" required>
                             </div>
+
+                            <div class="row">
+                                <div class="col mb-4">
+                                    {# <input type="text" class="form-control" name="section" placeholder="Section"> #}
+                                    <select name="section" class="form-control">
+                                        <option value=""> Section </option>
+                                        {% for section in params.section %}
+                                            <option value="{{ section.id }}"> {{ section.filiere }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col mb-4">
+                                    {# <input type="text" class="form-control" name="annee" placeholder="année"> #}
+                                    <select name="section" class="form-control" placeholder="année">
+                                            <option value=""> Année </option>
+                                            {% for section in params.section %}
+                                                <option value="{{ section.id }}"> {{ section.annee }}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-floating mb-4">
                                 <input type="password" name="password"  class="form-control my-input" id="name" placeholder="Mot de Passe" required>
-                            </div>    
+                            </div> 
+
                             <div class="form-floating mb-4">
                                 <h4 class="text-norm">Roles: </h4>
                                 <label for="student">Étudiant:</label>

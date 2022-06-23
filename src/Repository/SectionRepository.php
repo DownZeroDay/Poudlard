@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Entity\Section;
+use PDO;
 
 class SectionRepository extends AbstractRepository {
 
@@ -10,12 +11,17 @@ class SectionRepository extends AbstractRepository {
      /** Requete qui recupère tous les evenements */
   public function findAll()
   {
+    // $sql = "SELECT * FROM ".self::TABLE;
+    // $sections = new Section();
+    // return  $sections->pdoConnect->query_multi($sql);
+
     $sql = "SELECT * FROM ".self::TABLE;
-
-    $sections = new Section();
-
-    return  $sections->pdoConnect->query_multi($sql);
+    $resultat = $this->pdo->query($sql);
+    $resultat->execute();
+    return $resultat->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  
 
   public function deleteById($id)
   {

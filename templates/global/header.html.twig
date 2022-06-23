@@ -12,12 +12,11 @@
     <header>
       <nav class="navbar">
           <a class="navbar-brand">LOGO</a>
-          <button class="btn"> Evenements </button>
-          <button class="btn"> Profile </button>
-          <button class="btn"> Gestion </button>
+          <a href = "/profile" class="btn"> Gestion </a>
+          <a href = "/infos_bde" class="btn"> Informations BDE </a>
 
           <form method="POST" action="/">
-              <a href = "{% if session.id is empty %}/login{% else %}/disconnect{% endif %}" class="btn">{% if session.id is empty %}Connexion{% else %}Déconnexion{% endif %}</button>
+              <a href = "{% if session.id is empty %}/login{% else %}/disconnect{% endif %}" class="btn btn_connect">{% if session.id is empty %}Connexion{% else %}Déconnexion{% endif %}</a>
           </form>
           
         </nav>

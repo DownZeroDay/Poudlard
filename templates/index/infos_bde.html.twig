@@ -1,21 +1,24 @@
-<form method="POST" action="/">
-    <button class="btn btn-primary" type="submit" name="logout_btn"> Déconnexion </button>
-</form>
-<div class="container">
-    <h3> Présentation</h3>
-    <p>
-        Le BDE a pour but de défendre les intérêts des apprenants en assurant entre autres la liaison entre l’école et les élèves. <br>
-        Ainsi, il participe aux groupes de travail mis en place par l’école pour améliorer la vie étudiante et la scolarité des     élèves. <br>
-        Le BDE peut aussi intervenir sur des problèmes plus ponctuels dans la vie des étudiants. <br>
-        Dans le cadre de ce projet, le BDE est une structure qui s'occupe principalement de la gestion des différents évènement <br> 
-        de l'école qui consite à mettre en place une plateforme numérique offre la possible aux étudiants de consulter la liste des  <br>
-        différents évènements organisés par l'école et y participer si on le souhaite. <br>
-    </p> 
+{% include 'global/header.html.twig' with {'title': params.title, 'session': params.session} only %}
+<div class="container py-5 h-100 m-5">
+    <div class = "col-md-12 offset-md-5">
+        <div class="row d-flex flex-column justify-content-center">
+            <h3> Présentation</h3>
+            <p>
+                Le BDE a pour but de défendre les intérêts des apprenants en assurant entre autres la liaison entre l’école et les élèves. <br>
+                Ainsi, il participe aux groupes de travail mis en place par l’école pour améliorer la vie étudiante et la scolarité des     élèves. <br>
+                Le BDE peut aussi intervenir sur des problèmes plus ponctuels dans la vie des étudiants. <br>
+                Dans le cadre de ce projet, le BDE est une structure qui s'occupe principalement de la gestion des différents évènement <br> 
+                de l'école qui consite à mettre en place une plateforme numérique offre la possible aux étudiants de consulter la liste des  <br>
+                différents évènements organisés par l'école et y participer si on le souhaite. <br>
+            </p> 
 
-    <h3> Liste des membres du BDE</h3>
-    <ul> 
-        {% for user in users %}
-            <li> {{ user.nom }}  {{ user.prenom }}</li>
-        {% endfor %}
-    </ul>
+            <h3> Liste des membres du BDE</h3>
+            <ul> 
+                {% for user in users %}
+                    <li> {{ user.nom }}  {{ user.prenom }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
+{% include 'global/footer.html.twig' %}

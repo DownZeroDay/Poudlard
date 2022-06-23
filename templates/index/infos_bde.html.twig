@@ -55,7 +55,7 @@
         <tbody>
             {% for evenement in evenements %}
 
-                <form id="tableau">
+                <form id="tableau" method="POST">
                     <div class="form-group">
                         <tr id="tableau">
                             <td scope="row"><input type="text"   value="{{ evenement.titre }}" disabled></td> 
@@ -70,8 +70,12 @@
                             <td> <input type="text"  value="{{ evenement.participant }}" disabled></td> 
                             <td> <input type="text"  value="{{ evenement.nom }}  {{ evenement.prenom }}" disabled></td> 
                             <td> <img src="../image/{{ evenement.image }}" class="card-img-top" alt="{{ evenement.image }}"> <input type="file" accept=".jpg, .png, .jpeg, .gif"  hidden> </td>
+                            
                             <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
                             <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
+                            
+                            <input type="hidden"  value="/delete_event/{{ evenement.id }}"  name="linkdelete">
+                            <input type="hidden"  value="/event/edit/{{ categorie.id }}"    name="link">
                         </tr>
                     </div>
                     
@@ -80,8 +84,6 @@
 
         </tbody>
     </table>
-
-    
 
     <h3> Gestion des Catégories</h3>
     <table class="table table-striped">
@@ -95,7 +97,7 @@
         <tbody>
             {% for categorie in categories %}
 
-                <form id="tableau">
+                <form id="tableau" method="POST">
                     <div class="form-group">
                         <tr id="tableau">
                             <td scope="row"><input type="text"  value="{{ categorie.libelle }}" disabled></td>  
@@ -129,7 +131,7 @@
         <tbody>
             {% for user in users %}
 
-                <form id="tableau">
+                <form id="tableau" method="POST">
                     <div class="form-group">
                         <tr id="tableau">
                             <td scope="row"><input type="text"  value="{{ user.prenom }}" disabled></td>  

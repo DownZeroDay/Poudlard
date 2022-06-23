@@ -41,7 +41,7 @@ final class EvenementRepository extends AbstractRepository
         'idEvenement' => $idEvent
       ]);
     }
-
+    
     /**
    * Methode qui d'inserer un participant a un evenement
    */
@@ -51,6 +51,14 @@ final class EvenementRepository extends AbstractRepository
 
     return $sth->execute([
       'idEvent' => $idEvent]);
+  }
+
+
+  public function deleteById($id)
+  {
+    $sql = 'DELETE * FROM '.self::TABLE.' WHERE id='.$id;
+    $event = new Evenement();
+    return $event->pdoConnect->query_noresult($sql); 
   }
 
 }

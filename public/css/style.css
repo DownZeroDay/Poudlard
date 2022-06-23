@@ -1,6 +1,7 @@
 /** Principal */
 .fa-trash-can{
     color: red;
+}
 .space-button{
     margin-top: 200px !important;
 }
@@ -24,3 +25,40 @@ a:link{
     outline: none;
     box-shadow: none;
   }
+
+/************* BODY ***************************/
+body{
+    /* overflow: hidden; */
+    margin: 0;
+}
+
+/************* HEADER ***************************/
+/* header{
+    background-position: center;
+    background-size: cover;
+    margin: 0%
+} */
+nav{
+    background: #532851;
+    width: auto;
+    height: 90px;
+    
+    
+}
+nav .btn{
+    background-color: #9B6A6C;
+    width: 120px;
+    color: #D9D5AB;
+}
+
+/************* FOOTER ***************************/
+footer{
+    height: 90px;
+    background-color: #532851;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding-top:50px;
+}
+
+

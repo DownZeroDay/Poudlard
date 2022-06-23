@@ -30,22 +30,17 @@ class BdeController extends AbstractController
 
     /** Methode qui permet de supprimer un evenement */
     
-    #[Route(path: '/delete_event/{id}',  httpMethod: ['GET'], name: 'delete_event')]
-    public function delete_event(int $id){
+    #[Route(path: '/delete_event/{id}',  httpMethod: ['POST'], name: 'delete_event')]
+    public function delete_event($id, EvenementRepository $repoEvent){
 
-        $evenement = new Evenement($id);
-        $evenement = $evenement->get();
-        if($id){
-            echo "<script> alert('le bon') </script>";
-        }
-        else{
-            echo "<script> alert('pas bon') </script>";
-        }
-        //$evenement = $evenement->;
-
-        echo $this->twig->render('index/infos_bde.html.twig', [
-            
-        ]);
+        // $evenement = new Evenement($id);
+        // $evenement = $evenement->get();
+        var_dump($repoEvent->deleteById($id));
+        // if(isset($_POST['linkdelete']) == "POST"){
+        //     var_dump($repoEvent->deleteById($id));
+        // }
+        if($repoEvent->deleteById($id)){
+            echo("Supprimer avec succes");
+        };
     }
-
 }

@@ -8,20 +8,20 @@
     <link href="/css/style.css" rel="stylesheet">
     <title>{{title}}</title>
 </head>
-    <body>
-        <header>
-            <nav class="navbar">
-                <a class="navbar-brand">LOGO</a>
-                <button class="btn"> Evenements </button>
-                <button class="btn"> Profile </button>
-                <button class="btn"> Gestion </button>
+  <body>
+    <header>
+      <nav class="navbar">
+          <a class="navbar-brand">LOGO</a>
+          <button class="btn"> Evenements </button>
+          <button class="btn"> Profile </button>
+          <button class="btn"> Gestion </button>
 
-                <form method="POST" action="/">
-                    <a href = "{% if session.id is empty %}/login{% else %}/disconnect{% endif %}" class="btn">{% if session.id is empty %}Connexion{% else %}Déconnexion{% endif %}</button>
-                </form>
-                
-                </nav>
-        </header>  
-        
+          <form method="POST" action="/">
+              <a href = "{% if session.id is empty %}/login{% else %}/disconnect{% endif %}" class="btn">{% if session.id is empty %}Connexion{% else %}Déconnexion{% endif %}</button>
+          </form>
+          
+        </nav>
+    </header>  
+      
 
 

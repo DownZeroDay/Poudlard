@@ -62,4 +62,11 @@ footer{
     margin: 0;
 }
 
+.badge{
+    margin-top: -10px;
+    margin-left: 10px;
+}
 
+.row {
+    margin : 0;
+}

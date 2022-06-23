@@ -17,6 +17,12 @@ class Catevenement extends Model
         return $this->pdoConnect->query_one($sql);
     }
 
+    public function deleteById($id)
+    {
+      $sql = 'DELETE FROM '.self::TABLE_NAME.' WHERE id='.$id;
+      return $this->pdoConnect->query_noresult($sql); 
+    }
+
     /**
      * Get the value of id
      */ 

@@ -28,6 +28,13 @@ class User extends Model
     $query = "SELECT id FROM " . static::TABLE_NAME . " WHERE email=" . $this->pdoConnect->quote($email);
     return (($result = $this->pdoConnect->query_one($query))!== false) ? $result['id'] : 0;
   }
+
+  public function deleteById($id)
+  {
+    $sql = 'DELETE FROM '.self::TABLE_NAME.' WHERE id='.$id;
+    return $this->pdoConnect->query_noresult($sql); 
+  }
+
   public function getId(): int
   {
     return $this->id;

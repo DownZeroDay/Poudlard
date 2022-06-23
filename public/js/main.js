@@ -90,9 +90,9 @@ document.addEventListener('submit', function (event) {
         event.preventDefault();
         console.log(link);
         sendForm(selectedForm,link,true,() => {
-            // if(reloaded){
-            //     window.location.reload();
-            // } 
+            if(reloaded){
+                window.location.reload();
+            } 
         });
         
     }

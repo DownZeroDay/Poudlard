@@ -74,11 +74,20 @@ class EventController extends AbstractController
         $evenement->initialiser($data);
         $evenement->enregistrer();
     }
+
+       /** Methode qui permet de supprimer un evenement */
+  #[Route(path: '/event/delete/{id}',  httpMethod: ['POST'], name: 'delete_event')]
+  public function delete_event(int $id){
+      $evenement = new Evenement($id);    
+      if($evenement->deleteById($id)){
+          echo("Supprimer avec succes");
+      };
+  }
   
 
   /** Méthode qui permet de créér une catégorie */
   #[Route(path: '/categorie/create',  httpMethod: ['POST'], name: 'categorie_create_form')]
-  public function categorieCreate(CategorieRepository $repoCat)
+  public function categorieCreate()
   {
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
@@ -100,7 +109,7 @@ class EventController extends AbstractController
   
   /** Méthode qui permet de créér une catégorie */
   #[Route(path: '/categorie/edit/{id}',  httpMethod: ['POST'], name: 'categorie_create_form')]
-  public function categorieEdit(int $id,CategorieRepository $repoCat)
+  public function categorieEdit(int $id)
   {
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
@@ -119,6 +128,16 @@ class EventController extends AbstractController
       else{
         echo ("erreur");
       }   
+  }
+
+  
+    /** Methode qui permet de supprimer un evenement */
+  #[Route(path: '/categorie/delete/{id}',  httpMethod: ['POST'], name: 'delete_categorie')]
+  public function delete_categorie(int $id){
+      $categorie = new Catevenement($id);    
+      if($categorie->deleteById($id)){
+          echo("Supprimer avec succes");
+      };
   }
 
   /** Methode qui affiche un detail de l'evenement */

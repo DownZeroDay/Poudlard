@@ -26,13 +26,4 @@ final class CategorieRepository extends AbstractRepository
     $resultat->execute();
     return $resultat->fetchAll(PDO::FETCH_ASSOC);
   }
-
-  /** Methode qui permet de supprimer une catégorie */
-  public function deleteById($id){
-
-    $sql = "DELETE FROM catevenement where id = $id"; 
-    $resultat = $this->pdo->query($sql);
-    $resultat->execute();
-    return $resultat->fetch(PDO::FETCH_ASSOC);
-  }
 }

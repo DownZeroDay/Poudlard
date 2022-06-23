@@ -17,11 +17,6 @@ final class CategorieRepository extends AbstractRepository
   //     'libelle' => $cat->getLibelle()
   //   ]);
   // }
-  /** Methode qui verifie si la catégorie existe déja */ 
-  public function CategorieExist()
-  {
-    return $this->pdo->prepare('SELECT libelle FROM ' . self::TABLE .' WHERE libelle = ? ');
-  }
 
   /**Methode qui affiche toutes les catégories */
   public function findAll()

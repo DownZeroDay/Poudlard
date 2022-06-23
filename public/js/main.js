@@ -1,15 +1,13 @@
 const buttonEdit = document.querySelector('#Edit-Profile');
 const buttonValideEdit = document.querySelector('#Valide-Profile');
 const buttonEditEvent = document.querySelectorAll('.edit_event');
-const buttonValidEditEvent = document.querySelectorAll('.valid_editEvent'); 
+const buttonEditCate = document.querySelectorAll('.edit_catevent'); 
 
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
 const inputId = document.querySelector('#id-Profile');
 
 const formProfile = document.getElementById('form-Profile');
-const formEventTab = document.querySelectorAll(".formEventTab");
-
 
 /////////////////////Profile Function////////////////////////////////////////
 if(typeof(buttonEdit) !== undefined && buttonEdit !== null) {
@@ -40,6 +38,21 @@ if(typeof(buttonEditEvent) !== undefined && buttonEditEvent !== null){
     });
 
 }
+
+if(typeof(buttonEditCate !== undefined) && buttonEditCate !== null){
+    buttonEditCate.forEach((b) => {
+        b.onclick = function(){
+         for(f of this.form){
+             if(f.disabled === true && f.name !== 'infoCreator') {
+                 f.disabled = false;
+             }
+         }
+         b.hidden = true;
+         this.form['validIcon'].hidden = false;
+     }
+     });
+}
+
 
 if(typeof(buttonValideEdit) !== undefined && buttonValideEdit !== null) {
     buttonValideEdit.addEventListener('click', function (event) {
@@ -77,9 +90,9 @@ document.addEventListener('submit', function (event) {
         event.preventDefault();
         console.log(link);
         sendForm(selectedForm,link,true,() => {
-            if(reloaded){
-                window.location.reload();
-            } 
+            // if(reloaded){
+            //     window.location.reload();
+            // } 
         });
         
     }

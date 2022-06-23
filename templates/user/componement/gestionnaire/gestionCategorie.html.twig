@@ -11,13 +11,14 @@
         <tbody>
             {% for categorie in categories %}
 
-                <form id="tableau">
+                <form class="formEventTab">
                     <div class="form-group">
                         <tr id="tableau">
-                            <td scope="row"><input type="text"  value="{{ categorie.libelle }}" disabled></td>  
-                            <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <td scope="row"><input type="text" name="libelle" value="{{ categorie.libelle }}" disabled></td>  
+                            <td> <button class="edit_catevent button_icon" type="button"> <i class="fa-solid fa-pen"></i> </button> <button class="button_icon" name="validIcon" type="submit" hidden> <i class="fa-solid fa-check"></i> </button> </td>
                             <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
-                            <input type="hidden"  value="/event/edit/{{ categorie.id }}" name="link">
+                            <input type="hidden"  value="/categorie/edit/{{ categorie.id }}" name="linkEdit">
+                            <input type="hidden"  value="/categorie/delete/{{ categorie.id }}" name="linkDelete">
                         </tr>
                     </div>
                 </form>

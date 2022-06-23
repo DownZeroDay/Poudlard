@@ -77,26 +77,43 @@ class EventController extends AbstractController
   
 
   /** Méthode qui permet de créér une catégorie */
-  #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
-  public function categorie(CategorieRepository $repoCat)
+  #[Route(path: '/categorie/create',  httpMethod: ['POST'], name: 'categorie_create_form')]
+  public function categorieCreate(CategorieRepository $repoCat)
+  {
+      $cat = [];
+      $cat["libelle"] = $_POST['libelle'];
+      if (!empty($cat["libelle"])){
+        $categorie = new Catevenement();
+        if(!$categorie->CategorieExist($cat["libelle"])){
+          $categorie->initialiser($cat);
+          $categorie->enregistrer();
+        }
+        else{
+          echo "<script> alert('Cette catégorie existe déjà') </script>";
+        }
+      }
+      else{
+        echo ("erreur");
+      }   
+  }
+
+  
+  /** Méthode qui permet de créér une catégorie */
+  #[Route(path: '/categorie/edit/{id}',  httpMethod: ['POST'], name: 'categorie_create_form')]
+  public function categorieEdit(int $id,CategorieRepository $repoCat)
   {
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
 
       if (!empty($cat["libelle"])){
 
-        $categorie = new Catevenement();
-
-        $check = $repoCat->CategorieExist();
-        $check->execute(array($cat["libelle"]));
-        $row = $check->rowCount();
-
-        if($row == 0){
+        $categorie = new Catevenement($id);
+        if(!$categorie->CategorieExist($cat["libelle"])){
           $categorie->initialiser($cat);
           $categorie->enregistrer();
         }
         else{
-          echo "<script> alert('Cette catégorie existe déjà') </script>";
+          echo "<script> alert('Cette catégorie existe pas') </script>";
         }
       }
       else{

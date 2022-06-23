@@ -12,6 +12,10 @@ class Catevenement extends Model
     const TABLE_NAME = 'catevenement';
     const PRIMARY_FIELD_NAME = 'id';
 
+    public function CategorieExist($libelle){
+        $sql = 'SELECT libelle FROM ' . self::TABLE_NAME .' WHERE libelle='.$this->pdoConnect->quote($libelle);
+        return $this->pdoConnect->query_one($sql);
+    }
 
     /**
      * Get the value of id

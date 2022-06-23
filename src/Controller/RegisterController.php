@@ -33,14 +33,15 @@ class RegisterController extends AbstractController
       $res["password"] = password_hash($_POST['password'], PASSWORD_BCRYPT);
       $res["droit"] = intval($_POST['role']);
     }
-
+    
     if (!empty($res["nom"]) && !empty($res["prenom"]) && !empty($res["email"]) && !empty($res["dateNaissance"]) && !empty($res["password"]) && !empty($res["droit"])) {
       $user = new User();
+      
       $check = $userRepository->userExist($user->getIdByMail($res["email"]));
       if (!$check) {
         $user->initialiser($res);
         $user->enregistrer();
-        header('Location:/');
+        header('Location:/login');
       } else {
         echo "<script> alert('Ce compte existe déjà') </script>";
       }

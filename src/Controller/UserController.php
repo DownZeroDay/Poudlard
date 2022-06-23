@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Routing\Attribute\Route;
 use App\Session\SessionInterface;
+use App\Entity\User;
 
 class UserController extends AbstractController
 {
@@ -22,11 +23,22 @@ class UserController extends AbstractController
     );
   }
 
-  #[Route(path: "/user/edit/{id}", name: "user_edit")]
-  public function edit(UserRepository $userRepository, int $id)
+  #[Route(path: "/user/edit", name: "edit", httpMethod: ["POST","GET"])]
+  public function edit()
   {
-    $user = $userRepository->find($id);
-    var_dump($user);
+    $user = new User($_POST['id']);
+
+    if(!empty($_POST['nom']) && !empty($_POST['prenom'])){
+      $NewData['nom'] = $_POST['nom'];
+      $NewData['prenom'] = $_POST['prenom'];
+   
+      $user->initialiser($NewData);
+      $user->enregistrer();
+      
+    }else{
+      echo "<script>alert(Les infos envoyés sont vide!);</script>";
+    }
+
   }
 
 

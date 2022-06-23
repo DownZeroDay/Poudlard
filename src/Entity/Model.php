@@ -19,6 +19,7 @@ class Model
     public function __construct($primary_field = NULL)
     {
         $this->pdoConnect = new PdoConnection();
+        $this->pdoConnect->init();
         if (!empty($primary_field)) {
             $query = "SELECT * FROM " . static::TABLE_NAME . " WHERE " . static::PRIMARY_FIELD_NAME . " = " . $this->pdoConnect->quote($primary_field);
             $resultat = $this->pdoConnect->query_one($query);

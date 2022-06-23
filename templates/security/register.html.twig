@@ -1,4 +1,4 @@
-{% include 'global/header.html.twig' with {'title':'Register'} only %}
+{% inxlude 'global/header.html.twig' with {"title":"Inscription"} only %}
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-50 mx-auto">
@@ -7,6 +7,17 @@
                         <h3 class="card-title text-center mb-5 fw-light fs-5">Inscrivez-vous</h3>
 
                         <form method="POST" >
+                            <h3>Création de compte avec vos informations MyGes</h3>
+                            <div class="form-floating mb-4">
+                                <label for="name">Login</label>
+                                <input type="text" name="login" class="form-control my-input">
+                            </div>
+                            <div class="form-floating mb-4">
+                                <label for="firstname">Mot de passe</label>
+                                <input type="password" name="mdp" class="form-control my-input">
+                            </div>
+                            <br><br>
+                            <h3>Création de compte sans MyGes</h3>
                             <div class="form-floating mb-4">
                                 <input type="text" name="name" class="form-control my-input" id="name" placeholder="Nom" required>
                             </div>
@@ -25,9 +36,9 @@
                             <div class="form-floating mb-4">
                                 <h4 class="text-norm">Roles: </h4>
                                 <label for="student">Étudiant:</label>
-                                <input type="radio" name="role"  class="form-control my-input" value="1" id="student" checked required>
+                                <input type="radio" name="role"  class="form-control my-input" value="1" id="student" checked>
                                 <label for="bde">BDE:</label>
-                                <input type="radio" name="role"  class="form-control my-input" value="2" id="bde" required>
+                                <input type="radio" name="role"  class="form-control my-input" value="2" id="bde">
                             </div>  
                             <div class="text-center" >
                                 <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit">S'inscrire

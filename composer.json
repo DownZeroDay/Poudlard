@@ -13,10 +13,11 @@
     "symfony/dotenv": "^5.3",
     "twig/twig": "^3.0",
     "psr/container": "^1.1",
-    "spomky-labs/otphp": "^10.0"
+    "spomky-labs/otphp": "^10.0",
+    "guzzlehttp/guzzle": "^6.3"
   },
   "scripts": {
-    "start": "php -S localhost:8000 -t public/ public/index.php",
+    "start": "php -S localhost:8000 -t public/",
     "test": "phpunit tests --testdox",
     "test:coverage": [
       "@putenv XDEBUG_MODE=coverage",

@@ -13,10 +13,10 @@ class LoginController extends AbstractController
 
   private $user; 
 
-  #[Route(path: "/", httpMethod: ["GET", "POST"])]
+  #[Route(path: "/login", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
-      echo $this->twig->render('security/login.html.twig');     
+     
 
     if (key_exists('logout_btn', $_POST) && key_exists('user', $_SESSION)) {
       $_SESSION = [];
@@ -34,15 +34,16 @@ class LoginController extends AbstractController
           $user = new user($userId);
           $user = $user->get();
           if(password_verify($password, $user['password'])){
-             header('Location:/home');
              $_SESSION['user'] = $user['nom'] . ' ' . $user['prenom'];
              $_SESSION['id'] =  $user['id'];
+             header('Location:/profile');
           }
         } else {
           echo "<script> alert('identifiant incorrect') </script>";
         }
       }
     }
+    echo $this->twig->render('security/login.html.twig');     
   }
 
 
@@ -56,6 +57,7 @@ class LoginController extends AbstractController
     #[Route(path: "/auth_google",  httpMethod: ["GET", "POST"], name: "auth_google")]
     public function auth_google()
     { 
+      $this->resetViewsAndParams();
       if(!empty($_SESSION) ){
 
         $otp = TOTP::create('KFJMP3RSMRIKZHCZEH2HSNVN5SO2TXDDV5ZBT6EF3Q4BNRSJ4BL3FQYZVUVBVL4UALTQ63MONTPN564S7YLCEGEQNM4NPQV56YQRSPQ');
@@ -76,8 +78,8 @@ class LoginController extends AbstractController
       else{
         header('Location:/');        
       }
-        echo $this->twig->render('Security/auth_google.html.twig',[
-            'link' => $link
-        ]);
+
+      $this->params['link'] = $link;
+      $this->view = [['Security/auth_google.html.twig',0]];
     }
 }

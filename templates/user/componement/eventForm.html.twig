@@ -1,0 +1,51 @@
+<div class="col-3 col-md-8 col-lg-6 col-xl-5">
+    <div class="card shadow-2-strong" >
+        <div class="card-body p-5 text-center">
+            <form  method='post'>
+            <div class="form-row">
+            <input type="hidden" name="link" value='/event/create' />
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" name='titre'  placeholder="Titre évennement"  required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" name='accroche'  placeholder="Phrase d'accroche" required>
+                </div>
+                 <div class="col-md-12 mb-3">     
+                    <select class="form-control" name="categorie">
+                        {% for resultat in params.categoryEvent %}
+                            <option value="{{ resultat.id }}"> {{ resultat.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="dateDebut">Date de début</label>
+                    <input type="date" class="form-control" name='dateDebut'  placeholder="Date de début" required>
+                </div>
+                    <div class="col-md-6 mb-3">
+                    <label for="dateFin">Date de Fin</label>
+                    <input type="date" class="form-control" name='dateFin' placeholder="Date de Fin" required>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <input type="text" class="form-control" name='adresse'  placeholder="Adresse" required>
+                </div>
+                <div class="input-group mb-3">                            
+                    <input type="number" class="form-control" name='prix' placeholder="Prix" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">€</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="number" class="form-control" name='participantMax'  placeholder="10" value="" required>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <input type="file"  name='image' accept=".jpg, .png, .jpeg, .gif" />
+                    <label class="" for="inputGroupFile01">Choisir un fichier</label>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <textarea class="form-control" name='description' required></textarea>
+                </div>
+            <button class="btn btn-primary" type='submit'>Crée un évenement</button>
+            </form>
+        </div>
+    </div>
+</div>

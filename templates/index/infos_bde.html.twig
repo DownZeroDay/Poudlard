@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="https://kit.fontawesome.com/95aa5ef389.js" crossorigin="anonymous"></script>
+        <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+
+    <form method="POST" action="/">
+            <button class="btn btn-primary" type="submit" name="logout_btn"> Déconnexion </button>
+        </form>
+
+    <div class="container">
+
+        
+        <h3> Présentation</h3>
+        <p>
+            Le BDE a pour but de défendre les intérêts des apprenants en assurant entre autres la liaison entre l’école et les élèves. <br>
+            Ainsi, il participe aux groupes de travail mis en place par l’école pour améliorer la vie étudiante et la scolarité des     élèves. <br>
+            Le BDE peut aussi intervenir sur des problèmes plus ponctuels dans la vie des étudiants. <br>
+            Dans le cadre de ce projet, le BDE est une structure qui s'occupe principalement de la gestion des différents évènement <br> 
+            de l'école qui consite à mettre en place une plateforme numérique offre la possible aux étudiants de consulter la liste des  <br>
+            différents évènements organisés par l'école et y participer si on le souhaite. <br>
+       </p> 
+
+        <h3> Liste des membres du BDE</h3>
+        <ul> 
+            {% for user in users %}
+                <li> {{ user.nom }}  {{ user.prenom }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h3> Gestion des évenements</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Evenement</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Description</th>
+                <th scope="col">Participant</th>
+                <th scope="col">Créateur</th>
+                <th scope="col">Image</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evenement in evenements %}
+
+                <form id="tableau">
+                    <div class="form-group">
+                        <tr id="tableau">
+                            <td scope="row"><input type="text"   value="{{ evenement.titre }}" disabled></td> 
+                            <td><input type="text"  value="{{ evenement.libelle }}" disabled>
+                                <select name="categorie" hidden>
+                                    {% for categorie in categories %}
+                                        <option value="{{ categorie.id }}"> {{ categorie.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td> <input type="text"  value="{{ evenement.description }}" disabled></td> 
+                            <td> <input type="text"  value="{{ evenement.participant }}" disabled></td> 
+                            <td> <input type="text"  value="{{ evenement.nom }}  {{ evenement.prenom }}" disabled></td> 
+                            <td> <img src="../image/{{ evenement.image }}" class="card-img-top" alt="{{ evenement.image }}"> <input type="file" accept=".jpg, .png, .jpeg, .gif"  hidden> </td>
+                            <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
+                        </tr>
+                    </div>
+                    
+                </form>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    
+
+    <h3> Gestion des Catégories</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nom de la catégorie</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in categories %}
+
+                <form id="tableau">
+                    <div class="form-group">
+                        <tr id="tableau">
+                            <td scope="row"><input type="text"  value="{{ categorie.libelle }}" disabled></td>  
+                            <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
+                            <input type="hidden"  value="/event/edit/{{ categorie.id }}" name="link">
+                        </tr>
+                    </div>
+                </form>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% block content %}
+    {% endblock %}
+
+    <h3> Gestion des utilisateurs </h3> 
+
+     <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Prenom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Rôle</th>
+                <th scope="col">Date de naissance</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+
+                <form id="tableau">
+                    <div class="form-group">
+                        <tr id="tableau">
+                            <td scope="row"><input type="text"  value="{{ user.prenom }}" disabled></td>  
+                            <td> <input type="text"  value="{{ user.nom }}" disabled></td> 
+                            <td> <input type="text"  value="{{ user.email }}" disabled></td> 
+                            <td> <input type="text"  value="{{ user.libelle }}" disabled></td> 
+                            <td> <input type="text"  value="{{ user.dateNaissance|date("d/m/Y") }}" disabled></td> 
+                            <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
+                            <input type="hidden"  value="/event/edit/{{ user.id }}" name="link">
+                        </tr>
+                    </div>
+                </form>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

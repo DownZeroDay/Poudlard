@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Catevenement;
 use App\Routing\Attribute\Route;
 use App\Entity\Evenement;
+use App\Entity\Inscription;
 use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
 class EventController extends AbstractController
@@ -35,7 +36,7 @@ class EventController extends AbstractController
           && !empty($data["prix"]) && !empty($data["dateDebut"]) && !empty($data["dateFin"]) )
       {
 
-      if(move_uploaded_file($_FILES['image']['tmp_name'], $target))
+      if($this->resizeImage($_FILES['image']['tmp_name'], $target))
         {
           $evenement->initialiser($data);
           $evenement->enregistrer();
@@ -143,20 +144,24 @@ class EventController extends AbstractController
   /** Methode qui affiche un detail de l'evenement */
   #[Route(path: '/show_event/{id}',  httpMethod: ['GET'], name: 'show_event')]
   public function show_event(int $id){
-    
     $this->resetViewsAndParams();
+    if(!empty($_SESSION))
+    {
+      $this->params['session'] = $_SESSION;
+    }
     $evenement = new Evenement($id);
+    $inscription = new Inscription();
     $evenement = $evenement->get();
 
     if(!$evenement['id']){
-      echo "<script> alert('l\'évenement n\'existe pas  ') </script>";
+      echo "<script> alert('l\'événement n\'existe pas  ') </script>";
     }
 
     if(!empty($evenement))
     {
       $this->params['evenement'] = $evenement;
     }
-
+    $this->params['inscrit'] = $inscription->inscrit($_SESSION['id'] ,$evenement['id']);
     $this->views = [['event/show_event.html.twig',0]];
     $this->viewPage();
   }
@@ -167,15 +172,16 @@ class EventController extends AbstractController
    * @param EvenementRepository $repoEvent
    * @return void
    */
-  #[Route(path: '/participe',  httpMethod: ['GET'], name: 'participe')]
-  public function participe (EvenementRepository $repoEvent){
-    
-    $object = json_decode(file_get_contents("php://input"), true);
-    $idEvent = $object['id'];
-    $idUser = $_SESSION['id'];
-    
-    if(!empty($idUser) && !empty($idEvent)){
-      $repoEvent->participe($idUser, $idEvent);
+  #[Route(path: '/participe/{event}/{user}',  httpMethod: ['GET'], name: 'participe')]
+  public function participe (int $event, int $user, EvenementRepository $repoEvent){
+    if(!empty($user) && !empty($event)){
+      $inscription = new Inscription();
+      if($inscription->inscrit($user, $event)){
+        $inscription->participePas($user, $event);
+      }
+      else{
+        $inscription->participe($user, $event);
+      }
     }
   }  
 }

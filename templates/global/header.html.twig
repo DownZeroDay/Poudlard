@@ -17,7 +17,7 @@
                 <button class="btn"> Gestion </button>
 
                 <form method="POST" action="/">
-                    <button class="btn my-2 my-sm-0" type="submit" name="logout_btn"> Deconnexion </button>
+                    <a href = "{% if session.id is empty %}/login{% else %}/disconnect{% endif %}" class="btn">{% if session.id is empty %}Connexion{% else %}Déconnexion{% endif %}</button>
                 </form>
                 
                 </nav>

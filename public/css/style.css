@@ -58,20 +58,8 @@ footer{
     position:absolute;
     bottom:0;
     width:100%;
-    padding-top:50px;
+    height: 15%;
     margin: 0;
-}
-
-footer a{
-    color: #D9D5AB;
-}
-
-footer img{
-    width: 3%;
-}
-.row{
-    display: flex;
-    justify-content: space-between;
 }
 
 

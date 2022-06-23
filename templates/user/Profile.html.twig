@@ -8,7 +8,7 @@
         <div class="row d-flex m-5">
         {% include 'user/componement/form/createCategory.html.twig' %}
         {% include 'user/componement/form/eventForm.html.twig' %}
-        
+        {% include 'user/componement/gestionnaire/gestionSection.html.twig' with {"sections":params.sections} only %}
         </div>
 
         

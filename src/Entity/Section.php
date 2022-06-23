@@ -18,6 +18,12 @@ class Section extends Model {
         return $this->id;
     }
 
+    public function deleteById($id)
+    {
+      $sql = 'DELETE FROM '.self::TABLE_NAME.' WHERE id='.$id;
+      return $this->pdoConnect->query_noresult($sql); 
+    }
+
     /**
      * Get the value of annee
      */ 

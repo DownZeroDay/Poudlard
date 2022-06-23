@@ -2,7 +2,8 @@ const buttonEdit = document.querySelector('#Edit-Profile');
 const buttonValideEdit = document.querySelector('#Valide-Profile');
 const buttonEditEvent = document.querySelectorAll('.edit_event');
 const buttonEditCate = document.querySelectorAll('.edit_catevent'); 
-const buttonEditUser = document.querySelectorAll('.edit_user'); 
+const buttonEditUser = document.querySelectorAll('.edit_user');
+const buttonEditSection = document.querySelectorAll('.edit_section'); 
 
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
@@ -68,6 +69,21 @@ if(typeof(buttonEditUser !== undefined) && buttonEditUser !== null){
      });
 }
 
+if(typeof(buttonEditSection !== undefined) && buttonEditSection !== null){
+    buttonEditSection.forEach((b) => {
+        b.onclick = function(){
+         for(f of this.form){
+             if(f.disabled === true && f.name !== 'infoCreator') {
+                 f.disabled = false;
+             }
+         }
+         b.hidden = true;
+         this.form['validIcon'].hidden = false;
+     }
+     });
+}
+
+
 if(typeof(buttonValideEdit) !== undefined && buttonValideEdit !== null) {
     buttonValideEdit.addEventListener('click', function (event) {
         event.preventDefault();
@@ -104,9 +120,7 @@ document.addEventListener('submit', function (event) {
         event.preventDefault();
         console.log(link);
         sendForm(selectedForm,link,true,() => {
-            if(reloaded){
-                window.location.reload();
-            } 
+            window.location.reload();
         });
         
     }

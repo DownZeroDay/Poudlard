@@ -10,6 +10,7 @@ use App\Routing\Attribute\Route;
 use App\Repository\CategorieRepository;
 use App\Repository\DroitRepository;
 use App\Repository\EvenementRepository;
+use App\Repository\SectionRepository;
 use DateTime;
 use OTPHP\TOTP;
 
@@ -33,7 +34,7 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: "/profile" , name: "profile")]
-  public function profile(UserRepository $userRepo,EvenementRepository $eventRepo, CategorieRepository $categorieEvent, DroitRepository $repoDroit){
+  public function profile(UserRepository $userRepo,EvenementRepository $eventRepo, CategorieRepository $categorieEvent, DroitRepository $repoDroit,SectionRepository $repoSection){
   $this->resetViewsAndParams();
 
     $user = new User($_SESSION['id']);
@@ -50,6 +51,7 @@ class IndexController extends AbstractController
     $this->params['events'] = $eventRepo->findbyCat();
     $this->params['users'] = $userRepo->findAll();
     $this->params['droit'] = $repoDroit->findAll();
+    $this->params['sections'] = $repoSection->findAll();
 
     $age = "0";
     $birth = $user['dateNaissance'];

@@ -1,13 +1,15 @@
 const buttonEdit = document.querySelector('#Edit-Profile');
 const buttonValideEdit = document.querySelector('#Valide-Profile');
-const buttonEditEvent = document.querySelector('.edit_event');
-const buttonValidEditEvent = document.querySelector('.valid_editEvent'); 
+const buttonEditEvent = document.querySelectorAll('.edit_event');
+const buttonValidEditEvent = document.querySelectorAll('.valid_editEvent'); 
 
 const inputNom = document.querySelector('#nom-Profile');
 const inputPreNom = document.querySelector('#prenom-Profile');
 const inputId = document.querySelector('#id-Profile');
 
 const formProfile = document.getElementById('form-Profile');
+const formEventTab = document.querySelectorAll(".formEventTab");
+
 
 /////////////////////Profile Function////////////////////////////////////////
 if(typeof(buttonEdit) !== undefined && buttonEdit !== null) {
@@ -22,15 +24,21 @@ if(typeof(buttonEdit) !== undefined && buttonEdit !== null) {
 }
 
 if(typeof(buttonEditEvent) !== undefined && buttonEditEvent !== null){
-    buttonEditEvent.addEventListener('click',function (event) {
-        event.preventDefault();
+    buttonEditEvent.forEach((b) => {
+       b.onclick = function(){
         for(f of this.form){
-            if(f.disabled === true) f.disabled = false;
-            console.log(f);
+            if(f.disabled === true && f.name !== 'infoCreator') {
+                f.disabled = false;
+            }
+            if(f.name === "imageEventTab") f.hidden = false;
+            console.log(f.name);
+
         }
-        buttonEditEvent.hidden = true;
-        buttonValideEdit.hidden = false;
+        b.hidden = true;
+        this.form['validIcon'].hidden = false;
+    }
     });
+
 }
 
 if(typeof(buttonValideEdit) !== undefined && buttonValideEdit !== null) {
@@ -53,16 +61,34 @@ function switchInput() {
 
 document.addEventListener('submit', function (event) {
     const selectedForm = this.activeElement.form;
-    const link = selectedForm['link'].value;
-    if(link !== undefined && link !== null) {
+    let reloaded = false;
+    let link ='';
+    if(selectedForm.className === 'formEventTab'){
+        if(selectedForm['validIcon'].hidden === false){
+             link = selectedForm['linkEdit'].value;
+        }else{
+             link = selectedForm['linkDelete'].value;
+        }
+        reloaded = true;
+    }else{
+         link = selectedForm['link'].value;
+    } 
+    if(link !== undefined && link !== null && link !== '') {
         event.preventDefault();
-        sendForm(selectedForm,link,true)
+        console.log(link);
+        sendForm(selectedForm,link,true,() => {
+            if(reloaded){
+                window.location.reload();
+            } 
+        });
+        
     }
     
 });
 
 function sendForm(form, url, isReset, after = () => { }) {
     var data = new FormData(form);
+    console.log(url);
     const options = {
         method: 'POST',
         body: data,

@@ -44,6 +44,36 @@ class EventController extends AbstractController
         }
       }        
     }
+
+
+    #[Route(path:'/event/edit/{id}', httpMethod:['POST'] ,name:'edit')]
+    public function edit(int $id)
+    {
+      $target = "image/".basename($_FILES['imageEventTab']['name']);
+      $data["categorie"]       = $_POST['categorie'];
+      $data["titre"]           = $_POST['titre'];
+      $data["description"]     = $_POST['description'];
+      $data["accroche"]        = $_POST['accroche'];
+      $data["participantMax"]  = $_POST['participantMax'];
+      $data["prix"]            = $_POST['prix'];
+      $data["dateDebut"]       = $_POST['dateDebut'];
+      $data["dateFin"]         = $_POST['dateFin'];
+      $data["adresse"]         = $_POST['adresse'];
+      $data["createur"]        = $_SESSION['id'];
+     
+    
+      $evenement = new Evenement($id);  
+
+        if(!(move_uploaded_file($_FILES['imageEventTab']['tmp_name'], $target)))
+        {
+          echo "Fichier Non Chargé";   
+        }else{
+          $data["image"] = $_FILES['imageEventTab']['name'];
+        }
+        
+        $evenement->initialiser($data);
+        $evenement->enregistrer();
+    }
   
 
   /** Méthode qui permet de créér une catégorie */

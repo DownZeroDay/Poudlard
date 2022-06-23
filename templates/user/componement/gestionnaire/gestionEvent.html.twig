@@ -4,8 +4,13 @@
             <tr>
                 <th scope="col">Evenement</th>
                 <th scope="col">Catégorie</th>
+                <th scope="col">Accroche</th>
                 <th scope="col">Description</th>
-                <th scope="col">Participant</th>
+                <th scope="col">Participant Maximum</th>
+                <th scope="col">Date de début</th>
+                <th scope="col">Date de Fin</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Prix</th>
                 <th scope="col">Créateur</th>
                 <th scope="col">Image</th>
                 <th scope="col"></th>
@@ -15,10 +20,11 @@
         <tbody>
             {% for evenement in evenements %}
 
-                <form id="tableau">
-                    <div class="form-group">
+                <form class="formEventTab">
                         <tr id="tableau">
-                            <input type="hidden" name="idEvent" value={{evenement.id}} />
+                            <input type="hidden" name="idEvent" value='{{evenement.id}}' />
+                            <input type="hidden" name="linkEdit" value='/event/edit/{{evenement.id}}' />
+                            <input type="hidden" name="linkDelete" value='/event/delete/{{evenement.id}}'/>
                             <td scope="row"><input type="text" name="titre"   value="{{ evenement.titre }}" disabled></td> 
                             <td><select name="categorie" disabled>
                                     {% for categorie in categories %}
@@ -26,15 +32,18 @@
                                     {% endfor %}
                                 </select>
                             </td>
-                            <td> <input type="text"  value="{{ evenement.description }}" disabled></td> 
-                            <td> <input type="text"  value="{{ evenement.participant }}" disabled></td> 
-                            <td> <input type="text"  value="{{ evenement.nom }}  {{ evenement.prenom }}" disabled></td> 
-                            <td> <img src="../image/{{ evenement.image }}" class="card-img-top" alt="{{ evenement.image }}"> <input type="file" accept=".jpg, .png, .jpeg, .gif"  hidden> </td>
-                            <td> <button class="edit_event button_icon" > <i class="fa-solid fa-pen"></i> </button><button class="valid_editEvent button_icon" hidden> <i class="fa-solid fa-check"></i> </button>  </td>
+                            <td> <input type="text" name="accroche" value="{{ evenement.accroche }}" disabled></td> 
+                            <td> <textarea name="description" row="1" disabled>{{ evenement.description }}</textarea></td> 
+                            <td> <input type="text"  name="participantMax" value="{{ evenement.participantMax }}" disabled></td>
+                            <td> <input type="date" name="dateDebut" value="{{ evenement.dateDebut }}" disabled></td> 
+                            <td> <input type="date" name="dateFin" value="{{ evenement.dateFin }}" disabled></td> 
+                            <td> <input type="text" name="adresse" value="{{ evenement.adresse }}" disabled></td>
+                            <td> <input type="number" name="prix" value="{{ evenement.prix }}" disabled></td> 
+                            <td> <input type="text" name="infoCreator" value="{{ evenement.nom }}  {{ evenement.prenom }}" disabled></td> 
+                            <td> <img src="../image/{{ evenement.image }}" class="card-img-top" alt="{{ evenement.image }}"> <input type="file" name="imageEventTab" accept=".jpg, .png, .jpeg, .gif"  hidden> </td>
+                            <td> <button type="button" class="edit_event button_icon" name='{{evenement.titre}}' > <i class="fa-solid fa-pen"></i> </button><button class="valid_editEvent button_icon" name="validIcon" type="submit" hidden> <i class="fa-solid fa-check"></i> </button>  </td>
                             <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
-                        </tr>
-                    </div>
-                    
+                        </tr>                 
                 </form>
             {% endfor %}
 

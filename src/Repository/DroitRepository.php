@@ -3,11 +3,21 @@
 namespace App\Repository;
 
 use App\Entity\Droit;
-
+use PDO;
 
 class DroitRepository extends AbstractRepository 
 {
     protected const TABLE = "droit";
+
+
+    public function findAll()
+    {
+        $sql = "SELECT * FROM droit";
+        $resultat = $this->pdo->query($sql);
+        $resultat->execute();
+        return $resultat->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function getDroitById($idDroit)
     {

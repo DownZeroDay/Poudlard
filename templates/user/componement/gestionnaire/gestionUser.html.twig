@@ -15,17 +15,22 @@
     <tbody>
         {% for user in users %}
 
-            <form id="tableau">
+            <form class="formEventTab">
                 <div class="form-group">
                     <tr id="tableau">
-                        <td scope="row"><input type="text"  value="{{ user.prenom }}" disabled></td>  
-                        <td> <input type="text"  value="{{ user.nom }}" disabled></td> 
-                        <td> <input type="text"  value="{{ user.email }}" disabled></td> 
-                        <td> <input type="text"  value="{{ user.libelle }}" disabled></td> 
-                        <td> <input type="text"  value="{{ user.dateNaissance|date("d/m/Y") }}" disabled></td> 
-                        <td> <button class="button_icon" type="submit"> <i class="fa-solid fa-pen"></i> </button>  </td>
+                            <input type="hidden" name="linkEdit" value='/user/edit/{{user.id}}' />
+                            <input type="hidden" name="linkDelete" value='/user/delete/{{user.id}}'/>
+                        <td scope="row"><input type="text" name="prenom"  value="{{ user.prenom }}" disabled></td>  
+                        <td> <input type="text" name="nom"  value="{{ user.nom }}" disabled></td> 
+                        <td> <input type="text" name="email" value="{{ user.email }}" disabled></td> 
+                        <td><select name="droit" disabled>
+                                    {% for role in roles %}
+                                        <option value="{{ role.id }}" {{role.id == user.droit ? 'selected' : ''}}> {{ user.libelle }}</option>
+                                    {% endfor %}
+                                </select> 
+                        <td> <input type="date" name="dateNaissance" value="{{ user.dateNaissance|date("Y-m-d") }}" disabled></td> 
+                        <td> <button type="button" class="edit_user button_icon" name='{{user.nom}}' > <i class="fa-solid fa-pen"></i> </button><button class="button_icon" name="validIcon" type="submit" hidden> <i class="fa-solid fa-check"></i> </button>  </td>
                         <td class ="icone"> <button class="button_icon" type="submit"> <i class="fa-solid fa-trash-can"></i> </button></td>
-                        <input type="hidden"  value="/event/edit/{{ user.id }}" name="link">
                     </tr>
                 </div>
             </form>

@@ -23,8 +23,8 @@ class UserController extends AbstractController
     );
   }
 
-  #[Route(path: "/user/edit", name: "edit", httpMethod: ["POST","GET"])]
-  public function edit()
+  #[Route(path: "/profile/edit", name: "edit", httpMethod: ["POST","GET"])]
+  public function edit_profile()
   {
     $user = new User($_POST['id']);
 
@@ -40,7 +40,32 @@ class UserController extends AbstractController
     }
 
   }
-
-
   
-}
+  #[Route(path: "/user/edit/{id}", httpMethod: ["POST"] )]
+  public function edit_admin(int $id)
+  {
+    $res = [];
+    $res["nom"] = $_POST['nom'];
+    $res["prenom"] = $_POST['prenom'];
+    $res["email"] = $_POST['email'];
+    $res["dateNaissance"] = $_POST['dateNaissance'];
+    $res["droit"] = $_POST['droit'];
+      
+    $user = new User($id);
+    $user->initialiser($res);
+    $user->enregistrer();    
+  } 
+
+  #[Route(path: "/user/delete/{id}", httpMethod: ["GET", "POST"])]
+  public function delete_admin(int $id)
+  {
+    $user = new User($id);
+    if($user->deleteById($id)){
+      echo"Supprimmer avec succès!";
+    }
+  } 
+
+  }
+
+
+?>

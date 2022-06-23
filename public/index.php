@@ -56,6 +56,7 @@ $container->set(SessionInterface::class, $session);
 $container->set(UserRepository::class, $userRepository);
 $container->set(CategorieRepository::class, $catRepository);
 $container->set(EvenementRepository::class, $evenementRepository);
+$container->set(DroitRepository::class, $droitRepository);
 $container->set(AccessControl::class,$authorization);
 
 // Routage

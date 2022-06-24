@@ -1,4 +1,4 @@
-{% include 'global/header.html.twig' with {"title":params.evenement.titre} only %}
+{% include 'global/header.html.twig' with {"title":params.evenement.titre, 'session': params.session} only %}
 <div class ="row mt-5">
   <div class ="col-md-10 offset-md-1  mt-5">
     <div class="card text-center">
@@ -14,4 +14,4 @@
     </div>
   </div>
 </div>
-{% include 'global/footer.html.twig' %}
+{% include 'global/footer.html.twig' with {'session': params.session} only %}

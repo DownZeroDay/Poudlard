@@ -39,4 +39,4 @@
     </div>
 </div>
   
-{% include 'global/footer.html.twig' %}
+{% include 'global/footer.html.twig' with {'session': params.session} only %}

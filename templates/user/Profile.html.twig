@@ -30,4 +30,4 @@
             {% include 'user/componement/gestionnaire/gestionUser.html.twig' with {"users":params.users,"roles":params.droit,"sections":params.sections} only %}
         </div>
         {% endif %}
- {% include 'global/footer.html.twig' %}
+ {% include 'global/footer.html.twig' with {'session': params.session} only %}

@@ -81,5 +81,12 @@ final class UserRepository extends AbstractRepository
      $resultat->execute();
      return $resultat->fetchAll(PDO::FETCH_ASSOC);
    }
- 
+
+   public function findAllBDE()
+   {
+     $sql = "SELECT utilisateurs.* , droit.id as idDroit , libelle FROM utilisateurs INNER JOIN droit ON droit.id = droit where droit = 1";
+     $resultat = $this->pdo->query($sql);
+     $resultat->execute();
+     return $resultat->fetchAll(PDO::FETCH_ASSOC);
+   }
 }

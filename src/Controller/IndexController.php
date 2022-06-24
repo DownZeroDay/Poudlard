@@ -43,10 +43,10 @@ class IndexController extends AbstractController
       $this->params['session'] = $_SESSION;
     }
     $evenement = new Evenement();
-    $maxPage = intval(floor($evenement->getTotal() / 10));
+    $maxPage = intval(floor($evenement->getTotal() / 3));
     $page = $page < $maxPage ? $page : $maxPage;
-    $offset = $page != 0 ? $page * 10 : 0;
-    $limit = 10;
+    $offset = $page != 0 ? $page * 3 : 0;
+    $limit = 3;
     if(!empty($_GET['categorie'])){
       $this->params['evenements'] = $evenement->getAllAccueilByCategorieId($_GET['categorie'], $offset, $limit);
     }
@@ -106,7 +106,7 @@ class IndexController extends AbstractController
       $this->params['session'] = $_SESSION;
     }
 
-    $users      = $reposUser->findAll();
+    $users      = $reposUser->findAllBDE();
     $this->params['users'] = $users;
     $this->params['title'] = 'BDE';
     $this->views = [['index/infos_bde.html.twig', 0]];

@@ -12,7 +12,20 @@ class Inscription extends Model
     const TABLE_NAME = 'inscription';
     const PRIMARY_FIELD_NAME = 'id';
 
-   
+   public function inscrit($id_user, $id_event){
+    $sql = 'select * from ' . self::TABLE_NAME . ' where idUtilisateur = ' . $id_user . ' and idEvenement = ' . $id_event;
+    return $this->pdoConnect->query_one($sql);
+   }
+
+   public function participe ($idUser, $idEvent){
+    $sql = 'insert into ' . self::TABLE_NAME . ' values(' . $idUser . ', ' . $idEvent . ')';
+    return $this->pdoConnect->query_noresult($sql);
+   }
+
+   public function participePas ($idUser, $idEvent){
+    $sql = 'delete from ' . self::TABLE_NAME . ' where idUtilisateur = ' . $idUser . ' and idEvenement = ' . $idEvent;
+    return $this->pdoConnect->query_noresult($sql);
+   }
 
     /**
      * Get the value of idUtilisateur

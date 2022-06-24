@@ -1,6 +1,6 @@
 {% include 'global/header.html.twig' with {'title': params.title, 'session': params.session} only %}
 
-<div class="row">
+<div class="row m-0">
     <div class="col-md-10 d-flex offset-md-1 mt-5">
             <div class="col-8 m-5">
                 <form action = "/">
@@ -21,7 +21,7 @@
             <div class="col-md-4">
                 <a href="/show_event/{{ evenement.id }}">  
                     <div class="card m-5" style = "width : auto; height : 80%;"><span class="badge position-absolute top-0 start-0 translate-middle bg-info p-2 mt-n2">{{ evenement.libelle }}</span>
-                        <img src="../image/{{ evenement.image }}" class="card-img-top" alt="image de l'évènement">
+                        <img src="/image/{{ evenement.image }}" class="card-img-top" alt="image de l'évènement">
                         <div class="card-body mb-5">
                             <h5 class="card-title text-center">{{ evenement.titre }}</h5>
                             <p class="card-text text-center"> {{ evenement.description }}</p>
@@ -32,10 +32,10 @@
         {% endfor %}
     </div>
 </div>
-<div class="row">
+<div class="row m-0">
     <div class ="col-sm-12 d-flex mt-5 justify-content-center">
         {% if params.page > 0 %} <a href="/{{ params.tri }}/{{ params.page - 1 }}"><button class="btn p-2 ml-2">{{ params.page - 1}}</button></a> {% endif %}
-        <a href="/{{ params.tri }}/{{ params.page}}"><button class="btn btn-primary p-2 ml-2">{{ params.page }}</button></a>
+        {% if params.page is not empty %} <a href="/{{ params.tri }}/{{ params.page}}"><button class="btn btn-primary p-2 ml-2">{{ params.page }}</button></a> {% endif %}
         {% if params.page < params.maxPage %}<a href="/{{ params.tri }}/{{ params.page + 1 }}"><button class="btn p-2 ml-2">{{ params.page + 1}}</button></a> {% endif %}
     </div>
 </div>  

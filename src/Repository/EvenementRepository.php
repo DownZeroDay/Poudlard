@@ -29,19 +29,6 @@ final class EvenementRepository extends AbstractRepository
     return $resultat->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  /**
-   * Methode qui d'inserer un participant a un evenement
-   */
-    public function participe ($idUser, $idEvent){
-      $stmt = $this->pdo->prepare("INSERT INTO inscription (`idUtilisateur	`, idEvenement) 
-      VALUES (:idUtilisateur, :idEvenement)");
-
-      return $stmt->execute([
-        'idUtilisateur' => $idUser,
-        'idEvenement' => $idEvent
-      ]);
-    }
-    
     /**
    * Methode qui d'inserer un participant a un evenement
    */

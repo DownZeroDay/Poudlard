@@ -19,6 +19,7 @@ use App\Repository\DroitRepository;
 use App\Repository\UserRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\EvenementRepository;
+use App\Repository\SectionRepository;
 use App\Routing\ArgumentResolver;
 use App\Routing\RouteNotFoundException;
 use App\Routing\Router;
@@ -38,7 +39,7 @@ $userRepository = new UserRepository($pdoConnection->getPdoConnection());
 $droitRepository = new DroitRepository($pdoConnection->getPdoConnection());
 $catRepository = new CategorieRepository($pdoConnection->getPdoConnection());
 $evenementRepository = new EvenementRepository($pdoConnection->getPdoConnection());
-
+$sectionRepository = new SectionRepository($pdoConnection->getPdoConnection());
 // Twig - Vue
 $twigEnvironment = new TwigEnvironment();
 $twig = $twigEnvironment->init();
@@ -56,6 +57,8 @@ $container->set(SessionInterface::class, $session);
 $container->set(UserRepository::class, $userRepository);
 $container->set(CategorieRepository::class, $catRepository);
 $container->set(EvenementRepository::class, $evenementRepository);
+$container->set(DroitRepository::class, $droitRepository);
+$container->set(SectionRepository::class, $sectionRepository);
 $container->set(AccessControl::class,$authorization);
 
 // Routage

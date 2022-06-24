@@ -45,24 +45,56 @@ class EventController extends AbstractController
         }
       }        
     }
+
+
+    #[Route(path:'/event/edit/{id}', httpMethod:['POST'] ,name:'edit')]
+    public function edit(int $id)
+    {
+      $target = "image/".basename($_FILES['imageEventTab']['name']);
+      $data["categorie"]       = $_POST['categorie'];
+      $data["titre"]           = $_POST['titre'];
+      $data["description"]     = $_POST['description'];
+      $data["accroche"]        = $_POST['accroche'];
+      $data["participantMax"]  = $_POST['participantMax'];
+      $data["prix"]            = $_POST['prix'];
+      $data["dateDebut"]       = $_POST['dateDebut'];
+      $data["dateFin"]         = $_POST['dateFin'];
+      $data["adresse"]         = $_POST['adresse'];
+      $data["createur"]        = $_SESSION['id'];
+     
+    
+      $evenement = new Evenement($id);  
+
+        if(!(move_uploaded_file($_FILES['imageEventTab']['tmp_name'], $target)))
+        {
+          echo "Fichier Non Chargé";   
+        }else{
+          $data["image"] = $_FILES['imageEventTab']['name'];
+        }
+        
+        $evenement->initialiser($data);
+        $evenement->enregistrer();
+    }
+
+       /** Methode qui permet de supprimer un evenement */
+  #[Route(path: '/event/delete/{id}',  httpMethod: ['POST'], name: 'delete_event')]
+  public function delete_event(int $id){
+      $evenement = new Evenement($id);    
+      if($evenement->deleteById($id)){
+          echo("Supprimer avec succes");
+      };
+  }
   
 
   /** Méthode qui permet de créér une catégorie */
-  #[Route(path: '/event/categorie',  httpMethod: ['POST'], name: 'categorie_create_form')]
-  public function categorie(CategorieRepository $repoCat)
+  #[Route(path: '/categorie/create',  httpMethod: ['POST'], name: 'categorie_create_form')]
+  public function categorieCreate()
   {
       $cat = [];
       $cat["libelle"] = $_POST['libelle'];
-
       if (!empty($cat["libelle"])){
-
         $categorie = new Catevenement();
-
-        $check = $repoCat->CategorieExist();
-        $check->execute(array($cat["libelle"]));
-        $row = $check->rowCount();
-
-        if($row == 0){
+        if(!$categorie->CategorieExist($cat["libelle"])){
           $categorie->initialiser($cat);
           $categorie->enregistrer();
         }
@@ -73,6 +105,40 @@ class EventController extends AbstractController
       else{
         echo ("erreur");
       }   
+  }
+
+  
+  /** Méthode qui permet de créér une catégorie */
+  #[Route(path: '/categorie/edit/{id}',  httpMethod: ['POST'], name: 'categorie_create_form')]
+  public function categorieEdit(int $id)
+  {
+      $cat = [];
+      $cat["libelle"] = $_POST['libelle'];
+
+      if (!empty($cat["libelle"])){
+
+        $categorie = new Catevenement($id);
+        if(!$categorie->CategorieExist($cat["libelle"])){
+          $categorie->initialiser($cat);
+          $categorie->enregistrer();
+        }
+        else{
+          echo "<script> alert('Cette catégorie existe pas') </script>";
+        }
+      }
+      else{
+        echo ("erreur");
+      }   
+  }
+
+  
+    /** Methode qui permet de supprimer un evenement */
+  #[Route(path: '/categorie/delete/{id}',  httpMethod: ['POST'], name: 'delete_categorie')]
+  public function delete_categorie(int $id){
+      $categorie = new Catevenement($id);    
+      if($categorie->deleteById($id)){
+          echo("Supprimer avec succes");
+      };
   }
 
   /** Methode qui affiche un detail de l'evenement */

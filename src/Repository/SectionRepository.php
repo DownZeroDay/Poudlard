@@ -2,7 +2,7 @@
 namespace App\Repository;
 
 use App\Entity\Section;
-
+use PDO;
 class SectionRepository extends AbstractRepository {
 
     const TABLE = 'section';
@@ -11,17 +11,9 @@ class SectionRepository extends AbstractRepository {
   public function findAll()
   {
     $sql = "SELECT * FROM ".self::TABLE;
-
-    $sections = new Section();
-
-    return  $sections->pdoConnect->query_multi($sql);
-  }
-
-  public function deleteById($id)
-  {
-    $sql = 'DELETE * FROM '.self::TABLE.' WHERE id='.$id;
-    $section = new Section();
-    return $section->pdoConnect->query_noresult($sql); 
+    $resultat = $this->pdo->query($sql);
+    $resultat->execute();
+    return $resultat->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function sectionExist($sectionId)

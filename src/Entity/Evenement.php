@@ -58,6 +58,12 @@ class Evenement extends Model
         return $this->prix;
     }
 
+    public function deleteById($id)
+    {
+      $sql = 'DELETE FROM '.self::TABLE_NAME.' WHERE id='.$id;
+      return $this->pdoConnect->query_noresult($sql); 
+    }
+
     /**
      * @param int $prix
      */

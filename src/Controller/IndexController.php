@@ -8,6 +8,10 @@ use App\Entity\Evenement;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Routing\Attribute\Route;
+use App\Repository\CategorieRepository;
+use App\Repository\DroitRepository;
+use App\Repository\EvenementRepository;
+use App\Repository\SectionRepository;
 use DateTime;
 use OTPHP\TOTP;
 use App\Repository\CategorieRepository;
@@ -65,7 +69,7 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: "/profile" , name: "profile")]
-  public function profile(CategorieRepository $categorieEvent){
+  public function profile(UserRepository $userRepo,EvenementRepository $eventRepo, CategorieRepository $categorieEvent, DroitRepository $repoDroit,SectionRepository $repoSection){
   $this->resetViewsAndParams();
 
     if(!empty($_SESSION)){
@@ -77,11 +81,14 @@ class IndexController extends AbstractController
     $this->params['user'] = $user;   
     $this->params['categoryEvent'] = $categorieEvent->findAll();
     
+    $this->params['events'] = $eventRepo->findbyCat();
+    $this->params['users'] = $userRepo->findAll();
+    $this->params['droit'] = $repoDroit->findAll();
+    $this->params['sections'] = $repoSection->findAll();
+
     $age = "0";
-    
     $birth = $user['dateNaissance'];
     $today = date('Y-m-d');
-
     $diff = date_diff(date_create($birth),date_create($today));
     $age = $diff->format('%y');
     $this->params['age'] = strval($age);

@@ -20,7 +20,7 @@ class SectionController extends AbstractController
         $data["annee"] = $_POST['annee'];
 
 
-        if(!empty($data["filliaire"]) && !empty($data["annee"])){
+        if(!empty($data["filiere"]) && !empty($data["annee"])){
             $section = new Section();
 
             $section->initialiser($data);
@@ -31,7 +31,7 @@ class SectionController extends AbstractController
     }
 
 
-    #[Route(path:'/section/update/{id}', httpMethod: ['POST'] , name: 'update_section')]
+    #[Route(path:'/section/edit/{id}', httpMethod: ['POST'] , name: 'update_section')]
     public function update(SectionRepository $repoSection, int $id)
     {
         $data["filiere"] = $_POST['filiere'];
@@ -48,11 +48,11 @@ class SectionController extends AbstractController
     }
 
     #[Route(path:'/section/delete/{id}', httpMethod: ['POST'] , name: 'delete_section')]
-    public function delete(SectionRepository $repoSection,int $id)
+    public function delete(int $id)
     {
         $section = new Section($id);
-        if($repoSection->sectionExist($id)){
-            $repoSection->deleteById($id);
+        if($section->deleteById($id)){
+           echo "supprimmer avec succès";
         }
     }
 

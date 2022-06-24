@@ -31,14 +31,4 @@ class BdeController extends AbstractController
         $this->views = [['index/infos_bde.html.twig', 0]];
         $this->viewPage();
     }
-
-    /** Methode qui permet de supprimer un evenement */
-
-    #[Route(path: '/delete_event/{id}',  httpMethod: ['POST'], name: 'delete_event')]
-    public function delete_event($id, EvenementRepository $repoEvent)
-    {
-        if ($repoEvent->deleteById($id)) {
-            echo ("Supprimé avec succes");
-        };
-    }
 }

@@ -4,7 +4,7 @@ namespace App\Entity;
 
 
 
-class Inscription extends Model
+class Participation extends Model
 {
     protected int $idUtilisateur = 0;
     protected int $idEvenement = 0;

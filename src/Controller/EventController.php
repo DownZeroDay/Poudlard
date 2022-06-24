@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Routing\Attribute\Route;
 use App\Entity\Evenement;
-use App\Entity\Inscription;
+use App\Entity\Participation;
 
 use App\Repository\EvenementRepository;
 
@@ -96,7 +96,7 @@ class EventController extends AbstractController
       $this->params['session'] = $_SESSION;
     }
     $evenement = new Evenement($id);
-    $inscription = new Inscription();
+    $inscription = new Participation();
     $evenement = $evenement->get();
 
     if (!$evenement['id']) {
@@ -121,11 +121,11 @@ class EventController extends AbstractController
   public function participe(int $event, int $user, EvenementRepository $repoEvent)
   {
     if (!empty($user) && !empty($event)) {
-      $inscription = new Inscription();
-      if ($inscription->inscrit($user, $event)) {
-        $inscription->participePas($user, $event);
+      $participation = new Participation();
+      if ($participation->inscrit($user, $event)) {
+        $participation->participePas($user, $event);
       } else {
-        $inscription->participe($user, $event);
+        $participation->participe($user, $event);
       }
     }
     header('Location:/show_event/' . $event);

@@ -43,7 +43,7 @@ On peut retrouver des situations réelles dans les controller LoginController et
 
 ##Alex Robbrecht
 ## Lansana KEITA
-### Inscription 
+### Participation 
 Dans cette partie du devoir on a opté pour une authentification classique qui nous permet de nous inscrire et ensuite pouvoir se connecter à l'aide des identifiants (email et password)
 
 Pour ce faire, à l'inscription on s'assure que tous les champs du formulaire sont bien renseignés avant de soumettre le formulaire pour le contrôle.

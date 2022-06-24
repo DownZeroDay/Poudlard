@@ -40,4 +40,12 @@ final class EvenementRepository extends AbstractRepository
       'idEvent' => $idEvent]);
   }
 
+
+  public function deleteById($id)
+  {
+    $sql = 'DELETE * FROM '.self::TABLE.' WHERE id='.$id;
+    $event = new Evenement();
+    return $event->pdoConnect->query_noresult($sql); 
+  }
+
 }

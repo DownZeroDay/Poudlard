@@ -36,7 +36,7 @@ class LoginController extends AbstractController
           if(password_verify($password, $user['password'])){
              $_SESSION['user'] = $user['nom'] . ' ' . $user['prenom'];
              $_SESSION['id'] =  $user['id'];
-             header('Location:/profile');
+             header('Location:/');
           }
         } else {
           echo "<script> alert('identifiant incorrect') </script>";

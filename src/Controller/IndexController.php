@@ -95,5 +95,9 @@ class IndexController extends AbstractController
     $this->views = [['user/Profile.html.twig',4]];
     $this->viewPage();
   }
-
+  #[Route(path: "/disconnect" , name: "disconnect")]
+  public function disconnect(){
+    session_destroy();
+    Header('Location:/');
+  }
 }

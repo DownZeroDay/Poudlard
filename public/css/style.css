@@ -1,8 +1,5 @@
 
 
-body {
-    background-color:#D9D5AB;
-}
 
 form, .card {
     background-color:#532851 !important;
@@ -72,7 +69,11 @@ a:hover {
 button {
     background-color: #9B6A6C !important;
     border: 1px solid #9B6A6C !important;
-    
+    color: #D9D5AB;
+}
+
+button:selected {
+    color:#532851;
 }
 
 button:hover {
@@ -192,11 +193,16 @@ td select:disabled{
     appearance: none;
 }
 
-
 span{
     background-color:#D9D5AB !important;
     color: #532851 !important;
     border: 1px solid #532851 !important;
 }
 
+body  {
+    background-color:#D9D5AB;
+}
 
+.clean-bg {
+    background-color:#D9D5AB !important;
+}

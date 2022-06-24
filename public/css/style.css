@@ -103,3 +103,54 @@ a:link{
     outline: none;
     box-shadow: none;
   }
+
+/************* BODY ***************************/
+body{
+    /* overflow: hidden; */
+    margin: 0;
+    background-color: #D9D5AB;
+}
+
+/************* HEADER ***************************/
+/* header{
+    background-position: center;
+    background-size: cover;
+    margin: 0%
+} */
+nav{
+    background: #532851;
+}
+nav .btn{
+    background-color: #9B6A6C;
+    color: #D9D5AB;
+}
+
+a {
+    color: #D9D5AB;
+}
+a:hover{
+    color: #af7e41;
+}
+
+.carte a, .carte a:hover{
+    color: #D9D5AB;
+}
+
+.btn_connect{
+    margin-top: -50px;
+    margin-right : -5px;
+}
+
+/************* FOOTER ***************************/
+footer{
+    background-color: #532851;
+}
+
+.badge{
+    margin-top: -10px;
+    margin-left: 10px;
+}
+
+.row {
+    margin : 0;
+}

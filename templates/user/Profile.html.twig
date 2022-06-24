@@ -1,19 +1,13 @@
-{% include 'global/header.html.twig' with {'title': params.title} only %}
-    
+{% include 'global/header.html.twig' with {'title': params.title, 'session': params.session} only %}
     <div class="container py-5 h-100 m-5">
         <div class="row d-flex">
-        {% include 'user/componement/editProfil.html.twig' %}
-        {% include 'user/componement/contactForm.html.twig' %}
-        {% include 'user/componement/sectionForm.html.twig' %}
+            {% include 'user/componement/editProfil.html.twig' %}
+            {% include 'user/componement/contactForm.html.twig' %}
+            {% include 'user/componement/sectionForm.html.twig' %}
         </div>
         <div class="row d-flex mt-2">
-        {% include 'user/componement/createCategory.html.twig' %}
-        {% include 'user/componement/eventForm.html.twig' %}
+            {% include 'user/componement/createCategory.html.twig' %}
+            {% include 'user/componement/eventForm.html.twig' %}
         </div>
     </div>
-
-      <form method="POST" action="/">
-          <button class="btn btn-primary" type="submit" name="logout_btn"> Deconnexion </button>
-      </form>
-
  {% include 'global/footer.html.twig' %}

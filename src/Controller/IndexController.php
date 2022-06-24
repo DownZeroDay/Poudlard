@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -109,7 +108,6 @@ class IndexController extends AbstractController
     $this->views = [['index/infos_bde.html.twig', 0]];
     $this->viewPage();
   }
-
 
   #[Route(path: "/disconnect", name: "disconnect")]
   public function disconnect()

@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Routing\Attribute\Route;
-use DateTime;
 
 class RegisterController extends AbstractController
 {

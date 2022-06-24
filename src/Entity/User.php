@@ -152,15 +152,6 @@ class User extends Model
     return $this;
   }
 
-  public function getUserData(){
-      return array(
-          "nom" => $this->getName(),
-          "prenom" => $this->getBirthDate(),
-          "email" => $this->getEmail(),
-          "date de naissance" => $this->getBirthDate()
-      );
-  }
-
   /**
    * Get the value of idSection
    */ 

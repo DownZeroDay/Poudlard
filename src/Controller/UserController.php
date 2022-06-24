@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Controller;
 
-use App\Repository\UserRepository;
 use App\Routing\Attribute\Route;
 use App\Session\SessionInterface;
 use App\Entity\User;

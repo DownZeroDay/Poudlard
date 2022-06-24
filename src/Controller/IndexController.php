@@ -12,9 +12,7 @@ use App\Repository\CategorieRepository;
 use App\Repository\DroitRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\SectionRepository;
-use DateTime;
-use OTPHP\TOTP;
-use App\Repository\CategorieRepository;
+
 class IndexController extends AbstractController
 {
   #[Route(path: "/")]
@@ -74,26 +72,29 @@ class IndexController extends AbstractController
 
     if(!empty($_SESSION)){
       $this->params['session'] = $_SESSION;
+      $user = new User($_SESSION['id']);
+      $user = $user->get();
+      $this->params['user'] = $user;
+      
+      $age = "0";
+      $birth = $user['dateNaissance'];
+      $today = date('Y-m-d');
+      $diff = date_diff(date_create($birth),date_create($today));
+      $age = $diff->format('%y');
+      $this->params['age'] = strval($age);
     }
-    $user = new User($_SESSION['id']);
-    $user = $user->get();
-    $this->params['title'] = $this->authorize->getLabelUserWithId();
-    $this->params['user'] = $user;   
-    $this->params['categoryEvent'] = $categorieEvent->findAll();
     
+    $this->params['title'] = $this->authorize->getLabelUserWithId();
+  
+    $this->params['categoryEvent'] = $categorieEvent->findAll();   
     $this->params['events'] = $eventRepo->findbyCat();
     $this->params['users'] = $userRepo->findAll();
     $this->params['droit'] = $repoDroit->findAll();
     $this->params['sections'] = $repoSection->findAll();
 
-    $age = "0";
-    $birth = $user['dateNaissance'];
-    $today = date('Y-m-d');
-    $diff = date_diff(date_create($birth),date_create($today));
-    $age = $diff->format('%y');
-    $this->params['age'] = strval($age);
+    
     $this->views = [['user/Profile.html.twig',4]];
-    $this->viewPage();
+    $this->viewPage('/');
   }
   #[Route(path: "/disconnect" , name: "disconnect")]
   public function disconnect(){

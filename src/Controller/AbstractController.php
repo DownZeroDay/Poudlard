@@ -56,12 +56,15 @@ abstract class AbstractController
     throw new AccessDeniedException();
   }
 
-  protected function viewPage(){
+  protected function viewPage($redirect = ''){
     try{
       $bypass = (count($this->views) ==  1 && $this->authorize->isAuthorize($this->authorize->getAdmin()->getId()));
       $this->chooseView($bypass);
     }catch(AccessDeniedException $e){
       http_response_code(403);
+      if($redirect !== ''){
+        header('Location:'.$redirect);
+      }
       echo $this->twig->render('403.html.twig');
     }
   }

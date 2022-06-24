@@ -8,13 +8,13 @@
             {% if params.session.idDroit == 3 %}
                 {% include 'user/componement/form/createCategory.html.twig' %}  
             {% endif %}  
-            {% if params.session.idDroit > 1 %}  
+            {% if params.session.idDroit != 2 %}  
                 {% include 'user/componement/form/eventForm.html.twig' %}
             {% endif %}
         </div>
         
         <div class="row d-flex m-5">
-         {% if params.session.idDroit > 1 %}
+         {% if params.session.idDroit != 2 %}
             {% include 'user/componement/gestionnaire/gestionEvent.html.twig' with {"evenements":params.events, "categories":params.categoryEvent} only %}  
         </div>
         {% endif %}

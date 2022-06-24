@@ -82,7 +82,6 @@ class IndexController extends AbstractController
     }
 
     $this->params['title'] = $this->authorize->getLabelUserWithId();
-
     $this->params['categoryEvent'] = $categorieEvent->findAll();
     $this->params['events'] = $eventRepo->findbyCat();
     $this->params['users'] = $userRepo->findAll();

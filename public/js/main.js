@@ -31,8 +31,6 @@ if(typeof(buttonEditEvent) !== undefined && buttonEditEvent !== null){
                 f.disabled = false;
             }
             if(f.name === "imageEventTab") f.hidden = false;
-            console.log(f.name);
-
         }
         b.hidden = true;
         this.form['validIcon'].hidden = false;
@@ -118,18 +116,14 @@ document.addEventListener('submit', function (event) {
     } 
     if(link !== undefined && link !== null && link !== '') {
         event.preventDefault();
-        console.log(link);
         sendForm(selectedForm,link,true,() => {
             window.location.reload();
-        });
-        
+        }); 
     }
-    
 });
 
 function sendForm(form, url, isReset, after = () => { }) {
     var data = new FormData(form);
-    console.log(url);
     const options = {
         method: 'POST',
         body: data,

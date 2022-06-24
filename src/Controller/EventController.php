@@ -1,13 +1,9 @@
 <?php
-/* A modifier avec access control */
-
 namespace App\Controller;
-
 
 use App\Routing\Attribute\Route;
 use App\Entity\Evenement;
 use App\Entity\Participation;
-
 use App\Repository\EvenementRepository;
 
 class EventController extends AbstractController

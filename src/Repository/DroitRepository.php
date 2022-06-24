@@ -9,7 +9,6 @@ class DroitRepository extends AbstractRepository
 {
     protected const TABLE = "droit";
 
-
     public function findAll()
     {
         $sql = "SELECT * FROM droit";
@@ -18,11 +17,8 @@ class DroitRepository extends AbstractRepository
         return $resultat->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     public function getDroitById($idDroit)
     {
-
-
         $stmp = $this->pdo->prepare("SELECT * FROM droit WHERE id= :id");
 
         $stmp->execute([':id' => $idDroit]);

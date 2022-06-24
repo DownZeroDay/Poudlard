@@ -6,8 +6,6 @@ namespace App\Controller;
 use Twig\Environment;
 use App\AccessControl\AccessControl;
 use App\AccessControl\AccessDeniedException;
-use App\Routing\Attribute\Route;
-
 
 abstract class AbstractController
 {

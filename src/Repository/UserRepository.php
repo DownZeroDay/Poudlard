@@ -1,6 +1,5 @@
 <?php
 namespace App\Repository;
-
 use App\Entity\User;
 use GuzzleHttp\Client as HTTPClient;
 use PDO;
@@ -14,7 +13,6 @@ final class UserRepository extends AbstractRepository
     $user = $user->get();
     return !empty($user['id']) ?  true : false;
   }
-
 
   /**
      * Get current profile

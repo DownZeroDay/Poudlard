@@ -1,8 +1,5 @@
 <?php
-
 namespace App\Entity;
-
-
 
 class Participation extends Model
 {

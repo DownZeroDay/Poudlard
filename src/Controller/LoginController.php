@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -46,10 +45,8 @@ class LoginController extends AbstractController
     echo $this->twig->render('security/login.html.twig');
   }
 
-
-  //methode de vérifier le code google authenicator
-
   /**
+   * methode de vérifier le code google authenicator
    * @throws \Twig\Error\RuntimeError
    * @throws \Twig\Error\SyntaxError
    * @throws \Twig\Error\LoaderError

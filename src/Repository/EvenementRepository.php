@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repository;
 
 use App\Entity\Evenement;
@@ -17,8 +16,6 @@ final class EvenementRepository extends AbstractRepository
     $resultat->execute();
     return $resultat->fetchAll(PDO::FETCH_ASSOC);
   }
-
-  /** methode qui affiche les evenement pour la page de gestion  */
 
   /** Requete qui recupère tous les evenements avec les catégories*/
   public function findByCat()
@@ -39,7 +36,6 @@ final class EvenementRepository extends AbstractRepository
     return $sth->execute([
       'idEvent' => $idEvent]);
   }
-
 
   public function deleteById($id)
   {

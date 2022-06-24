@@ -1,13 +1,8 @@
 <?php
-/* A modifier avec access control */
 namespace App\Controller;
 
-use App\Entity\Catevenement;
 use App\Routing\Attribute\Route;
-use App\Entity\Evenement;
 use App\Entity\Section;
-use App\Repository\CategorieRepository;
-use App\Repository\EvenementRepository;
 use App\Repository\SectionRepository;
 
 class SectionController extends AbstractController
@@ -30,7 +25,6 @@ class SectionController extends AbstractController
         }
     }
 
-
     #[Route(path:'/section/edit/{id}', httpMethod: ['POST'] , name: 'update_section')]
     public function update(SectionRepository $repoSection, int $id)
     {
@@ -43,8 +37,7 @@ class SectionController extends AbstractController
             $section->enregistrer();
         }else{
             echo "<script>alert('Cette Section n'existe pas')</script>";
-        }
-        
+        }    
     }
 
     #[Route(path:'/section/delete/{id}', httpMethod: ['POST'] , name: 'delete_section')]

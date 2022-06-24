@@ -128,5 +128,6 @@ class EventController extends AbstractController
         $inscription->participe($user, $event);
       }
     }
+    header('Location:/show_event/' . $event);
   }
 }

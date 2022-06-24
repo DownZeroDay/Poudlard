@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use DateTime;
@@ -18,7 +19,6 @@ class Evenement extends Model
   protected string $accroche = "";
   protected string $image;
   protected int $createur = 0;
-
 
   const TABLE_NAME = 'evenement';
   const PRIMARY_FIELD_NAME = 'id';
@@ -51,6 +51,12 @@ class Evenement extends Model
   public function recherche($recherche)
   {
     $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE titre like \'%' . $recherche . '%\' AND dateFin > NOW()';
+    return $this->pdoConnect->query_multi($sql);
+  }
+
+  public function getAllAccueilByCategorieId($categ, $offset = 0, $limit = 10)
+  {
+    $sql = 'SELECT ' . self::TABLE_NAME . '.*, catevenement.libelle FROM ' . self::TABLE_NAME . ' INNER JOIN catevenement on categorie = catevenement.id WHERE dateDebut > NOW() AND categorie = ' . $categ . ' ORDER BY categorie limit ' . $limit . ' offset ' . $offset;
     return $this->pdoConnect->query_multi($sql);
   }
 

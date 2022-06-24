@@ -17,8 +17,6 @@ class LoginController extends AbstractController
   #[Route(path: "/login", httpMethod: ["GET", "POST"])]
   public function index(UserRepository $userRepository)
   {
-
-
     if (key_exists('logout_btn', $_POST) && key_exists('user', $_SESSION)) {
       $_SESSION = [];
     }
@@ -37,6 +35,7 @@ class LoginController extends AbstractController
           if (password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user['nom'] . ' ' . $user['prenom'];
             $_SESSION['id'] =  $user['id'];
+            $_SESSION['idDroit'] = $user['droit'];
             header('Location:/');
           }
         } else {

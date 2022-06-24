@@ -33,12 +33,14 @@ select:-webkit-autofill:focus {
 }
 
 
-form input{
+form input, form select, form textarea{
     background-color:#532851 !important;
     border: 1px solid #D9D5AB !important;
     color:#ffff !important;
     color-scheme: #D9D5AB;
 }
+
+
 
 input::placeholder {
     color: #ffff !important;
@@ -184,6 +186,13 @@ td select:disabled{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+
+span{
+    background-color:#D9D5AB !important;
+    color: #532851 !important;
+    border: 1px solid #532851 !important;
 }
 
 

@@ -168,8 +168,13 @@ nav {
   background: #532851;
 }
 nav .btn {
-  background-color: #9b6a6c;
-  color: #d9d5ab;
+  background-color: #9b6a6c !important;
+  color: #d9d5ab !important;
+  border: none !important;
+}
+
+.btn:focus{
+  box-shadow: none;
 }
 
 a {

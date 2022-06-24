@@ -6,7 +6,7 @@
         <div class="card-body text-norm">
           <a href="/participe/{{ params.evenement.id }}/{{ params.session.id }}"><i class="{% if params.inscrit %}fa-solid{% else %}fa-regular{% endif %} fa-heart fa-2xl"></i></a>
           <h1 class="card-title">{{ params.evenement.titre }} </h1>
-          <h5 class="card-title"><i class="fa-solid fa-credit-card"></i>{{ params.evenement.prix }} € </h5>
+          <h5 class="card-title"><i class="fa-solid fa-credit-card"></i> {{ params.evenement.prix }} € </h5>
           <h5 class="card-title"><i class="fa-solid fa-calendar"></i> Du  {{ params.evenement.dateDebut | date('d/m/Y H:i') }} au {{ params.evenement.dateFin | date('d/m/Y H:i') }}</h5>
           <h5 class="card-title"><i class="fa-solid fa-location-dot"></i> {{ params.evenement.adresse }} </h5>
           <p class="card-text"> {{ params.evenement.description }}</p>

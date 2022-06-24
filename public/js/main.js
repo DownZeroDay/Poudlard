@@ -134,3 +134,11 @@ function sendForm(form, url, isReset, after = () => { }) {
             after();
         })
 }
+
+document.querySelector('.categList').addEventListener('change', redirectCateg)
+
+function redirectCateg(){
+    console.log(this)
+    let categ = this.options[this.selectedIndex].value;
+    window.location = '/default/0?categorie=' + categ
+}

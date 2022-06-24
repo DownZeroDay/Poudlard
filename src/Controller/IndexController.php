@@ -35,7 +35,7 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: "/{tri}/{page}")]
-  public function home(string $tri, int $page)
+  public function home(string $tri, int $page, CategorieRepository $categoriesEvent)
   {
     $this->resetViewsAndParams();
 
@@ -47,13 +47,17 @@ class IndexController extends AbstractController
     $page = $page < $maxPage ? $page : $maxPage;
     $offset = $page != 0 ? $page * 10 : 0;
     $limit = 10;
-    if ($tri == 'categorie') {
+    if(!empty($_GET['categorie'])){
+      $this->params['evenements'] = $evenement->getAllAccueilByCategorieId($_GET['categorie'], $offset, $limit);
+    }
+    else if ($tri == 'categorie') {
       $this->params['evenements'] = $evenement->getAllAccueilByCategorie($offset, $limit);
     } else if ($tri == 'nom') {
       $this->params['evenements'] = $evenement->getAllAccueilByName($offset, $limit);
     } else {
       $this->params['evenements'] = $evenement->getAllAccueil($offset, $limit);
     }
+    $this->params['catevent'] = $categoriesEvent->findAll();
     $this->params['maxPage'] = $maxPage;
     $this->params['tri'] = $tri;
     $this->params['page'] = $page;

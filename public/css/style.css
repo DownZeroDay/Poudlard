@@ -41,8 +41,6 @@ body{
 } */
 nav{
     background: #532851;
-    width: auto;
-    height: 90px;
 }
 nav .btn{
     background-color: #9B6A6C;
@@ -61,7 +59,7 @@ a:hover{
 }
 
 .btn_connect{
-    margin-top: -35px;
+    margin-top: -50px;
     margin-right : -5px;
 }
 

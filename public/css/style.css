@@ -40,7 +40,7 @@ form input{
     color-scheme: #D9D5AB;
 }
 
-form input::placeholder {
+input::placeholder {
     color: #ffff !important;
 }
 
@@ -154,3 +154,36 @@ footer{
 .row {
     margin : 0;
 }
+
+thead {
+    background-color: #532851;
+    color: #D9D5AB;
+}
+
+.table-striped tbody tr:nth-of-type(2n+1){
+    background-color: #532851; 
+}
+
+.table-striped tbody tr:nth-of-type(2n){
+    background-color: #773874; 
+}
+
+
+td input:disabled{
+    background-color:rgba(1, 1, 1, 0);
+    border: none;
+    color:#D9D5AB !important;
+    color-scheme: #D9D5AB;
+}
+
+td select:disabled{
+    background-color:rgba(1, 1, 1, 0);
+    border: none;
+    color:#D9D5AB !important;
+    color-scheme: #D9D5AB;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+

@@ -76,7 +76,7 @@ final class UserRepository extends AbstractRepository
    /** Requete qui recupère tous les users*/
    public function findAll()
    {
-     $sql = "SELECT * FROM utilisateurs INNER JOIN droit ON droit.id = droit";
+     $sql = "SELECT utilisateurs.* , droit.id as idDroit , libelle FROM utilisateurs INNER JOIN droit ON droit.id = droit";
      $resultat = $this->pdo->query($sql);
      $resultat->execute();
      return $resultat->fetchAll(PDO::FETCH_ASSOC);

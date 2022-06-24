@@ -117,7 +117,7 @@ document.addEventListener('submit', function (event) {
     if(link !== undefined && link !== null && link !== '') {
         event.preventDefault();
         sendForm(selectedForm,link,true,() => {
-            window.location.reload();
+        //     window.location.reload();
         }); 
     }
 });

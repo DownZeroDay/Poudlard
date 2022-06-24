@@ -8,7 +8,6 @@ use PDO;
 final class ParticipationRepository extends AbstractRepository
 {
  /** Requete qui recupère tous les evenements auxquels un utilisateur participent*/
-
     public function finById ($idUser){
         //$sql = 'SELECT * FROM'.self::TABLE.' WHERE id='.$idUser;
         $sql = "SELECT * FROM inscription inner join evenement on inscription.idEvenement = evenement.id WHERE inscription.idUtilisateur = " . $idUser ;
@@ -17,10 +16,4 @@ final class ParticipationRepository extends AbstractRepository
         return $resultat->fetchAll(PDO::FETCH_ASSOC);
     }
 
-     // public function finById ($idUser){
-    //     $sql = "SELECT inscription.*, evenement.titre as titre FROM inscription  INNER JOIN evenement on inscription.idEvenement = evenement.id WHERE idUtilisateur = $idUser" ;
-    //     $resultat = $this->pdo->query($sql);
-    //     $resultat->execute();
-    //     return $resultat->fetchAll(PDO::FETCH_ASSOC);
-    // }
 }

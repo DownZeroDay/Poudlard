@@ -1,8 +1,10 @@
 {% include 'global/header.html.twig' with {'title': params.title , 'session': params.session} only %}
         <div class="row mt-5"></div>
         <div class="row d-flex m-5 ">
-            {% include 'user/componement/form/editProfil.html.twig' %}
-            {% include 'user/componement/gestionnaire/participation.html.twig' with {'participes':params.participe} %}
+                {% include 'user/componement/form/editProfil.html.twig' %}
+            {% if params.session.idDroit < 3 %}
+                {% include 'user/componement/gestionnaire/participation.html.twig' with {'participes':params.participe} %}
+            {% endif %}
             {% if params.session.idDroit == 3 %}
                 {% include 'user/componement/form/sectionForm.html.twig' %}
             {% endif %}

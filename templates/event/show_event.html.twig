@@ -1,10 +1,10 @@
 {% include 'global/header.html.twig' with {"title":params.evenement.titre} only %}
-<div class ="row">
+<div class ="row mt-5">
   <div class ="col-md-10 offset-md-1  mt-5">
     <div class="card text-center">
         <img src="../image/{{ params.evenement.image }}" class="card-img-top" alt="{{ params.evenement.image }}">
         <div class="card-body">
-          <a href="/participe/{{ params.evenement.id }}/{{ params.session.id }}" class=""><i class="{% if params.inscrit %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i></a>
+          <a href="/participe/{{ params.evenement.id }}/{{ params.session.id }}"><i class="{% if params.inscrit %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i></a>
           <h1 class="card-title">{{ params.evenement.titre }} </h1>
           <h5 class="card-title"><i class="fa-solid fa-credit-card"></i>{{ params.evenement.prix }} € </h5>
           <h5 class="card-title"><i class="fa-solid fa-calendar"></i> Du  {{ params.evenement.dateDebut | date('d/m/Y H:i') }} au {{ params.evenement.dateFin | date('d/m/Y H:i') }}</h5>
@@ -15,4 +15,3 @@
   </div>
 </div>
 {% include 'global/footer.html.twig' %}
-

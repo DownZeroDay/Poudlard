@@ -57,4 +57,3 @@ class SectionController extends AbstractController
     }
 
 }
-?>

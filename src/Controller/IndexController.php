@@ -96,9 +96,28 @@ class IndexController extends AbstractController
     $this->views = [['user/Profile.html.twig',4]];
     $this->viewPage('/');
   }
-  #[Route(path: "/disconnect" , name: "disconnect")]
-  public function disconnect(){
-    session_destroy();
-    Header('Location:/');
-  }
+
+
+      /** Methode qui permet d'afficher les infos du BDE */
+      #[Route(path: '/infos_bde',  httpMethod: ['GET'], name: 'infos_bde')]
+      public function infos_bde(UserRepository $reposUser) {
+          if (!empty($_SESSION)) {
+              $this->params['session'] = $_SESSION;
+          }
+
+          $users      = $reposUser->findAll();
+          $this->params['users'] = $users;
+          $this->params['title'] = 'BDE';
+          $this->views = [['index/infos_bde.html.twig', 0]];
+          $this->viewPage();
+      }
+
+
+      #[Route(path: "/disconnect" , name: "disconnect")]
+      public function disconnect(){
+        session_destroy();
+        Header('Location:/');
+      }
+
+
 }

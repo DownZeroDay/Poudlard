@@ -2,6 +2,7 @@
         <div class="row mt-5"></div>
         <div class="row d-flex m-5 ">
             {% include 'user/componement/form/editProfil.html.twig' %}
+            {% include 'user/componement/gestionnaire/participation.html.twig' with {'participes':params.participe} %}
             {% if params.session.idDroit == 3 %}
                 {% include 'user/componement/form/sectionForm.html.twig' %}
             {% endif %}

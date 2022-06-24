@@ -11,6 +11,7 @@ use App\Routing\Attribute\Route;
 use App\Repository\CategorieRepository;
 use App\Repository\DroitRepository;
 use App\Repository\EvenementRepository;
+use App\Repository\ParticipationRepository;
 use App\Repository\SectionRepository;
 
 class IndexController extends AbstractController
@@ -63,7 +64,8 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: "/profile", name: "profile")]
-  public function profile(UserRepository $userRepo, EvenementRepository $eventRepo, CategorieRepository $categorieEvent, DroitRepository $repoDroit, SectionRepository $repoSection)
+  public function profile(UserRepository $userRepo, EvenementRepository $eventRepo, CategorieRepository $categorieEvent, DroitRepository $repoDroit, SectionRepository $repoSection, 
+  ParticipationRepository $repoParticipe)
   {
     $this->resetViewsAndParams();
 
@@ -72,7 +74,7 @@ class IndexController extends AbstractController
       $user = new User($_SESSION['id']);
       $user = $user->get();
       $this->params['user'] = $user;
-
+      $this->params['participe'] = $repoParticipe->finById($_SESSION['id']);
       $age = "0";
       $birth = $user['dateNaissance'];
       $today = date('Y-m-d');
@@ -87,7 +89,6 @@ class IndexController extends AbstractController
     $this->params['users'] = $userRepo->findAll();
     $this->params['droit'] = $repoDroit->findAll();
     $this->params['sections'] = $repoSection->findAll();
-
 
     $this->views = [['user/Profile.html.twig', 4]];
     $this->viewPage('/');
